@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "930489694387",
+    "firebase_url": "https://doanmobilelaptopnganngo-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "doanmobilelaptopnganngo",
+    "storage_bucket": "doanmobilelaptopnganngo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:930489694387:android:68004c5d0f8b5bc16958c6",
+        "android_client_info": {
+          "package_name": "com.example.doan_mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "930489694387-1u2svgtm2n2t6798bvtt868e7jf5ecd3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkHETN46STqXYd-YuRlPg6G3ebA3WJr2Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "930489694387-1u2svgtm2n2t6798bvtt868e7jf5ecd3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
