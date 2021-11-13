@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -16,8 +17,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
-    ListView nguoiDungList;
-    ArrayAdapter<String> adapter;
+    Button signup, login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,32 +26,11 @@ public class MainActivity extends AppCompatActivity {
 
         matching();
 
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
-        nguoiDungList.setAdapter(adapter);
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-
-        DatabaseReference myRef = database.getReference("NguoiDung");
-
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                adapter.clear();
-                for (DataSnapshot data:snapshot.getChildren()) {
-                    String key = data.getKey();
-                    String value = data.getValue().toString();
-                    adapter.add(key + "\n" + value);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.d("Firebase", "loadPost:OnCancelled", error.toException());
-            }
-        });
     }
 
     private void matching() {
-        nguoiDungList = (ListView) findViewById(R.id.lv_NguoiDung);
+        signup = (Button) findViewById(R.id.main_btn_signup);
+        login = (Button) findViewById(R.id.main_btn_login);
     }
 }
