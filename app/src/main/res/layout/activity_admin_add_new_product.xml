@@ -1,11 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AdminAddNewProductActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/adminAddNewProduct_iv_selectImg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:cropToPadding="false"
+            android:scaleType="centerCrop"
+            android:src="@drawable/select_image"
+            tools:ignore="ContentDescription" />
+
+        <EditText
+            android:id="@+id/adminAddNewProduct_et_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/adminAddNewProduct_iv_selectImg"
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="45dp"
+            android:background="@drawable/input_design"
+            android:hint="Tên sản phẩm"
+            android:inputType="textMultiLine"
+            android:padding="20dp" />
+
+        <EditText
+            android:id="@+id/adminAddNewProduct_et_productDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/adminAddNewProduct_et_name"
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginRight="45dp"
+            android:background="@drawable/input_design"
+            android:hint="Thông tin sản phẩm"
+            android:inputType="textMultiLine"
+            android:padding="20dp" />
+
+        <EditText
+            android:id="@+id/adminAddNewProduct_et_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/adminAddNewProduct_et_productDescription"
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginRight="45dp"
+            android:background="@drawable/input_design"
+            android:hint="Giá sản phẩm"
+            android:inputType="textMultiLine"
+            android:padding="20dp" />
+
+        <Button
+            android:id="@+id/adminAddNewProduct_btn_add"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/adminAddNewProduct_et_price"
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="45dp"
+            android:background="@drawable/buttons"
+            android:padding="17dp"
+            android:text="Thêm sản phẩm"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+    </LinearLayout>
 
 
-</RelativeLayout>
+</ScrollView>
