@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.doan_mobile.Model.NguoiDung;
@@ -30,8 +31,9 @@ public class LoginActivity extends AppCompatActivity {
     Button login;
     ProgressDialog loadingBar;
     CheckBox rememberMe;
+    TextView adminLink, notAdminLink;
 
-    final String parentDbName = "NguoiDung";
+    String parentDbName = "NguoiDung";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,10 +80,17 @@ public class LoginActivity extends AppCompatActivity {
 
                             if (usersData.getDienThoai().equals(sphone)) {
                                 if (usersData.getMatKhau().equals(spassword)) {
-                                    Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
-                                    loadingBar.dismiss();
+                                    if (parentDbName.equals("QuanTri")) {
+                                        Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
+                                        loadingBar.dismiss();
 
-                                    startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                                        startActivity(new Intent(LoginActivity.this, AdminAddNewProductActivity.class));
+                                    } else if (parentDbName.equals("NguoiDung")){
+                                        Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
+                                        loadingBar.dismiss();
+
+                                        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                                    }
                                 } else {
                                     loadingBar.dismiss();
                                     Toast.makeText(LoginActivity.this, "Sai mật khẩu, vui lòng kiểm tra lại", Toast.LENGTH_SHORT).show();
@@ -100,6 +109,26 @@ public class LoginActivity extends AppCompatActivity {
                 });
             }
         });
+
+        adminLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                login.setText("Đăng nhập quản trị");
+                adminLink.setVisibility(view.INVISIBLE);
+                notAdminLink.setVisibility(view.VISIBLE);
+                parentDbName = "QuanTri";
+            }
+        });
+
+        notAdminLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                login.setText("Đăng nhập");
+                adminLink.setVisibility(view.VISIBLE);
+                notAdminLink.setVisibility(view.INVISIBLE);
+                parentDbName = "NguoiDung";
+            }
+        });
     }
 
     private void matching() {
@@ -108,5 +137,7 @@ public class LoginActivity extends AppCompatActivity {
         login = (Button) findViewById(R.id.login_btn_login);
         loadingBar = new ProgressDialog(this);
         rememberMe = (CheckBox) findViewById(R.id.login_cb_remmemberMe);
+        adminLink = (TextView) findViewById(R.id.login_tv_adminLogin);
+        notAdminLink = (TextView) findViewById(R.id.login_tv_notAdmin);
     }
 }
