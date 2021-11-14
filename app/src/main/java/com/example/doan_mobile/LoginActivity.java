@@ -84,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
                                         Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
                                         loadingBar.dismiss();
 
-                                        startActivity(new Intent(LoginActivity.this, AdminAddNewProductActivity.class));
+                                        startActivity(new Intent(LoginActivity.this, AdminCategoryActivity.class));
                                     } else if (parentDbName.equals("NguoiDung")){
                                         Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
                                         loadingBar.dismiss();
