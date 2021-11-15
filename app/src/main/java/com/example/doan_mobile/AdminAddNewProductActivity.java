@@ -26,16 +26,17 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 
 public class AdminAddNewProductActivity extends AppCompatActivity {
 
-    String categoryID, dowloadImageUri;
-    String sName, sDescription,sPrice;
+    String categoryName, dowloadImageUri, ID;
+    String sName, sDescription,sPrice, sQuantity;
     ImageView inputImage;
     Button addNewProduct;
-    EditText pName, pDescription, pPrice;
+    EditText pName, pDescription, pPrice, pCategoryName, pQuantity;
     private  static  final int GalleryPick = 1;
     Uri ImageUri;
     StorageReference ProductImagesRef;
@@ -50,7 +51,10 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
         matching();
         ProductImagesRef = FirebaseStorage.getInstance().getReference().child("HinhAnhSP");
         ProductRef = FirebaseDatabase.getInstance().getReference().child("SanPham");
-        categoryID = getIntent().getExtras().get("HangSP").toString();
+        categoryName = getIntent().getExtras().get("HangSP").toString();
+
+        pCategoryName.setEnabled(false);
+        pCategoryName.setText(categoryName);
         Intent intent = getIntent();
 
         inputImage.setOnClickListener(new View.OnClickListener() {
@@ -85,15 +89,18 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
          sName = pName.getText().toString().trim();
          sDescription = pDescription.getText().toString().trim();
          sPrice = pPrice.getText().toString().trim();
+         sQuantity = pQuantity.getText().toString().trim();
 
         if (ImageUri == null){
             Toast.makeText(getApplicationContext(),"Hình ảnh đâu ??-.-??",Toast.LENGTH_LONG).show();
-        }else if (TextUtils.isEmpty(sDescription)){
-            Toast.makeText(getApplicationContext(),"Chưa có mô tả kìa -.-",Toast.LENGTH_LONG).show();
         }else if (TextUtils.isEmpty(sName)){
             Toast.makeText(getApplicationContext(),"Bán cái gì mà hong có tên ??-.-??",Toast.LENGTH_LONG).show();
+        }else if (TextUtils.isEmpty(sDescription)){
+            Toast.makeText(getApplicationContext(),"Chưa có mô tả kìa -.-",Toast.LENGTH_LONG).show();
         }else if (TextUtils.isEmpty(sPrice)){
             Toast.makeText(getApplicationContext(),"Rồi bán mà hong có giá hả ??-.-??",Toast.LENGTH_LONG).show();
+        }else if (TextUtils.isEmpty(sQuantity)){
+            Toast.makeText(getApplicationContext(),"Bán nhiu cái ??-.-??",Toast.LENGTH_LONG).show();
         }else{
             StoreProductInformation();
         }
@@ -101,9 +108,17 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
 
     private void StoreProductInformation() {
         loadingBar.setTitle("Thêm mới sản phẩm");
-        loadingBar.setMessage("Gửi admin,  vui lòng đợi, chúng tôi đang thêm sản phẩm mới");
+        loadingBar.setMessage("Vui lòng đợi, chúng tôi đang thêm sản phẩm mới");
         loadingBar.setCanceledOnTouchOutside(false);
         loadingBar.show();
+
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat currentDate = new SimpleDateFormat("MMddyyyy");
+        String saveCurrentDate = currentDate.format(calendar.getTime());
+        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
+        String saveCurrentTime = currentTime.format(calendar.getTime());
+
+        ID = saveCurrentDate+ " - " + saveCurrentTime;
 
         StorageReference filePath = ProductImagesRef.child(ImageUri.getLastPathSegment() +".png");
         final UploadTask uploadTask = filePath.putFile(ImageUri);
@@ -146,14 +161,15 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
 
     private void SaveProductInfoToDatabase() {
         HashMap<String, Object> productMap = new HashMap<>();
-        String sID = ProductRef.push().getKey();
-        productMap.put("ID",sID);
-        productMap.put("MaHangSP",categoryID);
+        /*String sID = ProductRef.push().getKey();*/
+        productMap.put("ID",ID);
+        productMap.put("TenHangSP",categoryName);
         productMap.put("TenSP",sName);
         productMap.put("ThongTinChiTietSP",sDescription);
         productMap.put("GiaGoc",sPrice);
+        productMap.put("SoLuongTonKho",sQuantity);
         productMap.put("HinhAnhSP",dowloadImageUri);
-        ProductRef.child(sID).updateChildren(productMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+        ProductRef.child(ID).updateChildren(productMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()){
@@ -167,7 +183,6 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
                 }
             }
         });
-
 
     }
 
@@ -193,6 +208,8 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
         pName = (EditText) findViewById(R.id.adminAddNewProduct_et_name);
         pDescription = (EditText) findViewById(R.id.adminAddNewProduct_et_productDescription);
         pPrice = (EditText) findViewById(R.id.adminAddNewProduct_et_price);
+        pCategoryName = (EditText) findViewById(R.id.adminAddNewProduct_et_categoryName);
+        pQuantity = (EditText) findViewById(R.id.adminAddNewProduct_et_quantity);
         inputImage = (ImageView) findViewById(R.id.adminAddNewProduct_iv_selectImg);
         loadingBar = new ProgressDialog(this);
     }
