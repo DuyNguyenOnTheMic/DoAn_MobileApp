@@ -89,6 +89,7 @@ public class LoginActivity extends AppCompatActivity {
                                         Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
                                         loadingBar.dismiss();
 
+                                        Prevalent.currentOnlineUser = usersData;
                                         startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                                     }
                                 } else {

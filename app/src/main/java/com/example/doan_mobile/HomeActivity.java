@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,12 +14,14 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.doan_mobile.Prevalent.Prevalent;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DatabaseReference;
 
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import io.paperdb.Paper;
 
 
@@ -62,14 +65,12 @@ public class HomeActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-/*
         View headerView = navigationView.getHeaderView(0);
         TextView userNameTextView = headerView.findViewById(R.id.userprofile_tv_name);
         CircleImageView profileImageView = headerView.findViewById(R.id.userprofile_iv_image);
 
         userNameTextView.setText(Prevalent.currentOnlineUser.getHoTen());
-        Picasso.get().load(Prevalent.currentOnlineUser.get).placeholder(R.drawable.profile).into(profileImageView);
-*/
+        //Picasso.get().load(Prevalent.currentOnlineUser.get).placeholder(R.drawable.profile).into(profileImageView);
 
 
         /*recyclerView = findViewById(R.id.recycler_menu);
