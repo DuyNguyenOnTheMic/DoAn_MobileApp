@@ -86,8 +86,9 @@ public class MainActivity extends AppCompatActivity {
                     if (usersData.getDienThoai().equals(sphone)) {
                         if (usersData.getMatKhau().equals(spassword)) {
                             loadingBar.dismiss();
-
-                            startActivity(new Intent(MainActivity.this, HomeActivity.class));
+                            Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                            Prevalent.currentOnlineUser = usersData;
+                            startActivity(intent);
                         } else {
                             loadingBar.dismiss();
                             Toast.makeText(MainActivity.this, "Sai mật khẩu, vui lòng kiểm tra lại", Toast.LENGTH_SHORT).show();
