@@ -135,6 +135,10 @@ public class HomeActivity extends AppCompatActivity
         {
 
         }
+        else if (id == R.id.nav_updateUser)
+        {
+
+        }
         else if (id == R.id.nav_logout)
         {
             Paper.book().destroy();

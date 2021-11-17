@@ -20,6 +20,11 @@
             android:title="Danh mục laptop"
             android:iconTint="@color/white"/>
         <item
+            android:id="@+id/nav_updateUser"
+            android:icon="@drawable/user"
+            android:title="Cập nhật hồ sơ"
+            android:iconTint="@color/white"/>
+        <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/logout"
             android:title="Đăng xuất"
