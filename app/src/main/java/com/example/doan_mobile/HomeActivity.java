@@ -104,7 +104,7 @@ public class HomeActivity extends AppCompatActivity
             new FirebaseRecyclerAdapter<SanPham, ProductViewHolder>(options) {
                 @Override
                 protected void onBindViewHolder(@NonNull ProductViewHolder productViewHolder, int i, @NonNull SanPham sanPham) {
-                    String name = sanPham.getTenSP().toString();
+
                     productViewHolder.productName.setText(sanPham.getTenSP());
                     productViewHolder.productDecription.setText(sanPham.getThongTinChiTietSP());
                     productViewHolder.productPrice.setText("Giá sản phẩm: " + sanPham.getGiaGoc() +"đ");
