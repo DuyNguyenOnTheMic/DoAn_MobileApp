@@ -86,7 +86,7 @@ public class HomeActivity extends AppCompatActivity
         CircleImageView profileImageView = headerView.findViewById(R.id.userprofile_iv_image);
 
         userNameTextView.setText(Prevalent.currentOnlineUser.getHoTen());
-        //Picasso.get().load(Prevalent.currentOnlineUser.get).placeholder(R.drawable.profile).into(profileImageView);
+        Picasso.get().load(Prevalent.currentOnlineUser.getAvatar()).placeholder(R.drawable.profile).into(profileImageView);
 
 
         recyclerView = findViewById(R.id.recycler_menu);
@@ -115,7 +115,7 @@ public class HomeActivity extends AppCompatActivity
 
                     productViewHolder.productName.setText(sanPham.getTenSP());
                     productViewHolder.productDecription.setText(sanPham.getThongTinChiTietSP());
-                    productViewHolder.productPrice.setText("Giá sản phẩm: " + sPrice  + " VNĐ");
+                    productViewHolder.productPrice.setText(sPrice  + " VNĐ");
                     Picasso.get().load(sanPham.getHinhAnhSP()).into(productViewHolder.productImage);
                 }
 

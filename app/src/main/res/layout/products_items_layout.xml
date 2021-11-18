@@ -38,7 +38,7 @@
             android:layout_below="@+id/im_productImage"
             android:text="Product Price"
             android:textAlignment="center"
-            android:textColor="@color/pink_500"
+            android:textColor="#F44336"
             android:textSize="18dp" />
 
         <TextView
@@ -49,7 +49,7 @@
             android:layout_marginTop="2dp"
             android:text="Product Description"
             android:textAlignment="center"
-            android:textColor="@color/pink_500"
+            android:textColor="@color/black"
             android:textSize="16dp" />
 
     </RelativeLayout>
