@@ -32,6 +32,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Locale;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.paperdb.Paper;
 
@@ -105,9 +109,13 @@ public class HomeActivity extends AppCompatActivity
                 @Override
                 protected void onBindViewHolder(@NonNull ProductViewHolder productViewHolder, int i, @NonNull SanPham sanPham) {
 
+                    double dPrice = Double.parseDouble(sanPham.getGiaGoc());
+                    NumberFormat nf = NumberFormat.getInstance(new Locale("en", "US"));
+                    String sPrice = nf.format(dPrice);
+
                     productViewHolder.productName.setText(sanPham.getTenSP());
                     productViewHolder.productDecription.setText(sanPham.getThongTinChiTietSP());
-                    productViewHolder.productPrice.setText("Giá sản phẩm: " + sanPham.getGiaGoc() +"đ");
+                    productViewHolder.productPrice.setText("Giá sản phẩm: " + sPrice  + " VNĐ");
                     Picasso.get().load(sanPham.getHinhAnhSP()).into(productViewHolder.productImage);
                 }
 
