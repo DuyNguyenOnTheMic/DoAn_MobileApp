@@ -117,6 +117,15 @@ public class HomeActivity extends AppCompatActivity
                     productViewHolder.productDecription.setText(sanPham.getThongTinChiTietSP());
                     productViewHolder.productPrice.setText(sPrice  + " VNĐ");
                     Picasso.get().load(sanPham.getHinhAnhSP()).into(productViewHolder.productImage);
+
+                    productViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(HomeActivity.this, ProductDetailsActivity.class);
+                            intent.putExtra("MaSP", sanPham.getID());
+                            startActivity(intent);
+                        }
+                    });
                 }
 
                 @NonNull

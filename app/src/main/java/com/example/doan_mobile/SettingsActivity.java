@@ -119,7 +119,7 @@ public class SettingsActivity extends AppCompatActivity {
         ref.child(Prevalent.currentOnlineUser.getDienThoai()).updateChildren(userMap);
 
 
-        startActivity(new Intent(SettingsActivity.this, MainActivity.class));
+        startActivity(new Intent(SettingsActivity.this, HomeActivity.class));
         Toast.makeText(SettingsActivity.this, "Cập nhật hồ sơ thành công!", Toast.LENGTH_SHORT).show();
         finish();
     }
@@ -184,7 +184,7 @@ public class SettingsActivity extends AppCompatActivity {
                         
                         progressDialog.dismiss();
                         
-                        startActivity(new Intent(SettingsActivity.this, MainActivity.class));
+                        startActivity(new Intent(SettingsActivity.this, HomeActivity.class));
                         Toast.makeText(SettingsActivity.this, "Cập nhật hồ sơ thành công!", Toast.LENGTH_SHORT).show();
                         finish();
 
