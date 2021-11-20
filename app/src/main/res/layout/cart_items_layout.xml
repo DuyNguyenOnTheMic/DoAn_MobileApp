@@ -13,7 +13,7 @@
         android:background="@color/pink_500">
 
         <TextView
-            android:id="@+id/cartItems_tv_pname"
+            android:id="@+id/cartItems_tv_name"
             android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:text="Product Name"
