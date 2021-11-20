@@ -3,12 +3,19 @@ package com.example.doan_mobile;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.example.doan_mobile.Model.SanPham;
+import com.example.doan_mobile.Prevalent.Prevalent;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -18,14 +25,17 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Locale;
 
 public class ProductDetailsActivity extends AppCompatActivity {
 
-    //FloatingActionButton addToCart;
     ImageView image;
     ElegantNumberButton numberButton;
     TextView price, description, name;
+    Button addToCart;
 
     String productID = "";
 
@@ -39,6 +49,65 @@ public class ProductDetailsActivity extends AppCompatActivity {
         matching();
 
         getProductDetails(productID);
+
+        addToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addingToCartList();
+            }
+        });
+    }
+
+    private void addingToCartList() {
+        String saveCurrentTime, saveCurrentDate;
+
+        Calendar callForDate = Calendar.getInstance();
+        SimpleDateFormat currentDate = new SimpleDateFormat("ddMMyyyy");
+        saveCurrentDate = currentDate.format(callForDate.getTime());
+
+        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
+        saveCurrentTime = currentDate.format(callForDate.getTime());
+
+        final DatabaseReference cartRef = FirebaseDatabase.getInstance().getReference().child("GioHang");
+
+        String sname = name.getText().toString().trim();
+        String sprice = price.getText().toString().trim();
+
+        final HashMap<String, Object> cartMap = new HashMap<>();
+        cartMap.put("MaSP", productID);
+        cartMap.put("TenSP", sname);
+        cartMap.put("GiaGoc", sprice);
+        cartMap.put("Ngay", saveCurrentDate);
+        cartMap.put("ThoiGian", saveCurrentTime);
+        cartMap.put("SoLuongTonKho", numberButton.getNumber());
+        cartMap.put("GiamGia", "");
+
+        cartRef.child("ViewKhachHang").child(Prevalent.currentOnlineUser.getDienThoai())
+                .child("SanPham").child(productID)
+                .updateChildren(cartMap)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            cartRef.child("ViewQuanTri").child(Prevalent.currentOnlineUser.getDienThoai())
+                                    .child("SanPham").child(productID)
+                                    .updateChildren(cartMap)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Toast.makeText(ProductDetailsActivity.this, "Thêm vào giỏ hàng thành công!", Toast.LENGTH_SHORT).show();
+
+                                                Intent intent = new Intent(ProductDetailsActivity.this, HomeActivity.class);
+                                                startActivity(intent);
+                                            }
+                                        }
+                                    });
+                        }
+                    }
+                });
+
+
     }
 
     private void getProductDetails(String productID) {
@@ -55,7 +124,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
                     name.setText(sanPham.getTenSP());
                     description.setText(sanPham.getThongTinChiTietSP());
-                    price.setText(sPrice  + " VNĐ");
+                    price.setText(sPrice + " VNĐ");
                     Picasso.get().load(sanPham.getHinhAnhSP()).into(image);
 
                 }
@@ -69,11 +138,11 @@ public class ProductDetailsActivity extends AppCompatActivity {
     }
 
     private void matching() {
-        //addToCart = (FloatingActionButton) findViewById(R.id.productDetails_btn_addToCart);
         image = (ImageView) findViewById(R.id.productDetails_iv_image);
         numberButton = (ElegantNumberButton) findViewById(R.id.productDetails_btn_number);
         price = (TextView) findViewById(R.id.productDetails_tv_price);
         description = (TextView) findViewById(R.id.productDetails_tv_description);
         name = (TextView) findViewById(R.id.productDetails_tv_name);
+        addToCart = (Button) findViewById(R.id.productDetails_btn_addToCart);
     }
 }
