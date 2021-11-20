@@ -112,16 +112,25 @@ public class SettingsActivity extends AppCompatActivity {
         String sPassword = password.getText().toString().trim();
         String sAddress = address.getText().toString().trim();
 
-        HashMap<String, Object> userMap = new HashMap<>();
-        userMap.put("HoTen", sName);
-        userMap.put("MatKhau", sPassword);
-        userMap.put("DiaChi", sAddress);
-        ref.child(Prevalent.currentOnlineUser.getDienThoai()).updateChildren(userMap);
+        if (TextUtils.isEmpty(sName)) {
+            Toast.makeText(this, "Họ và tên không được rỗng", Toast.LENGTH_SHORT).show();
+        } else if (TextUtils.isEmpty(sPassword)) {
+            Toast.makeText(this, "Mật khẩu không được rỗng", Toast.LENGTH_SHORT).show();
+        } else if (sPassword.length() <= 5) {
+            Toast.makeText(this, "Mật khẩu tối thiểu là 6 kí tự", Toast.LENGTH_SHORT).show();
+        } else {
+            HashMap<String, Object> userMap = new HashMap<>();
+            userMap.put("HoTen", sName);
+            userMap.put("MatKhau", sPassword);
+            userMap.put("DiaChi", sAddress);
+            ref.child(Prevalent.currentOnlineUser.getDienThoai()).updateChildren(userMap);
 
 
-        startActivity(new Intent(SettingsActivity.this, HomeActivity.class));
-        Toast.makeText(SettingsActivity.this, "Cập nhật hồ sơ thành công!", Toast.LENGTH_SHORT).show();
-        finish();
+            startActivity(new Intent(SettingsActivity.this, HomeActivity.class));
+            Toast.makeText(SettingsActivity.this, "Cập nhật hồ sơ thành công!", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+
     }
 
     private void userInfoSaved() {
