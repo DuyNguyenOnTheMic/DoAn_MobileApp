@@ -16,7 +16,6 @@ import com.example.doan_mobile.Model.SanPham;
 import com.example.doan_mobile.Prevalent.Prevalent;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,6 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.text.NumberFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -66,20 +66,22 @@ public class ProductDetailsActivity extends AppCompatActivity {
         saveCurrentDate = currentDate.format(callForDate.getTime());
 
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
-        saveCurrentTime = currentDate.format(callForDate.getTime());
+        saveCurrentTime = currentTime.format(callForDate.getTime());
 
         final DatabaseReference cartRef = FirebaseDatabase.getInstance().getReference().child("GioHang");
 
         String sname = name.getText().toString().trim();
         String sprice = price.getText().toString().trim();
 
+        String newStr = sprice.replaceAll("[,]", "");
+
         final HashMap<String, Object> cartMap = new HashMap<>();
         cartMap.put("MaSP", productID);
         cartMap.put("TenSP", sname);
-        cartMap.put("GiaGoc", sprice);
+        cartMap.put("GiaGoc", newStr);
         cartMap.put("Ngay", saveCurrentDate);
         cartMap.put("ThoiGian", saveCurrentTime);
-        cartMap.put("SoLuongTonKho", numberButton.getNumber());
+        cartMap.put("SoLuongMua", numberButton.getNumber());
         cartMap.put("GiamGia", "");
 
         cartRef.child("ViewKhachHang").child(Prevalent.currentOnlineUser.getDienThoai())
@@ -124,7 +126,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
                     name.setText(sanPham.getTenSP());
                     description.setText(sanPham.getThongTinChiTietSP());
-                    price.setText(sPrice + " VNĐ");
+                    price.setText(sPrice);
                     Picasso.get().load(sanPham.getHinhAnhSP()).into(image);
 
                 }
