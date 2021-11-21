@@ -36,12 +36,29 @@ public class CartActivity extends AppCompatActivity {
     Button next;
     TextView total;
 
+    int overTotalPrice = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
 
         matching();
+
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                NumberFormat nf = NumberFormat.getInstance(new Locale("en", "US"));
+                String sPrice = nf.format(overTotalPrice);
+
+                total.setText("Tổng tiền: " + sPrice + "VNĐ");
+                Intent intent = new Intent(CartActivity.this, ConfimFinalOrderActivity.class);
+                intent.putExtra("Total Price", String.valueOf(overTotalPrice));
+                startActivity(intent);
+                finish();
+            }
+        });
 
     }
 
@@ -69,6 +86,9 @@ public class CartActivity extends AppCompatActivity {
                 cartViewHolder.txtPQuantity.setText("Số lượng: " + gioHang.getSoLuongMua());
                 cartViewHolder.txtPPrice.setText("Đơn giá: " + sPrice);
                 cartViewHolder.txtPName.setText(gioHang.getTenSP());
+
+                int oneTypeProductTPrice = Integer.valueOf(gioHang.getGiaGoc()) * Integer.valueOf(gioHang.getSoLuongMua());
+                overTotalPrice += oneTypeProductTPrice;
 
                 cartViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
