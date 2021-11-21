@@ -219,16 +219,33 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
+
+                    String sName = snapshot.child("HoTen").getValue().toString();
+                    String sPassword = snapshot.child("MatKhau").getValue().toString();
+
                     if (snapshot.child("Avatar").exists()) {
+
                         String sImage = snapshot.child("Avatar").getValue().toString();
-                        String sName = snapshot.child("HoTen").getValue().toString();
-                        String sPassword = snapshot.child("MatKhau").getValue().toString();
                         String sAddress = snapshot.child("DiaChi").getValue().toString();
 
                         Picasso.get().load(sImage).into(profileImage);
                         fullName.setText(sName);
                         password.setText(sPassword);
                         address.setText(sAddress);
+
+                    } else if (snapshot.child("Diachi").exists()) {
+
+                        String sAddress = snapshot.child("DiaChi").getValue().toString();
+
+                        fullName.setText(sName);
+                        password.setText(sPassword);
+                        address.setText(sAddress);
+
+                    } else {
+
+                        fullName.setText(sName);
+                        password.setText(sPassword);
+
                     }
                 }
             }

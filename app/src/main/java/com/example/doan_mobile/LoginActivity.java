@@ -1,8 +1,5 @@
 package com.example.doan_mobile;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,7 +11,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.doan_mobile.Model.NguoiDung;
+import com.example.doan_mobile.Model.QuanTri;
+import com.example.doan_mobile.Prevalent.AdminPrevalent;
 import com.example.doan_mobile.Prevalent.Prevalent;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -77,6 +79,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (snapshot.child(parentDbName).child(sphone).exists()) {
 
                             NguoiDung usersData = snapshot.child(parentDbName).child(sphone).getValue(NguoiDung.class);
+                            QuanTri adminsData = snapshot.child(parentDbName).child(sphone).getValue(QuanTri.class);
 
                             if (usersData.getDienThoai().equals(sphone)) {
                                 if (usersData.getMatKhau().equals(spassword)) {
@@ -84,6 +87,7 @@ public class LoginActivity extends AppCompatActivity {
                                         Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
                                         loadingBar.dismiss();
 
+                                        AdminPrevalent.currentOnlineAdmin = adminsData;
                                         startActivity(new Intent(LoginActivity.this, AdminCategoryActivity.class));
                                     } else if (parentDbName.equals("NguoiDung")){
                                         Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();

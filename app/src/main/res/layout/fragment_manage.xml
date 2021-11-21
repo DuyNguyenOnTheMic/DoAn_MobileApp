@@ -15,7 +15,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="27dp"
-        android:text="Quản lý"
+        android:text="@string/title_adminCategory"
         android:textAlignment="center"
         android:textSize="26sp"
         android:textStyle="bold" />
