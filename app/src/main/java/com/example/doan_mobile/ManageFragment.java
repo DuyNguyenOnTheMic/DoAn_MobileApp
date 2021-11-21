@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 
 public class ManageFragment extends Fragment {
 
-    ImageView lenovo, acer, asus, hp, apple, dell, msi, lg;
+    ImageView admin, category, product, order, voucher;
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -51,24 +51,34 @@ public class ManageFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_manage, container, false);
 
-        lenovo = (ImageView) view.findViewById(R.id.adminCategory_iv_lenovo);
-        acer = (ImageView) view.findViewById(R.id.adminCategory_iv_acer);
-        asus = (ImageView) view.findViewById(R.id.adminCategory_iv_asus);
-        hp = (ImageView) view.findViewById(R.id.adminCategory_iv_hp);
-        apple = (ImageView) view.findViewById(R.id.adminCategory_iv_apple);
-        dell = (ImageView) view.findViewById(R.id.adminCategory_iv_dell);
-        msi = (ImageView) view.findViewById(R.id.adminCategory_iv_msi);
-        lg = (ImageView) view.findViewById(R.id.adminCategory_iv_lg);
+        matching(view);
 
-        lenovo.setOnClickListener(new View.OnClickListener() {
+        product.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), AdminAddNewProductActivity.class);
-                intent.putExtra("HangSP", "Lenovo");
+                intent.putExtra("HangSP", "lenovo");
+                startActivity(intent);
+            }
+        });
+
+        order.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), AdminAddNewProductActivity.class);
+                intent.putExtra("HangSP", "lenovo");
                 startActivity(intent);
             }
         });
 
         return view;
+    }
+
+    private void matching(View view) {
+        admin = (ImageView) view.findViewById(R.id.adminManage_iv_admin);
+        category = (ImageView) view.findViewById(R.id.adminManage_iv_category);
+        product = (ImageView) view.findViewById(R.id.adminManage_iv_product);
+        order = (ImageView) view.findViewById(R.id.adminManage_iv_order);
+        voucher = (ImageView) view.findViewById(R.id.adminManage_iv_voucher);
     }
 }

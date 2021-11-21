@@ -83,7 +83,7 @@ public class AdminCategoryActivity extends AppCompatActivity {
                         }
                     });
                     dialog.show();
-                    return true;
+                    break;
             }
             return false;
         }
