@@ -5,12 +5,39 @@
     android:layout_height="match_parent"
     tools:context=".AccountFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/adminAccount_ap_profileImage"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/profile" />
+
     <TextView
+        android:id="@+id/adminAccount_et_fullName"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/title_account"
-        android:gravity="center"
-        android:textSize="30sp" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/adminAccount_ap_profileImage"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
+        android:text="Họ và tên: "
+        android:textSize="18sp"
+        android:padding="10dp" />
+
+    <TextView
+        android:id="@+id/adminAccount_et_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/adminAccount_et_fullName"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
+        android:text="Mật khẩu: "
+        android:textSize="18sp"
+        android:padding="10dp" />
 
 </RelativeLayout>

@@ -1,18 +1,21 @@
 package com.example.doan_mobile;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.doan_mobile.Prevalent.Prevalent;
 import com.google.android.gms.tasks.Continuation;
@@ -29,7 +32,6 @@ import com.google.firebase.storage.StorageTask;
 import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 
-import java.net.URI;
 import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -39,6 +41,7 @@ public class SettingsActivity extends AppCompatActivity {
     CircleImageView profileImage;
     EditText fullName, password, address;
     TextView change, close, save;
+    ImageView show_password;
 
     Uri imageUri;
     String myUrl = "";
@@ -245,5 +248,25 @@ public class SettingsActivity extends AppCompatActivity {
         change = (TextView) findViewById(R.id.settings_tv_profileImageChange);
         close = (TextView) findViewById(R.id.settings_tv_close);
         save = (TextView) findViewById(R.id.settings_tv_update);
+        show_password = (ImageView) findViewById(R.id.show_pass_btn);
+    }
+
+    public void ShowHidePass(View view) {
+        if(view.getId()==R.id.show_pass_btn){
+
+            if(password.getTransformationMethod().equals(PasswordTransformationMethod.getInstance())){
+                ((ImageView)(view)).setImageResource(R.drawable.hidden);
+
+                //Show Password
+                password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            }
+            else{
+                ((ImageView)(view)).setImageResource(R.drawable.eye);
+
+                //Hide Password
+                password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+
+            }
+        }
     }
 }
