@@ -6,11 +6,115 @@
     tools:context=".ManageFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!--<TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:text="@string/title_adminCategory"
-        android:textSize="30sp" />
+        android:textSize="30sp" />-->
+
+    <TextView
+        android:id="@+id/adminCategory_tv_slogan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="27dp"
+        android:text="Thêm sản phẩm"
+        android:textAlignment="center"
+        android:textSize="26sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/linear_category_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/adminCategory_tv_slogan"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="45dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/adminCategory_iv_lenovo"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/lenovo" />
+
+        <ImageView
+            android:id="@+id/adminCategory_iv_acer"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/acer" />
+
+        <ImageView
+            android:id="@+id/adminCategory_iv_asus"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:src="@drawable/asus" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear2_category_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linear_category_layout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="45dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/adminCategory_iv_hp"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/hp" />
+
+        <ImageView
+            android:id="@+id/adminCategory_iv_apple"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/apple" />
+
+        <ImageView
+            android:id="@+id/adminCategory_iv_dell"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:src="@drawable/dell" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear3_category_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linear2_category_layout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="45dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/adminCategory_iv_msi"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/msi" />
+
+
+        <ImageView
+            android:id="@+id/adminCategory_iv_lg"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:src="@drawable/lg" />
+
+    </LinearLayout>
 
 </RelativeLayout>
