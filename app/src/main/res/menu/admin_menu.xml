@@ -2,15 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_home"
-        android:icon="@drawable/ic_home_svgrepo_com"
-        android:title="@string/title_home" />
+        android:id="@+id/navigation_adminCategory"
+        android:icon="@drawable/ic_apps_svgrepo_com"
+        android:title="@string/title_adminCategory" />
 
     <item
-        android:id="@+id/navigation_manage"
-        android:icon="@drawable/ic_apps_svgrepo_com"
-        android:title="@string/title_manage" />
-
+        android:id="@+id/navigation_account"
+        android:icon="@drawable/ic_account_circle_svgrepo_com"
+        android:title="@string/title_account" />
 
     <item
         android:id="@+id/navigation_logout"
