@@ -17,7 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.doan_mobile.Prevalent.Prevalent;
+import com.example.doan_mobile.Prevalent.AdminPrevalent;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -36,10 +36,10 @@ import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class SettingsActivity extends AppCompatActivity {
+public class AdminSettingsActivity extends AppCompatActivity {
 
     CircleImageView profileImage;
-    EditText fullName, password, address;
+    EditText fullName, password;
     TextView change, close, save;
     ImageView show_password;
 
@@ -52,13 +52,13 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        setContentView(R.layout.activity_admin_settings);
 
-        storageReference = FirebaseStorage.getInstance().getReference().child("HinhAvatar");
+        storageReference = FirebaseStorage.getInstance().getReference().child("HinhAvatarAdmin");
 
         matching();
 
-        userInfoDisplay(profileImage, fullName, password, address);
+        userInfoDisplay(profileImage, fullName, password);
 
         close.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,9 +85,10 @@ public class SettingsActivity extends AppCompatActivity {
 
                 CropImage.activity(imageUri)
                         .setAspectRatio(1, 1)
-                        .start(SettingsActivity.this);
+                        .start(AdminSettingsActivity.this);
             }
         });
+
     }
 
     @Override
@@ -102,18 +103,17 @@ public class SettingsActivity extends AppCompatActivity {
             profileImage.setImageURI(imageUri);
         } else {
             Toast.makeText(this, "Có lỗi đã xảy ra, vui lòng thử lại!", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(SettingsActivity.this, SettingsActivity.class));
+            startActivity(new Intent(AdminSettingsActivity.this, SettingsActivity.class));
             finish();
         }
     }
 
     private void updateOnlyUserInfo() {
         DatabaseReference ref = FirebaseDatabase.getInstance().
-                getReference().child("NguoiDung");
+                getReference().child("QuanTri");
 
         String sName = fullName.getText().toString().trim();
         String sPassword = password.getText().toString().trim();
-        String sAddress = address.getText().toString().trim();
 
         if (TextUtils.isEmpty(sName)) {
             Toast.makeText(this, "Họ và tên không được rỗng", Toast.LENGTH_SHORT).show();
@@ -125,21 +125,19 @@ public class SettingsActivity extends AppCompatActivity {
             HashMap<String, Object> userMap = new HashMap<>();
             userMap.put("HoTen", sName);
             userMap.put("MatKhau", sPassword);
-            userMap.put("DiaChi", sAddress);
-            ref.child(Prevalent.currentOnlineUser.getDienThoai()).updateChildren(userMap);
+            ref.child(AdminPrevalent.currentOnlineAdmin.getDienThoai()).updateChildren(userMap);
 
 
-            //startActivity(new Intent(SettingsActivity.this, HomeActivity.class));
-            Toast.makeText(SettingsActivity.this, "Cập nhật hồ sơ thành công!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AdminSettingsActivity.this, "Cập nhật hồ sơ thành công!", Toast.LENGTH_SHORT).show();
             finish();
         }
-
     }
+
+
 
     private void userInfoSaved() {
         String sName = fullName.getText().toString().trim();
         String sPassword = password.getText().toString().trim();
-        String sAddress = address.getText().toString().trim();
 
         if (TextUtils.isEmpty(sName)) {
             Toast.makeText(this, "Họ và tên không được rỗng", Toast.LENGTH_SHORT).show();
@@ -161,7 +159,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         if (imageUri != null) {
             final StorageReference fileRef = storageReference.child
-                    (Prevalent.currentOnlineUser.getDienThoai() + ".jpg");
+                    (AdminPrevalent.currentOnlineAdmin.getDienThoai() + ".jpg");
 
             uploadTask = fileRef.putFile(imageUri);
 
@@ -178,43 +176,39 @@ public class SettingsActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<Uri> task) {
                     String sName = fullName.getText().toString().trim();
                     String sPassword = password.getText().toString().trim();
-                    String sAddress = address.getText().toString().trim();
 
                     if (task.isSuccessful()) {
                         Uri downloadUrl = task.getResult();
                         myUrl = downloadUrl.toString();
 
                         DatabaseReference ref = FirebaseDatabase.getInstance().
-                                getReference().child("NguoiDung");
+                                getReference().child("QuanTri");
 
                         HashMap<String, Object> userMap = new HashMap<>();
                         userMap.put("HoTen", sName);
                         userMap.put("MatKhau", sPassword);
-                        userMap.put("DiaChi", sAddress);
                         userMap.put("Avatar", myUrl);
-                        ref.child(Prevalent.currentOnlineUser.getDienThoai()).updateChildren(userMap);
-                        
+                        ref.child(AdminPrevalent.currentOnlineAdmin.getDienThoai()).updateChildren(userMap);
+
                         progressDialog.dismiss();
-                        
-                        //startActivity(new Intent(SettingsActivity.this, HomeActivity.class));
-                        Toast.makeText(SettingsActivity.this, "Cập nhật hồ sơ thành công!", Toast.LENGTH_SHORT).show();
+
+                        Toast.makeText(AdminSettingsActivity.this, "Cập nhật hồ sơ thành công!", Toast.LENGTH_SHORT).show();
                         finish();
 
                     } else {
                         progressDialog.dismiss();
-                        Toast.makeText(SettingsActivity.this, "Lỗi cập nhật hồ sơ", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AdminSettingsActivity.this, "Lỗi cập nhật hồ sơ", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
         } else {
-            Toast.makeText(SettingsActivity.this, "Ảnh đại diện chưa được chọn", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AdminSettingsActivity.this, "Ảnh đại diện chưa được chọn", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void userInfoDisplay(CircleImageView profileImage, EditText fullName, EditText
-            password, EditText address) {
+    private void userInfoDisplay(CircleImageView profileImage, EditText fullName, EditText password) {
         DatabaseReference UserRef = FirebaseDatabase.getInstance().getReference().
-                child("NguoiDung").child(Prevalent.currentOnlineUser.getDienThoai());
+                child("QuanTri").child(AdminPrevalent.currentOnlineAdmin.getDienThoai());
         UserRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -226,20 +220,10 @@ public class SettingsActivity extends AppCompatActivity {
                     if (snapshot.child("Avatar").exists()) {
 
                         String sImage = snapshot.child("Avatar").getValue().toString();
-                        String sAddress = snapshot.child("DiaChi").getValue().toString();
 
                         Picasso.get().load(sImage).into(profileImage);
                         fullName.setText(sName);
                         password.setText(sPassword);
-                        address.setText(sAddress);
-
-                    } else if (snapshot.child("Diachi").exists()) {
-
-                        String sAddress = snapshot.child("DiaChi").getValue().toString();
-
-                        fullName.setText(sName);
-                        password.setText(sPassword);
-                        address.setText(sAddress);
 
                     } else {
 
@@ -258,13 +242,12 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void matching() {
-        profileImage = (CircleImageView) findViewById(R.id.settings_ap_profileImage);
-        fullName = (EditText) findViewById(R.id.settings_et_fullName);
-        password = (EditText) findViewById(R.id.settings_et_password);
-        address = (EditText) findViewById(R.id.settings_et_address);
-        change = (TextView) findViewById(R.id.settings_tv_profileImageChange);
-        close = (TextView) findViewById(R.id.settings_tv_close);
-        save = (TextView) findViewById(R.id.settings_tv_update);
+        profileImage = (CircleImageView) findViewById(R.id.adminSettings_ap_profileImage);
+        fullName = (EditText) findViewById(R.id.adminSettings_et_fullName);
+        password = (EditText) findViewById(R.id.adminSettings_et_password);
+        change = (TextView) findViewById(R.id.adminSettings_tv_profileImageChange);
+        close = (TextView) findViewById(R.id.adminSettings_tv_close);
+        save = (TextView) findViewById(R.id.adminSettings_tv_update);
         show_password = (ImageView) findViewById(R.id.show_pass_btn);
     }
 

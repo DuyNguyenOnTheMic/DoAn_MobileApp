@@ -1,9 +1,11 @@
 package com.example.doan_mobile;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -26,6 +28,7 @@ public class AccountFragment extends Fragment {
 
     CircleImageView profileImage;
     TextView fullName, phone;
+    Button update;
 
     StorageReference storageReference;
 
@@ -69,6 +72,13 @@ public class AccountFragment extends Fragment {
 
         userInfoDisplay(profileImage, fullName, phone);
 
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), AdminSettingsActivity.class));
+            }
+        });
+
         return view;
     }
 
@@ -109,6 +119,7 @@ public class AccountFragment extends Fragment {
         profileImage = (CircleImageView) view.findViewById(R.id.adminAccount_ap_profileImage);
         fullName = (TextView) view.findViewById(R.id.adminAccount_et_fullName);
         phone = (TextView) view.findViewById(R.id.adminAccount_et_phone);
+        update = (Button) view.findViewById(R.id.adminAccount_btn_update);
     }
 
 }

@@ -27,8 +27,11 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.text.NumberFormat;
@@ -51,6 +54,7 @@ public class HomeActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
         ProductsRef = FirebaseDatabase.getInstance().getReference().child("SanPham");
         Paper.init(this);
 
@@ -83,14 +87,45 @@ public class HomeActivity extends AppCompatActivity
         TextView userNameTextView = headerView.findViewById(R.id.userprofile_tv_name);
         CircleImageView profileImageView = headerView.findViewById(R.id.userprofile_iv_image);
 
+/*
         userNameTextView.setText(Prevalent.currentOnlineUser.getHoTen());
         Picasso.get().load(Prevalent.currentOnlineUser.getAvatar()).placeholder(R.drawable.profile).into(profileImageView);
+*/
 
+        userInfoDisplay(profileImageView, userNameTextView);
 
         recyclerView = findViewById(R.id.recycler_menu);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+    }
+
+    private void userInfoDisplay(CircleImageView profileImageView, TextView userNameTextView) {
+        DatabaseReference UserRef = FirebaseDatabase.getInstance().getReference().
+                child("NguoiDung").child(Prevalent.currentOnlineUser.getDienThoai());
+        UserRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    if (snapshot.child("Avatar").exists()) {
+                        String sImage = snapshot.child("Avatar").getValue().toString();
+                        String sName = snapshot.child("HoTen").getValue().toString();
+
+                        Picasso.get().load(sImage).into(profileImageView);
+                        userNameTextView.setText(sName);
+                    } else {
+                        String sName = snapshot.child("HoTen").getValue().toString();
+
+                        userNameTextView.setText(sName);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     @Override
