@@ -33,7 +33,7 @@ public class AdminCategoryActivity extends AppCompatActivity {
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        loadFragment(new HomeFragment());
+        loadFragment(new ManageFragment());
 
 
         lenovo.setOnClickListener(new View.OnClickListener() {
@@ -124,12 +124,12 @@ public class AdminCategoryActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment fragment;
             switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    fragment = new HomeFragment();
+                case R.id.navigation_adminCategory:
+                    fragment = new ManageFragment();
                     loadFragment(fragment);
                     return true;
-                case R.id.navigation_manage:
-                    fragment = new ManageFragment();
+                case R.id.navigation_account:
+                    fragment = new AccountFragment();
                     loadFragment(fragment);
                     return true;
                 case R.id.navigation_logout:
