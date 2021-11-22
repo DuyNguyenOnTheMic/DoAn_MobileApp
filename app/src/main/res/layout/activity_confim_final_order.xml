@@ -10,8 +10,8 @@
         android:id="@+id/txt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Vui lòng xác định chi tiết đơn hàng của bạn"
-        android:textSize="18dp"
+        android:text="Thông tin giao hàng"
+        android:textSize="25sp"
         android:textColor="@color/pink_700"
         android:layout_margin="15dp"
         android:textAlignment="center"
@@ -23,12 +23,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txt"
-        android:layout_marginTop="60dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="60dp"
         android:layout_marginRight="20dp"
-        android:textSize="18dp"
         android:hint="Tên bạn"
-        />
+        android:minHeight="48dp"
+        android:textSize="18sp" />
 
     <EditText
         android:id="@+id/Confirm_et_phone"
@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/Confirm_et_name"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
         android:hint="Số điện thoại của bạn"
         android:minHeight="48dp" />
@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/Confirm_et_phone"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
         android:hint="Địa chỉ của bạn của bạn"
         android:minHeight="48dp" />
@@ -58,7 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/Confirm_et_address"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
         android:hint="Địa chỉ của bạn của bạn"
         android:minHeight="48dp" />
@@ -67,9 +67,9 @@
         android:id="@+id/Confirm_btn_confirm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/Confirm_et_city"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
         android:background="@color/pink_700"
