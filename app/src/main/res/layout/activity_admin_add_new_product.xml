@@ -21,27 +21,44 @@
             android:src="@drawable/select_image"
             tools:ignore="ContentDescription" />
 
-        <EditText
-            android:id="@+id/adminAddNewProduct_et_categoryName"
+
+
+        <RelativeLayout
+            android:id="@+id/adminAddNewProduct_relativeLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/adminAddNewProduct_iv_selectImg"
-            android:layout_marginLeft="45dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="45dp"
-            android:background="@drawable/input_disabled_design"
-            android:hint="Tên Hãng"
-            android:inputType="textMultiLine"
-            android:padding="20dp"
-            android:textAlignment="center"
-            android:textStyle="bold"
-            tools:ignore="DuplicateIds" />
+            android:layout_below="@+id/adminAddNewProduct_iv_selectImg">
+
+            <Spinner
+                android:id="@+id/adminAddNewProduct_spinner_categoryName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/input_design"
+                android:layout_marginLeft="45dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="45dp"
+                android:minHeight="48dp"
+                android:padding="20dp"
+                android:textStyle="bold"
+                android:spinnerMode="dropdown"/>
+
+            <ImageView
+                android:id="@+id/adminAddNewProduct_iv_dropDownIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:paddingTop="18dp"
+                android:layout_marginRight="55dp"
+                android:alpha=".5"
+                android:src="@drawable/ic_dropdown_svgrepo_com" />
+        </RelativeLayout>
 
         <EditText
             android:id="@+id/adminAddNewProduct_et_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/adminAddNewProduct_et_categoryName"
+            android:layout_below="@+id/adminAddNewProduct_spinner_categoryName"
             android:layout_marginLeft="45dp"
             android:layout_marginTop="6dp"
             android:layout_marginRight="45dp"
@@ -73,7 +90,7 @@
             android:layout_marginRight="45dp"
             android:background="@drawable/input_design"
             android:hint="Giá sản phẩm"
-            android:inputType="textMultiLine"
+            android:inputType="number"
             android:padding="20dp" />
 
         <EditText
@@ -86,7 +103,7 @@
             android:layout_marginRight="45dp"
             android:background="@drawable/input_design"
             android:hint="Số lượng tồn"
-            android:inputType="textMultiLine"
+            android:inputType="number"
             android:padding="20dp" />
 
         <Button

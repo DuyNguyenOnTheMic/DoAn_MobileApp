@@ -57,16 +57,6 @@ public class ManageFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), AdminAddNewProductActivity.class);
-                intent.putExtra("HangSP", "lenovo");
-                startActivity(intent);
-            }
-        });
-
-        order.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), AdminAddNewProductActivity.class);
-                intent.putExtra("HangSP", "lenovo");
                 startActivity(intent);
             }
         });

@@ -31,12 +31,14 @@
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/drawable/input_disabled_design.xml" value="0.13055555555555556" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/drawable/selector.xml" value="0.14322916666666666" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/drawable/side_nav_bar.xml" value="0.11388888888888889" />
+        <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/drawable/spinner_background.xml" value="0.8" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/activity_admin_account.xml" value="0.128125" />
-        <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/activity_admin_add_new_product.xml" value="0.16259057971014493" />
+        <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/activity_admin_add_new_product.xml" value="0.4" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/activity_admin_category.xml" value="0.264" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/activity_admin_home.xml" value="0.4" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/activity_admin_settings.xml" value="0.2" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/activity_cart.xml" value="0.2" />
+        <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/activity_confim_final_order.xml" value="0.264" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/activity_home.xml" value="0.2" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/activity_main.xml" value="0.1" />
