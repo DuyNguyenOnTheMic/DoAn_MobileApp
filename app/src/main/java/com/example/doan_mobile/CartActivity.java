@@ -45,14 +45,12 @@ public class CartActivity extends AppCompatActivity {
 
         matching();
 
+
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                NumberFormat nf = NumberFormat.getInstance(new Locale("en", "US"));
-                String sPrice = nf.format(overTotalPrice);
 
-                total.setText("Tổng tiền: " + sPrice + "VNĐ");
                 Intent intent = new Intent(CartActivity.this, ConfimFinalOrderActivity.class);
                 intent.putExtra("Total Price", String.valueOf(overTotalPrice));
                 startActivity(intent);
@@ -87,8 +85,14 @@ public class CartActivity extends AppCompatActivity {
                 cartViewHolder.txtPPrice.setText("Đơn giá: " + sPrice);
                 cartViewHolder.txtPName.setText(gioHang.getTenSP());
 
+
                 int oneTypeProductTPrice = Integer.valueOf(gioHang.getGiaGoc()) * Integer.valueOf(gioHang.getSoLuongMua());
                 overTotalPrice += oneTypeProductTPrice;
+                NumberFormat nf2 = NumberFormat.getInstance(new Locale("en", "US"));
+                String sPrice2 = nf.format(overTotalPrice);
+
+                total.setText("Tổng tiền: " + sPrice2 + " VNĐ");
+
 
                 cartViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override

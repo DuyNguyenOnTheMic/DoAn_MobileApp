@@ -7,6 +7,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 public class ConfimFinalOrderActivity extends AppCompatActivity {
     EditText name, phone, address, city;
     Button confirm;
@@ -18,7 +21,10 @@ public class ConfimFinalOrderActivity extends AppCompatActivity {
         maching();
 
         total = getIntent().getStringExtra("Total Price");
-        Toast.makeText(this, "Tổng tiền = " + total, Toast.LENGTH_SHORT).show();
+        double dPrice = Double.parseDouble(total);
+        NumberFormat nf = NumberFormat.getInstance(new Locale("en", "US"));
+        String sPrice = nf.format(dPrice);
+        Toast.makeText(this, "Tổng tiền = " + sPrice + " VNĐ", Toast.LENGTH_SHORT).show();
     }
 
     private void maching() {
