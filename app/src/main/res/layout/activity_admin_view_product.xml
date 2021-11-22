@@ -18,11 +18,49 @@
         android:textSize="26sp"
         android:textStyle="bold" />
 
+   <LinearLayout
+       android:id="@+id/adminViewProduct_linearLayout"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_below="@+id/adminViewProduct_tv_title"
+       android:layout_marginTop="15dp"
+       android:layout_marginBottom="15dp"
+       android:orientation="horizontal"
+       android:gravity="right">
+
+       <com.google.android.material.button.MaterialButton
+           android:id="@+id/adminViewProduct_btn_back"
+           android:layout_width="100dp"
+           android:layout_height="wrap_content"
+           android:layout_below="@+id/adminViewProduct_tv_title"
+           android:backgroundTint="@android:color/darker_gray"
+           android:layout_marginEnd="10dp"
+           android:text="Trở về"
+           app:cornerRadius="15dp"
+           android:textAllCaps="false"
+           android:textColor="@color/white"
+           android:textSize="15sp" />
+
+       <com.google.android.material.button.MaterialButton
+           android:id="@+id/adminViewProduct_btn_add"
+           android:layout_width="100dp"
+           android:layout_height="wrap_content"
+           android:layout_below="@+id/adminViewProduct_tv_title"
+           android:layout_marginEnd="10dp"
+           android:text="Thêm"
+           app:cornerRadius="15dp"
+           android:textAllCaps="false"
+           android:textColor="@color/white"
+           android:textSize="15sp" />
+
+
+   </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/adminViewProduct_recycler_menu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/adminViewProduct_tv_title"
+        android:layout_below="@+id/adminViewProduct_linearLayout"
         android:scrollbars="vertical">
 
     </androidx.recyclerview.widget.RecyclerView>

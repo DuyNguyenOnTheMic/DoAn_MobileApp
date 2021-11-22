@@ -19,6 +19,8 @@
         <entry key="..\:/Mobile_Development/DoAn_Mobile/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Mobile_Development/DoAn_Mobile/app/src/main/res/layout/activity_register.xml" value="0.152" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.11388888888888889" />
+        <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/drawable/back_buttons.xml" value="0.13541666666666666" />
+        <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/drawable/buttons.xml" value="0.13541666666666666" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/drawable/ic_account_circle_svgrepo_com.xml" value="0.14427083333333332" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/drawable/ic_apps_svgrepo_com.xml" value="0.14427083333333332" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.11388888888888889" />
@@ -37,7 +39,7 @@
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/activity_admin_category.xml" value="0.264" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/activity_admin_home.xml" value="0.4" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/activity_admin_settings.xml" value="0.2" />
-        <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/activity_admin_view_product.xml" value="0.2" />
+        <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/activity_admin_view_product.xml" value="0.264" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/activity_cart.xml" value="0.2" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/activity_confim_final_order.xml" value="0.264" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/activity_home.xml" value="0.2" />

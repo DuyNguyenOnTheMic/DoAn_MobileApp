@@ -1,9 +1,11 @@
 package com.example.doan_mobile;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +28,7 @@ public class AdminViewProductActivity extends AppCompatActivity {
     private DatabaseReference ProductsRef;
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
+    Button back, add;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +37,32 @@ public class AdminViewProductActivity extends AppCompatActivity {
 
         ProductsRef = FirebaseDatabase.getInstance().getReference().child("SanPham");
 
+        matching();
+
         recyclerView = findViewById(R.id.adminViewProduct_recycler_menu);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AdminViewProductActivity.this, AdminAddNewProductActivity.class));
+            }
+        });
+
+    }
+
+    private void matching() {
+        back = (Button) findViewById(R.id.adminViewProduct_btn_back);
+        add = (Button) findViewById(R.id.adminViewProduct_btn_add);
     }
 
     @Override
