@@ -37,6 +37,7 @@
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/activity_admin_category.xml" value="0.264" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/activity_admin_home.xml" value="0.4" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/activity_admin_settings.xml" value="0.2" />
+        <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/activity_admin_view_product.xml" value="0.2" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/activity_cart.xml" value="0.2" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/activity_confim_final_order.xml" value="0.264" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/activity_home.xml" value="0.2" />
@@ -48,12 +49,14 @@
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/activity_settings.xml" value="0.264" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/app_bar_home.xml" value="0.144" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/cart_items_layout.xml" value="0.176" />
-        <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/content_home.xml" value="0.1" />
+        <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/content_home.xml" value="0.2" />
+        <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/content_product_view.xml" value="0.264" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/fragment_account.xml" value="0.152" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/fragment_dashboard.xml" value="0.11503623188405797" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/fragment_home.xml" value="0.152" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/fragment_manage.xml" value="0.264" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/fragment_notifications.xml" value="0.11503623188405797" />
+        <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/fragment_product_view.xml" value="0.1" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/nav_header_home.xml" value="0.176" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/products_items_layout.xml" value="0.264" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/menu/activity_main_drawer.xml" value="0.4" />

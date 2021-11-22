@@ -56,8 +56,7 @@ public class ManageFragment extends Fragment {
         product.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), AdminAddNewProductActivity.class);
-                startActivity(intent);
+                startActivity(new Intent(getActivity(), AdminViewProductActivity.class));
             }
         });
 

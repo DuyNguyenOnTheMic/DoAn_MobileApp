@@ -15,6 +15,9 @@
         android:theme="@style/Theme.DoAn_Mobile"
         tools:replace="android:theme">
         <activity
+            android:name=".AdminViewProductActivity"
+            android:exported="false" />
+        <activity
             android:name=".AdminSettingsActivity"
             android:exported="false" />
         <activity
