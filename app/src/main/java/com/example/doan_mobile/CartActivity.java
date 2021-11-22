@@ -124,8 +124,7 @@ public class CartActivity extends AppCompatActivity {
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     if (task.isSuccessful()){
                                                         Toast.makeText(CartActivity.this, "Xóa thành công", Toast.LENGTH_SHORT).show();
-                                                        Intent intent = new Intent(CartActivity.this, HomeActivity.class);
-                                                        startActivity(intent);
+
                                                     }
                                                 }
                                             });

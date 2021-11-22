@@ -98,7 +98,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
-                                                Toast.makeText(ProductDetailsActivity.this, "Thêm vào giỏ hàng thành công!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(ProductDetailsActivity.this, "Giỏ hàng đã được cập nhật!", Toast.LENGTH_SHORT).show();
 
                                                 Intent intent = new Intent(ProductDetailsActivity.this, HomeActivity.class);
                                                 startActivity(intent);
