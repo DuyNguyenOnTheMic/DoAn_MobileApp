@@ -27,7 +27,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class AccountFragment extends Fragment {
 
     CircleImageView profileImage;
-    TextView fullName, phone;
+    TextView fullName, phone, role;
     Button update;
 
     StorageReference storageReference;
@@ -93,17 +93,21 @@ public class AccountFragment extends Fragment {
                         String sImage = snapshot.child("Avatar").getValue().toString();
                         String sName = snapshot.child("HoTen").getValue().toString();
                         String sPhone = snapshot.child("DienThoai").getValue().toString();
+                        String sRole = snapshot.child("VaiTro").getValue().toString();
 
 
                         Picasso.get().load(sImage).into(profileImage);
                         fullName.setText(sName);
+                        role.setText(sRole);
                         phone.setText(sPhone);
                     } else {
                         String sName = snapshot.child("HoTen").getValue().toString();
                         String sPhone = snapshot.child("DienThoai").getValue().toString();
+                        String sRole = snapshot.child("VaiTro").getValue().toString();
 
-                        fullName.setText("Họ và tên: " + sName);
-                        phone.setText("Số điện thoại: " + sPhone);
+                        fullName.setText(sName);
+                        phone.setText(sPhone);
+                        role.setText(sRole);
                     }
                 }
             }
@@ -120,6 +124,7 @@ public class AccountFragment extends Fragment {
         fullName = (TextView) view.findViewById(R.id.adminAccount_et_fullName);
         phone = (TextView) view.findViewById(R.id.adminAccount_et_phone);
         update = (Button) view.findViewById(R.id.adminAccount_btn_update);
+        role = (TextView) view.findViewById(R.id.adminAccount_et_role);
     }
 
 }

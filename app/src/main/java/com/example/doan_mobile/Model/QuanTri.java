@@ -1,17 +1,18 @@
 package com.example.doan_mobile.Model;
 
 public class QuanTri {
-    private String HoTen, DienThoai, MatKhau, Avatar;
+    private String HoTen, DienThoai, MatKhau, Avatar, VaiTro;
 
     public QuanTri() {
 
     }
 
-    public QuanTri(String hoTen, String dienThoai, String matKhau, String avatar) {
+    public QuanTri(String hoTen, String dienThoai, String matKhau, String avatar, String vaiTro) {
         HoTen = hoTen;
         DienThoai = dienThoai;
         MatKhau = matKhau;
         Avatar = avatar;
+        VaiTro = vaiTro;
     }
 
     public String getHoTen() {
@@ -44,5 +45,13 @@ public class QuanTri {
 
     public void setAvatar(String avatar) {
         Avatar = avatar;
+    }
+
+    public String getVaiTro() {
+        return VaiTro;
+    }
+
+    public void setVaiTro(String vaiTro) {
+        VaiTro = vaiTro;
     }
 }

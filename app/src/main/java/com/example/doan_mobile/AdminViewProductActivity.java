@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +16,7 @@ import com.example.doan_mobile.Model.SanPham;
 import com.example.doan_mobile.ViewHolder.ProductViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
@@ -28,7 +29,8 @@ public class AdminViewProductActivity extends AppCompatActivity {
     private DatabaseReference ProductsRef;
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
-    Button back, add;
+    FloatingActionButton add;
+    ImageView back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,8 +63,8 @@ public class AdminViewProductActivity extends AppCompatActivity {
     }
 
     private void matching() {
-        back = (Button) findViewById(R.id.adminViewProduct_btn_back);
-        add = (Button) findViewById(R.id.adminViewProduct_btn_add);
+        add = (FloatingActionButton) findViewById(R.id.adminViewProduct_fab_add);
+        back = (ImageView) findViewById(R.id.adminViewProduct_iv_back);
     }
 
     @Override

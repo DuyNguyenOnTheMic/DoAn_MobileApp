@@ -6,8 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+
+import com.example.doan_mobile.Prevalent.AdminPrevalent;
 
 
 public class ManageFragment extends Fragment {
@@ -57,6 +60,17 @@ public class ManageFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), AdminViewProductActivity.class));
+            }
+        });
+
+        admin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (AdminPrevalent.currentOnlineAdmin.getVaiTro().equals("Admin")) {
+                    startActivity(new Intent(getActivity(), AdminViewAdminActivity.class));
+                } else {
+                    Toast.makeText(getActivity(), "Chỉ có quản trị mới được quyền truy cập mục này!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
