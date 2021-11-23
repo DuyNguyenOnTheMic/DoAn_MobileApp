@@ -14,8 +14,11 @@ import android.widget.Toast;
 import com.example.doan_mobile.Prevalent.Prevalent;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
@@ -39,9 +42,32 @@ public class ConfimFinalOrderActivity extends AppCompatActivity {
         String sPrice = nf.format(dPrice);
         Toast.makeText(this, "Tổng tiền = " + sPrice + " VNĐ", Toast.LENGTH_SHORT).show();
 
+        DatabaseReference UserRef = FirebaseDatabase.getInstance().getReference().
+                child("NguoiDung").child(Prevalent.currentOnlineUser.getDienThoai());
+        UserRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    String sName = snapshot.child("HoTen").getValue().toString();
+                    String sAddress = snapshot.child("DiaChi").getValue().toString();
+                    String sPhone = Prevalent.currentOnlineUser.getDienThoai();
+
+                    name.setText(sName);
+                    phone.setText(sPhone);
+                    address.setText(sAddress);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 check();
             }
         });

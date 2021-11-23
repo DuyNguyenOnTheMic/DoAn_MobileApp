@@ -36,6 +36,7 @@
         android:layout_centerVertical="true"
         android:textAlignment="center"
         android:textColor="@color/pink_500"
+        android:visibility="gone"
         android:textSize="20dp"
         tools:ignore="TextContrastCheck" />
 

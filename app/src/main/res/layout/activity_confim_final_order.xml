@@ -60,7 +60,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
-        android:hint="Địa chỉ của bạn của bạn"
+        android:hint="Thành phố của bạn của bạn"
         android:minHeight="48dp" />
 
     <Button
