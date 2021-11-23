@@ -40,7 +40,7 @@ public class ConfimFinalOrderActivity extends AppCompatActivity {
         double dPrice = Double.parseDouble(total);
         NumberFormat nf = NumberFormat.getInstance(new Locale("en", "US"));
         String sPrice = nf.format(dPrice);
-        Toast.makeText(this, "Tổng tiền = " + sPrice + " VNĐ", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Vui lòng điền thông tin giao hàng để tiếp tục", Toast.LENGTH_SHORT).show();
 
         DatabaseReference UserRef = FirebaseDatabase.getInstance().getReference().
                 child("NguoiDung").child(Prevalent.currentOnlineUser.getDienThoai());
