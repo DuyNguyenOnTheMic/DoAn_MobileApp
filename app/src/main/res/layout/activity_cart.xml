@@ -17,21 +17,35 @@
             android:id="@+id/cart_tv_total"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="Tổng tiền: "
+            android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="20dp"
-            android:textAlignment="center"
-            android:layout_marginTop="10dp"/>
+            tools:ignore="TextContrastCheck" />
 
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/cart_tv_mslg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:text="Đơn hàng của bạn đã được đặt thành công. Bạn sẽ sớm nhận được sản phẩm !!!"
+        android:layout_centerVertical="true"
+        android:textAlignment="center"
+        android:textColor="@color/pink_500"
+        android:visibility="gone"
+        android:textSize="20dp"
+        tools:ignore="TextContrastCheck" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cart_rv_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/cart_rl_relativeLayout"
-        android:layout_above="@+id/cart_btn_next">
-    </androidx.recyclerview.widget.RecyclerView>
+        android:layout_above="@+id/cart_btn_next"
+        android:layout_below="@+id/cart_rl_relativeLayout"></androidx.recyclerview.widget.RecyclerView>
 
     <Button
         android:id="@+id/cart_btn_next"
@@ -41,7 +55,8 @@
         android:background="@color/pink_500"
         android:text="Mua hàng"
         android:textColor="@color/white"
-        android:textSize="20dp" />
+        android:textSize="20dp"
+        tools:ignore="TextContrastCheck" />
 
 
 

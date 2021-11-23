@@ -37,7 +37,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     TextView price, description, name;
     Button addToCart;
 
-    String productID = "";
+    String productID = "", state = "Thông thường";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +53,22 @@ public class ProductDetailsActivity extends AppCompatActivity {
         addToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addingToCartList();
+
+                if (state.equals("Đã đặt hàng") || state.equals("Đã giao")){
+                    Toast.makeText(ProductDetailsActivity.this, "Bạn có thể mua thêm sản phẩm khi đơn hàng của bạn đã giao hoặc đã được xác nhận", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    addingToCartList();
+                }
+                
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        checkOrderState();
     }
 
     private void addingToCartList() {
@@ -98,7 +111,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
-                                                Toast.makeText(ProductDetailsActivity.this, "Thêm vào giỏ hàng thành công!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(ProductDetailsActivity.this, "Giỏ hàng đã được cập nhật!", Toast.LENGTH_SHORT).show();
 
                                                 Intent intent = new Intent(ProductDetailsActivity.this, HomeActivity.class);
                                                 startActivity(intent);
@@ -129,6 +142,35 @@ public class ProductDetailsActivity extends AppCompatActivity {
                     price.setText(sPrice);
                     Picasso.get().load(sanPham.getHinhAnhSP()).into(image);
 
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void checkOrderState(){
+        DatabaseReference orderRef;
+
+        orderRef = FirebaseDatabase.getInstance().getReference()
+                .child("DonHang")
+                .child(Prevalent.currentOnlineUser.getDienThoai());
+
+        orderRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+                    String shippingState = snapshot.child("TinhTrang").getValue().toString();
+
+                    if (shippingState.equals("Đang giao")){
+                        state ="Đã giao";
+                         }
+                    else if (shippingState.equals("Chờ xác nhận!")){
+                        state ="Đã đặt hàng";
+                    }
                 }
             }
 
