@@ -43,6 +43,7 @@
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/activity_admin_view_admin.xml" value="0.176" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/activity_admin_view_product.xml" value="0.3359375" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/activity_admin_view_product_category.xml" value="0.176" />
+        <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/activity_admin_view_voucher.xml" value="0.2" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/activity_cart.xml" value="0.2" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/activity_confim_final_order.xml" value="0.264" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/activity_home.xml" value="0.2" />
@@ -53,6 +54,7 @@
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/activity_register.xml" value="0.1" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/activity_settings.xml" value="0.264" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/admin_productcategory_items_layout.xml" value="0.264" />
+        <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/admin_vouchers_items_layout.xml" value="0.4" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/admins_item_layout.xml" value="0.264" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/app_bar_home.xml" value="0.264" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/cart_items_layout.xml" value="0.176" />
@@ -66,6 +68,7 @@
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/fragment_product_view.xml" value="0.1" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/nav_header_home.xml" value="0.176" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/products_items_layout.xml" value="0.264" />
+        <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/layout/vouchers_items_layout.xml" value="0.2" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/menu/activity_main_drawer.xml" value="0.4" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/menu/admin.xml" value="0.176" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/menu/admin_home.xml" value="0.264" />

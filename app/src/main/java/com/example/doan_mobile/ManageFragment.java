@@ -81,6 +81,13 @@ public class ManageFragment extends Fragment {
             }
         });
 
+        voucher.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), AdminViewVoucherActivity.class));
+            }
+        });
+
         return view;
     }
 
