@@ -6,8 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+
+import com.example.doan_mobile.Prevalent.AdminPrevalent;
 
 
 public class ManageFragment extends Fragment {
@@ -56,18 +59,32 @@ public class ManageFragment extends Fragment {
         product.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), AdminAddNewProductActivity.class);
-                intent.putExtra("HangSP", "lenovo");
-                startActivity(intent);
+                startActivity(new Intent(getActivity(), AdminViewProductActivity.class));
             }
         });
 
-        order.setOnClickListener(new View.OnClickListener() {
+        admin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), AdminAddNewProductActivity.class);
-                intent.putExtra("HangSP", "lenovo");
-                startActivity(intent);
+                if (AdminPrevalent.currentOnlineAdmin.getVaiTro().equals("Admin")) {
+                    startActivity(new Intent(getActivity(), AdminViewAdminActivity.class));
+                } else {
+                    Toast.makeText(getActivity(), "Chỉ có quản trị mới được quyền truy cập mục này!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        category.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), AdminViewProductCategoryActivity.class));
+            }
+        });
+
+        voucher.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), AdminViewVoucherActivity.class));
             }
         });
 

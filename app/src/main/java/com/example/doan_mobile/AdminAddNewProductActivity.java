@@ -1,34 +1,41 @@
 package com.example.doan_mobile;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 
 public class AdminAddNewProductActivity extends AppCompatActivity {
 
@@ -36,11 +43,15 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
     String sName, sDescription,sPrice, sQuantity;
     ImageView inputImage;
     Button addNewProduct;
-    EditText pName, pDescription, pPrice, pCategoryName, pQuantity;
+    Spinner pCategoryName;
+    EditText pName, pDescription, pPrice, pQuantity;
     private  static  final int GalleryPick = 1;
+
+    List<String> pCategoryList;
+
     Uri ImageUri;
     StorageReference ProductImagesRef;
-    DatabaseReference ProductRef;
+    DatabaseReference ProductRef, ProductCategoryRef;
     ProgressDialog loadingBar;
 
     @Override
@@ -51,10 +62,31 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
         matching();
         ProductImagesRef = FirebaseStorage.getInstance().getReference().child("HinhAnhSP");
         ProductRef = FirebaseDatabase.getInstance().getReference().child("SanPham");
-        categoryName = getIntent().getExtras().get("HangSP").toString();
 
-        pCategoryName.setEnabled(false);
-        pCategoryName.setText(categoryName);
+        pCategoryList = new ArrayList<>();
+
+        ProductCategoryRef = FirebaseDatabase.getInstance().getReference();
+        ProductCategoryRef.child("HangSP").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot mySnapShot:snapshot.getChildren()) {
+                    String spinnerpCategory = mySnapShot.child("TenHangSP").getValue(String.class);
+                    pCategoryList.add(spinnerpCategory);
+                }
+
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(AdminAddNewProductActivity.this, android.R.layout.simple_spinner_item, pCategoryList);
+                arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+                pCategoryName.setAdapter(arrayAdapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        //pCategoryName.setEnabled(false);
+        //pCategoryName.setText(categoryName);
         Intent intent = getIntent();
 
         inputImage.setOnClickListener(new View.OnClickListener() {
@@ -69,19 +101,11 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
             public void onClick(View view) {
                 ValidateProduct();
 
-                /*FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference reference = database.getReference("SanPham");
-                String sID = reference.push().getKey();
-
-                reference.child(sID).child("ID").setValue(sID);
-                reference.child(sID).child("MaHangSP").setValue(categoryName);
-                reference.child(sID).child("TenSP").setValue(sName);
-                reference.child(sID).child("ThongTinChiTietSP").setValue(sDescription);
-                reference.child(sID).child("GiaGoc").setValue(sPrice);
-                Toast.makeText(getApplicationContext(),"Thêm thành công contact",Toast.LENGTH_LONG).show();
-                finish();*/
             }
         });
+
+
+
 
     }
 
@@ -131,7 +155,6 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Toast.makeText(AdminAddNewProductActivity.this,"Có hình ảnh rồi đó ^^: ",Toast.LENGTH_LONG).show();
 
                 Task<Uri> uriTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                     @Override
@@ -149,7 +172,6 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Uri> task) {
                         if (task.isSuccessful()){
                             dowloadImageUri = task.getResult().toString();
-                            Toast.makeText(AdminAddNewProductActivity.this,"Lấy Url hình ảnh sản phẩm thành công",Toast.LENGTH_LONG).show();
 
                         SaveProductInfoToDatabase();
                         }
@@ -160,8 +182,10 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
     }
 
     private void SaveProductInfoToDatabase() {
+
+        categoryName = pCategoryName.getSelectedItem().toString();
+
         HashMap<String, Object> productMap = new HashMap<>();
-        /*String sID = ProductRef.push().getKey();*/
         productMap.put("ID",ID);
         productMap.put("TenHangSP",categoryName);
         productMap.put("TenSP",sName);
@@ -208,7 +232,7 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
         pName = (EditText) findViewById(R.id.adminAddNewProduct_et_name);
         pDescription = (EditText) findViewById(R.id.adminAddNewProduct_et_productDescription);
         pPrice = (EditText) findViewById(R.id.adminAddNewProduct_et_price);
-        pCategoryName = (EditText) findViewById(R.id.adminAddNewProduct_et_categoryName);
+        pCategoryName = (Spinner) findViewById(R.id.adminAddNewProduct_spinner_categoryName);
         pQuantity = (EditText) findViewById(R.id.adminAddNewProduct_et_quantity);
         inputImage = (ImageView) findViewById(R.id.adminAddNewProduct_iv_selectImg);
         loadingBar = new ProgressDialog(this);

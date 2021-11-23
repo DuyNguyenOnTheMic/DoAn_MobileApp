@@ -15,8 +15,22 @@
         android:theme="@style/Theme.DoAn_Mobile"
         tools:replace="android:theme">
         <activity
+
             android:name=".ConfimFinalOrderActivity"
             android:exported="true" />
+
+            android:name=".AdminViewVoucherActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminViewProductCategoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminViewAdminActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminViewProductActivity"
+            android:exported="false" />
+
         <activity
             android:name=".AdminSettingsActivity"
             android:exported="false" />

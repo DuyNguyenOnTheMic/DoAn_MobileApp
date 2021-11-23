@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="15dp"
+    android:layout_marginTop="20dp"
+    android:layout_marginEnd="15dp"
+    android:paddingBottom="0dp"
+    app:cardElevation="15dp"
+    app:cardCornerRadius="10dp">
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/adminItems_iv_avatar"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:src="@drawable/profile"
+        app:civ_border_width="2dp"
+        android:layout_margin="10dp"
+        android:layout_gravity="center_vertical"
+        app:civ_border_color="@color/white"/>
+
+    <RelativeLayout
+        android:layout_width="230dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center|end"
+        android:layout_marginEnd="15dp">
+
+        <TextView
+            android:id="@+id/adminItems_tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Admin Name"
+            android:textAlignment="viewEnd"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/adminItems_tv_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/adminItems_tv_name"
+            android:text="Admin Phone"
+            android:textAlignment="viewEnd"
+            android:textColor="@color/black"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/adminItems_tv_role"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/adminItems_tv_phone"
+            android:text="Admin Role"
+            android:textAlignment="viewEnd"
+            android:textColor="@color/black"
+            android:textSize="18dp" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

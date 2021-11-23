@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginStart="15dp"
+    android:layout_marginTop="20dp"
+    android:layout_marginEnd="15dp"
+    android:paddingBottom="0dp"
+    app:cardElevation="15dp"
+    app:cardCornerRadius="10dp">
+
+    <ImageView
+        android:id="@+id/voucherItems_iv_voucherIcon"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:src="@drawable/brand_icon"
+        android:layout_margin="15dp"
+        android:layout_gravity="center_vertical"
+        app:civ_border_color="@color/white"/>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center">
+
+
+        <TextView
+            android:id="@+id/adminCategoryItems_tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="140dp"
+            android:text="Category Name"
+            android:textAlignment="viewStart"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
