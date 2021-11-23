@@ -24,15 +24,13 @@
     <RelativeLayout
         android:layout_width="230dp"
         android:layout_height="match_parent"
-        android:layout_gravity="right"
-        android:padding="10dp"
+        android:layout_gravity="center|end"
         android:layout_marginEnd="15dp">
 
         <TextView
             android:id="@+id/adminItems_tv_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:text="Admin Name"
             android:textAlignment="viewEnd"
             android:textColor="@color/black"
@@ -55,7 +53,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/adminItems_tv_phone"
-            android:layout_marginBottom="15dp"
             android:text="Admin Role"
             android:textAlignment="viewEnd"
             android:textColor="@color/black"

@@ -10,20 +10,29 @@
     app:cardElevation="15dp"
     app:cardCornerRadius="10dp">
 
+    <ImageView
+        android:id="@+id/voucherItems_iv_voucherIcon"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:src="@drawable/brand_icon"
+        android:layout_margin="15dp"
+        android:layout_gravity="center_vertical"
+        app:civ_border_color="@color/white"/>
+
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="10dp"
-        android:layout_marginEnd="15dp">
+        android:layout_gravity="center">
 
 
         <TextView
             android:id="@+id/adminCategoryItems_tv_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="140dp"
             android:text="Category Name"
-            android:textAlignment="center"
+            android:textAlignment="viewStart"
             android:textColor="@color/black"
             android:textSize="20dp"
             android:textStyle="bold" />
