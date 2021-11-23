@@ -1,8 +1,5 @@
 package com.example.doan_mobile;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -10,6 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.doan_mobile.Prevalent.Prevalent;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -75,18 +75,19 @@ public class ConfimFinalOrderActivity extends AppCompatActivity {
 
     private void check() {
         if (TextUtils.isEmpty(name.getText().toString())){
-            Toast.makeText(this, "Vui long nhập tên !", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Vui lòng nhập tên !", Toast.LENGTH_SHORT).show();
         }
         else if (TextUtils.isEmpty(phone.getText().toString())){
-            Toast.makeText(this, "Vui long nhập số điện thoại !", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Vui lòng nhập số điện thoại !", Toast.LENGTH_SHORT).show();
         }
         else if (TextUtils.isEmpty(address.getText().toString())){
-            Toast.makeText(this, "Vui long nhập địa chỉ !", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Vui lòng nhập địa chỉ !", Toast.LENGTH_SHORT).show();
         }
         else if (TextUtils.isEmpty(city.getText().toString())){
-            Toast.makeText(this, "Vui long nhập thành phố !", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Vui lòng nhập thành phố !", Toast.LENGTH_SHORT).show();
+        } else {
+            ConfirmOrder();
         }
-        ConfirmOrder();
     }
 
     private void ConfirmOrder() {

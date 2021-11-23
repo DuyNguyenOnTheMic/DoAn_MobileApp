@@ -106,7 +106,7 @@ public class CartActivity extends AppCompatActivity {
                                         "Xóa"
                                 };
                         AlertDialog.Builder builder = new AlertDialog.Builder(CartActivity.this);
-                        builder.setTitle("Cart Options: ");
+                        builder.setTitle("Lựa chọn: ");
 
                         builder.setItems(options, new DialogInterface.OnClickListener() {
                             @Override
@@ -126,8 +126,9 @@ public class CartActivity extends AppCompatActivity {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     if (task.isSuccessful()){
-                                                        Toast.makeText(CartActivity.this, "Xóa thành công", Toast.LENGTH_SHORT).show();
-
+                                                        Toast.makeText(CartActivity.this, "Xóa thành công!", Toast.LENGTH_SHORT).show();
+                                                        finish();
+                                                        startActivity(getIntent());
                                                     }
                                                 }
                                             });
