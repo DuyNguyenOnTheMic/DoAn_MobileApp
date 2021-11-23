@@ -23,8 +23,11 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -34,7 +37,7 @@ public class CartActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     Button next;
-    TextView total;
+    TextView total, mslg;
 
     int overTotalPrice = 0;
 
@@ -61,6 +64,8 @@ public class CartActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+        checkOrderState();
 
         final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("GioHang");
 
@@ -148,6 +153,47 @@ public class CartActivity extends AppCompatActivity {
         adapter.startListening();
     }
 
+    private void checkOrderState(){
+        DatabaseReference orderRef;
+
+        orderRef = FirebaseDatabase.getInstance().getReference()
+                .child("DonHang")
+                .child(Prevalent.currentOnlineUser.getDienThoai());
+
+        orderRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+                    String shippingState = snapshot.child("TinhTrang").getValue().toString();
+                    String username = snapshot.child("TenKH").getValue().toString();
+
+                    if (shippingState.equals("Đang giao")){
+                        total.setText("Thân gửi " + username + "Đơn hàng đã được xác nhận thành công!!");
+                        recyclerView.setVisibility(View.GONE);
+                        mslg.setText("Đơn hàng của bạn đã được đặt thành công. Bạn sẽ sớm nhận được sản phẩm !!!");
+
+                        mslg.setVisibility(View.VISIBLE);
+                        next.setVisibility(View.GONE);
+                        Toast.makeText(CartActivity.this, "Bạn có thể mua nhìu sản hẩm hơn, sau khi nhận đơn hàng đầu tiên !!", Toast.LENGTH_SHORT).show();
+                    }
+                   else if (shippingState.equals("Chờ xác nhận!")){
+                        total.setText("Tình trạng: Chờ xác nhận!");
+                        recyclerView.setVisibility(View.GONE);
+
+                        mslg.setVisibility(View.VISIBLE);
+                        next.setVisibility(View.GONE);
+                        Toast.makeText(CartActivity.this, "Bạn có thể mua nhiều sản phẩm hơn, sau khi nhận đơn hàng !!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
     private void matching() {
         recyclerView = (RecyclerView) findViewById(R.id.cart_rv_list);
         recyclerView.setHasFixedSize(true);
@@ -156,5 +202,6 @@ public class CartActivity extends AppCompatActivity {
 
         next = (Button) findViewById(R.id.cart_btn_next);
         total = (TextView) findViewById(R.id.cart_tv_total);
+        mslg = (TextView) findViewById(R.id.cart_tv_mslg);
     }
 }
