@@ -17,7 +17,6 @@
         <activity
             android:name=".SearchProductsActivity"
             android:exported="true" />
-
         <activity
             android:name=".AdminViewOrderActivity"
             android:exported="false" />
