@@ -15,12 +15,14 @@
         android:theme="@style/Theme.DoAn_Mobile"
         tools:replace="android:theme">
         <activity
+            android:name=".AdminUserProductActivity"
+            android:exported="false" />
+        <activity
             android:name=".SearchProductsActivity"
             android:exported="true" />
         <activity
             android:name=".AdminViewOrderActivity"
             android:exported="false" />
-
         <activity
             android:name=".ConfimFinalOrderActivity"
             android:exported="true" />

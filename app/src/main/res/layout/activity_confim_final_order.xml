@@ -28,6 +28,8 @@
         android:layout_marginTop="30dp"
         android:layout_marginRight="20dp"
         android:hint="Tên bạn"
+        android:imeOptions="actionNext"
+        android:inputType="text"
         android:minHeight="48dp"
         android:textSize="18sp" />
 
@@ -40,6 +42,8 @@
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
         android:hint="Số điện thoại của bạn"
+        android:imeOptions="actionNext"
+        android:inputType="text"
         android:minHeight="48dp" />
 
     <EditText
@@ -51,6 +55,8 @@
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
         android:hint="Địa chỉ của bạn của bạn"
+        android:imeOptions="actionNext"
+        android:inputType="text"
         android:minHeight="48dp" />
 
     <EditText
@@ -62,6 +68,8 @@
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
         android:hint="Thành phố của bạn của bạn"
+        android:imeOptions="actionDone"
+        android:inputType="text"
         android:minHeight="48dp" />
 
     <Button

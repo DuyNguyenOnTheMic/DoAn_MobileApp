@@ -1,5 +1,6 @@
 package com.example.doan_mobile;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,7 +59,7 @@ public class AdminViewOrderActivity extends AppCompatActivity {
         FirebaseRecyclerAdapter<DonHang, OrderViewHolder> adapter =
                 new FirebaseRecyclerAdapter<DonHang, OrderViewHolder>(options) {
                     @Override
-                    protected void onBindViewHolder(@NonNull OrderViewHolder orderViewHolder, int i, @NonNull DonHang donHang) {
+                    protected void onBindViewHolder(@NonNull OrderViewHolder orderViewHolder, final int position, @NonNull DonHang donHang) {
 
                         double dPrice = Double.parseDouble(donHang.getTongTien());
                         NumberFormat nf = NumberFormat.getInstance(new Locale("en", "US"));
@@ -69,6 +70,18 @@ public class AdminViewOrderActivity extends AppCompatActivity {
                         orderViewHolder.userTotalPrice.setText("Tổng tiền: " + sPrice);
                         orderViewHolder.userDateTime.setText("Ngày đặt hàng:\n" + donHang.getNgay() + " " +  donHang.getThoiGian());
                         orderViewHolder.userAddress.setText("Địa chỉ: " + donHang.getDiaChi() + ", " + donHang.getThanhPho());
+
+                        orderViewHolder.showProducts.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                                String MaKH = donHang.getSDT();
+
+                                Intent intent = new Intent(AdminViewOrderActivity.this, AdminUserProductActivity.class);
+                                intent.putExtra("MaKH", MaKH);
+                                startActivity(intent);
+                            }
+                        });
                     }
 
                     @NonNull
