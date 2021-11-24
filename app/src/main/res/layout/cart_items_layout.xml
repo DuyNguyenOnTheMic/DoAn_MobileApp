@@ -45,7 +45,7 @@
             android:gravity="center"
             android:text="Product Price"
             android:textColor="@color/white"
-            android:textSize="14dp"
+            android:textSize="18dp"
             android:textStyle="bold" />
 
     </RelativeLayout>
