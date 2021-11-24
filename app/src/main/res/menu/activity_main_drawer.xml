@@ -10,9 +10,9 @@
             android:title="Giỏ hàng"
             android:iconTint="@color/white"/>
         <item
-            android:id="@+id/nav_orders"
+            android:id="@+id/nav_search"
             android:icon="@drawable/orders"
-            android:title="Đơn hàng"
+            android:title="Tìm kiếm"
             android:iconTint="@color/white"/>
         <item
             android:id="@+id/nav_category"

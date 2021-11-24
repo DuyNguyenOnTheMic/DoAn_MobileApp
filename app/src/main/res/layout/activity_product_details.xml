@@ -59,8 +59,7 @@
         app:backGroundColor="@color/pink_500"
         app:finalNumber="10"
         app:initialNumber="1"
-        app:textSize="16sp">
-    </com.cepheuen.elegantnumberbutton.view.ElegantNumberButton>
+        app:textSize="16sp"></com.cepheuen.elegantnumberbutton.view.ElegantNumberButton>
 
     <Button
         android:id="@+id/productDetails_btn_addToCart"
