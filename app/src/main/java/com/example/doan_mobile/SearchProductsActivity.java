@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,7 +19,6 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.rey.material.widget.EditText;
 import com.squareup.picasso.Picasso;
 
 import java.text.NumberFormat;
@@ -26,7 +26,7 @@ import java.util.Locale;
 
 public class SearchProductsActivity extends AppCompatActivity {
     Button search;
-    com.rey.material.widget.EditText input;
+    android.widget.EditText input;
     RecyclerView list;
     String SearchLInput;
 
@@ -44,6 +44,7 @@ public class SearchProductsActivity extends AppCompatActivity {
                 onStart();
             }
         });
+
     }
     @Override
     protected void onStart(){

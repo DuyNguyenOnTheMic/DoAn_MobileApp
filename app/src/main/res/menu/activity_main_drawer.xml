@@ -6,27 +6,22 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_cart"
-            android:icon="@drawable/nav_cart"
+            android:icon="@drawable/ic_nav_cart"
             android:title="Giỏ hàng"
             android:iconTint="@color/white"/>
         <item
             android:id="@+id/nav_search"
-            android:icon="@drawable/orders"
+            android:icon="@drawable/ic_search_svgrepo_com"
             android:title="Tìm kiếm"
             android:iconTint="@color/white"/>
         <item
-            android:id="@+id/nav_category"
-            android:icon="@drawable/category"
-            android:title="Danh mục laptop"
-            android:iconTint="@color/white"/>
-        <item
             android:id="@+id/nav_updateUser"
-            android:icon="@drawable/user"
+            android:icon="@drawable/ic_account_svgrepo_com"
             android:title="Cập nhật hồ sơ"
             android:iconTint="@color/white"/>
         <item
             android:id="@+id/nav_logout"
-            android:icon="@drawable/logout"
+            android:icon="@drawable/ic_logout_svgrepo_com"
             android:title="Đăng xuất"
             android:iconTint="@color/white"/>
     </group>
