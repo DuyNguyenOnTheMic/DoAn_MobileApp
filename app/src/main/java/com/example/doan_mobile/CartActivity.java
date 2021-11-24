@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +39,7 @@ public class CartActivity extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
     Button next;
     TextView total, mslg;
+    ImageView thanks;
 
     int overTotalPrice = 0;
 
@@ -174,10 +176,10 @@ public class CartActivity extends AppCompatActivity {
                     String shippingState = snapshot.child("TinhTrang").getValue().toString();
 
                     if (shippingState.equals("Đang giao") | shippingState.equals("Chờ xác nhận")){
-                        total.setText("Tình trang: " + shippingState);
+                        total.setText("Tình trạng: " + shippingState);
                         recyclerView.setVisibility(View.GONE);
-                        mslg.setText("Đơn hàng của bạn đã được đặt thành công. Bạn sẽ sớm nhận được sản phẩm !!!");
 
+                        thanks.setVisibility(View.VISIBLE);
                         mslg.setVisibility(View.VISIBLE);
                         next.setVisibility(View.GONE);
                         //Toast.makeText(CartActivity.this, "Bạn có thể mua nhiều sản phẩm hơn sau khi đã hoàn thành đơn hàng", Toast.LENGTH_SHORT).show();
@@ -201,5 +203,6 @@ public class CartActivity extends AppCompatActivity {
         next = (Button) findViewById(R.id.cart_btn_next);
         total = (TextView) findViewById(R.id.cart_tv_total);
         mslg = (TextView) findViewById(R.id.cart_tv_mslg);
+        thanks = (ImageView) findViewById(R.id.cart_iv_thanks);
     }
 }
