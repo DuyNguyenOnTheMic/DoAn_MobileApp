@@ -52,10 +52,14 @@ public class CartActivity extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(CartActivity.this, ConfimFinalOrderActivity.class);
-                intent.putExtra("Total Price", String.valueOf(overTotalPrice));
-                startActivity(intent);
-                finish();
+                if (recyclerView.getChildCount() == 0) {
+                    Toast.makeText(CartActivity.this, "Bạn chưa thêm gì vào giỏ hàng mà", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intent = new Intent(CartActivity.this, ConfimFinalOrderActivity.class);
+                    intent.putExtra("Total Price", String.valueOf(overTotalPrice));
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
 
@@ -168,24 +172,15 @@ public class CartActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
                     String shippingState = snapshot.child("TinhTrang").getValue().toString();
-                    String username = snapshot.child("TenKH").getValue().toString();
 
-                    if (shippingState.equals("Đang giao")){
-                        total.setText("Thân gửi " + username + "Đơn hàng đã được xác nhận thành công!!");
+                    if (shippingState.equals("Đang giao") | shippingState.equals("Chờ xác nhận")){
+                        total.setText("Tình trang: " + shippingState);
                         recyclerView.setVisibility(View.GONE);
                         mslg.setText("Đơn hàng của bạn đã được đặt thành công. Bạn sẽ sớm nhận được sản phẩm !!!");
 
                         mslg.setVisibility(View.VISIBLE);
                         next.setVisibility(View.GONE);
-                        Toast.makeText(CartActivity.this, "Bạn có thể mua nhìu sản hẩm hơn, sau khi nhận đơn hàng đầu tiên !!", Toast.LENGTH_SHORT).show();
-                    }
-                   else if (shippingState.equals("Chờ xác nhận!")){
-                        total.setText("Tình trạng: Chờ xác nhận!");
-                        recyclerView.setVisibility(View.GONE);
-
-                        mslg.setVisibility(View.VISIBLE);
-                        next.setVisibility(View.GONE);
-                        Toast.makeText(CartActivity.this, "Bạn có thể mua nhiều sản phẩm hơn, sau khi nhận đơn hàng !!", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(CartActivity.this, "Bạn có thể mua nhiều sản phẩm hơn sau khi đã hoàn thành đơn hàng", Toast.LENGTH_SHORT).show();
                     }
                 }
             }

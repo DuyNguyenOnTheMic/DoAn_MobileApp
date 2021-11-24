@@ -1,8 +1,5 @@
 package com.example.doan_mobile;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +7,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.example.doan_mobile.Model.SanPham;
@@ -24,7 +24,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.text.NumberFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -54,8 +53,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (state.equals("Đã đặt hàng") || state.equals("Đã giao")){
-                    Toast.makeText(ProductDetailsActivity.this, "Bạn có thể mua thêm sản phẩm khi đơn hàng của bạn đã giao hoặc đã được xác nhận", Toast.LENGTH_SHORT).show();
+                if (state.equals("Hoàn thành") || state.equals("Đang giao")){
+                    Toast.makeText(ProductDetailsActivity.this, "Bạn có thể mua thêm sản phẩm khi đơn hàng của bạn đang giao hoặc đã hoàn thành", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     addingToCartList();
@@ -166,10 +165,10 @@ public class ProductDetailsActivity extends AppCompatActivity {
                     String shippingState = snapshot.child("TinhTrang").getValue().toString();
 
                     if (shippingState.equals("Đang giao")){
-                        state ="Đã giao";
+                        state ="Hoàn thành";
                          }
-                    else if (shippingState.equals("Chờ xác nhận!")){
-                        state ="Đã đặt hàng";
+                    else if (shippingState.equals("Chờ xác nhận")){
+                        state ="Đang giao";
                     }
                 }
             }

@@ -47,15 +47,29 @@ public class ConfimFinalOrderActivity extends AppCompatActivity {
         UserRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    String sName = snapshot.child("HoTen").getValue().toString();
-                    String sAddress = snapshot.child("DiaChi").getValue().toString();
-                    String sPhone = Prevalent.currentOnlineUser.getDienThoai();
 
-                    name.setText(sName);
-                    phone.setText(sPhone);
-                    address.setText(sAddress);
+
+
+                if (snapshot.exists()) {
+
+                    String sName = snapshot.child("HoTen").getValue().toString();
+                    String sPhone = snapshot.child("DienThoai").getValue().toString();
+                    String sAddress = snapshot.child("DiaChi").getValue().toString();
+
+                    if (snapshot.child("DiaChi").exists()) {
+
+                        name.setText(sName);
+                        phone.setText(sPhone);
+                        address.setText(sAddress);
+
+                    } else {
+
+                        name.setText(sName);
+                        phone.setText(sPhone);
+
+                    }
                 }
+
             }
 
             @Override
@@ -111,7 +125,7 @@ public class ConfimFinalOrderActivity extends AppCompatActivity {
         orderMap.put("ThanhPho", city.getText().toString().trim());
         orderMap.put("Ngay", saveCurrentDate);
         orderMap.put("ThoiGian", saveCurrentTime);
-        orderMap.put("TinhTrang", "Chờ xác nhận!");
+        orderMap.put("TinhTrang", "Chờ xác nhận");
         
         orderRef.updateChildren(orderMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
@@ -126,7 +140,7 @@ public class ConfimFinalOrderActivity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
-                                        Toast.makeText(ConfimFinalOrderActivity.this, "Bạn đã đặt hàng thành công!!!", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(ConfimFinalOrderActivity.this, "Đặt hàng thành công!!!", Toast.LENGTH_SHORT).show();
 
                                         Intent intent = new Intent(ConfimFinalOrderActivity.this, HomeActivity.class);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

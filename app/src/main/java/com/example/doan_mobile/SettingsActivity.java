@@ -233,7 +233,7 @@ public class SettingsActivity extends AppCompatActivity {
                         password.setText(sPassword);
                         address.setText(sAddress);
 
-                    } else if (snapshot.child("Diachi").exists()) {
+                    } else if (snapshot.child("DiaChi").exists()) {
 
                         String sAddress = snapshot.child("DiaChi").getValue().toString();
 
