@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SearchProductsActivity">
+
+    <RelativeLayout
+        android:id="@+id/r5"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="@color/pink_500">
+
+        <com.rey.material.widget.EditText
+            android:id="@+id/searchproducts_et_name"
+            android:layout_width="290dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/input_search_design"
+            android:hint="Nhập sản phẩm bạn muốn tìm"
+            android:paddingTop="9dp"
+            android:paddingRight="9dp"
+            android:paddingBottom="9dp"
+            android:paddingLeft="15dp"
+            android:textColorHint="@android:color/darker_gray"
+            android:textSize="15dp"
+            app:et_dividerColor="@color/pink_500"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <Button
+            android:id="@+id/searchproducts_btn_search"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_toRightOf="@+id/searchproducts_et_name"
+            android:background="@color/pink_700"
+            android:padding="9dp"
+            android:text="Tìm"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/searchproducts_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/r5">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+</RelativeLayout>
