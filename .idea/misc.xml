@@ -94,6 +94,8 @@
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/menu/selector.xml" value="0.264" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.13055555555555556" />
         <entry key="..\:/Mobile_Development/DoAn_MobileApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.14427083333333332" />
+        <entry key="..\:/Users/CS/DoAn_MobileApp/app/src/main/res/layout/activity_admin_add_new_voucher.xml" value="0.1" />
+        <entry key="..\:/Users/CS/DoAn_MobileApp/app/src/main/res/layout/activity_admin_edit_voucher.xml" value="0.1" />
       </map>
     </option>
   </component>

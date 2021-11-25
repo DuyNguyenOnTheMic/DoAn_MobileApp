@@ -15,6 +15,12 @@
         android:theme="@style/Theme.DoAn_Mobile"
         tools:replace="android:theme">
         <activity
+            android:name=".AdminEditVoucherActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminAddNewVoucherActivity"
+            android:exported="false" />
+        <activity
             android:name=".AdminEditProductCategoryActivity"
             android:exported="false" />
         <activity

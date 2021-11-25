@@ -1,12 +1,16 @@
 package com.example.doan_mobile;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +19,8 @@ import com.example.doan_mobile.Model.Voucher;
 import com.example.doan_mobile.ViewHolder.VoucherViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -51,7 +57,7 @@ public class AdminViewVoucherActivity extends AppCompatActivity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*startActivity(new Intent(AdminViewAdminActivity.this, AdminAddNewAdminActivity.class));*/
+                startActivity(new Intent(AdminViewVoucherActivity.this, AdminAddNewVoucherActivity.class));
             }
         });
 
@@ -82,6 +88,73 @@ public class AdminViewVoucherActivity extends AppCompatActivity {
                         voucherViewHolder.voucherDiscount.setText("Mức giảm: " + voucher.getMucGiam());
                         voucherViewHolder.voucherBegin.setText(voucher.getThoiGianBatDau());
                         voucherViewHolder.voucherEnd.setText(voucher.getThoiGianKetThuc());
+
+                        voucherViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                CharSequence options[] = new CharSequence[]
+                                        {
+                                                "Chỉnh sửa",
+                                                "Xóa"
+                                        };
+                                AlertDialog.Builder builder = new AlertDialog.Builder(AdminViewVoucherActivity.this);
+                                builder.setTitle("Lựa chọn: ");
+
+                                builder.setItems(options, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        if (which == 0) {
+
+                                            Intent intent = new Intent(AdminViewVoucherActivity.this, AdminEditVoucherActivity.class);
+                                            String i_id = getRef(voucherViewHolder.getAdapterPosition()).getKey();
+                                            intent.putExtra("MaVoucher", i_id);
+                                            startActivity(intent);
+                                            finish();
+
+                                        }
+                                        if (which == 1) {
+
+                                            AlertDialog.Builder confirm_dialog = new AlertDialog.Builder(AdminViewVoucherActivity.this);
+                                            AlertDialog alert = confirm_dialog.create();
+
+                                            confirm_dialog.setTitle("Thông báo");
+                                            confirm_dialog.setMessage("Bạn có chắc muốn xoá Voucher " + voucher.getMaVoucher() + "?");
+                                            confirm_dialog.setPositiveButton("Xoá", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+
+                                                    String key = getRef(voucherViewHolder.getAdapterPosition()).getKey();
+
+                                                    VouchersRef.child(key)
+                                                            .removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                            if (task.isSuccessful()){
+                                                                Toast.makeText(AdminViewVoucherActivity.this, "Xóa thành công!", Toast.LENGTH_SHORT).show();
+                                                                finish();
+                                                                overridePendingTransition(0, 0);
+                                                                startActivity(getIntent());
+                                                                overridePendingTransition(0, 0);
+                                                            }
+                                                        }
+                                                    });
+
+                                                }
+                                            });
+                                            confirm_dialog.setNegativeButton("Huỷ", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                    alert.dismiss();
+                                                }
+                                            });
+                                            confirm_dialog.show();
+
+                                        }
+                                    }
+                                });
+                                builder.show();
+                            }
+                        });
 
                     }
                 };
