@@ -75,7 +75,7 @@ public class AdminViewOrderActivity extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
 
-                                String MaKH = donHang.getSDT();
+                                String MaKH = getRef(orderViewHolder.getAdapterPosition()).getKey();
 
                                 Intent intent = new Intent(AdminViewOrderActivity.this, AdminUserProductActivity.class);
                                 intent.putExtra("MaKH", MaKH);

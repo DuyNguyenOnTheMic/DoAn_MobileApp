@@ -41,7 +41,7 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
 
     String categoryName, dowloadImageUri, ID;
     String sName, sDescription, sPrice, sQuantity;
-    ImageView inputImage;
+    ImageView inputImage, back;
     Button addNewProduct;
     Spinner pCategoryName;
     EditText pName, pDescription, pPrice, pQuantity;
@@ -101,6 +101,13 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
             public void onClick(View view) {
                 ValidateProduct();
 
+            }
+        });
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 
@@ -199,6 +206,7 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
 
                     loadingBar.dismiss();
                     Toast.makeText(AdminAddNewProductActivity.this, "Thêm sản phẩm thành công ^^", Toast.LENGTH_SHORT).show();
+                    finish();
                 } else {
                     loadingBar.dismiss();
                     Toast.makeText(AdminAddNewProductActivity.this, "Error: " + task.getException().toString(), Toast.LENGTH_SHORT).show();
@@ -233,6 +241,7 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
         pCategoryName = (Spinner) findViewById(R.id.adminAddNewProduct_spinner_categoryName);
         pQuantity = (EditText) findViewById(R.id.adminAddNewProduct_et_quantity);
         inputImage = (ImageView) findViewById(R.id.adminAddNewProduct_iv_selectImg);
+        back = (ImageView) findViewById(R.id.adminAddNewProduct_iv_back);
         loadingBar = new ProgressDialog(this);
     }
 }

@@ -10,17 +10,41 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/adminAddNewProduct_iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|start"
+                android:layout_margin="12dp"
+                android:src="@drawable/ic_back_svgrepo_com" />
+
+            <TextView
+                android:id="@+id/adminAddNewProduct_tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Thêm sản phẩm"
+                android:textAlignment="center"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+
         <ImageView
             android:id="@+id/adminAddNewProduct_iv_selectImg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_gravity="center"
+            android:layout_marginTop="10dp"
             android:cropToPadding="false"
             android:scaleType="centerCrop"
             android:src="@drawable/select_image"
             tools:ignore="ContentDescription" />
-
 
 
         <RelativeLayout
@@ -33,14 +57,14 @@
                 android:id="@+id/adminAddNewProduct_spinner_categoryName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/input_design"
                 android:layout_marginLeft="45dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="45dp"
+                android:background="@drawable/input_design"
                 android:minHeight="48dp"
                 android:padding="20dp"
-                android:textStyle="bold"
-                android:spinnerMode="dropdown"/>
+                android:spinnerMode="dropdown"
+                android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/adminAddNewProduct_iv_dropDownIcon"
@@ -48,9 +72,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:paddingTop="18dp"
                 android:layout_marginRight="55dp"
                 android:alpha=".5"
+                android:paddingTop="18dp"
                 android:src="@drawable/ic_dropdown_svgrepo_com" />
         </RelativeLayout>
 
