@@ -1,5 +1,6 @@
 package com.example.doan_mobile;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,7 +52,11 @@ public class AdminViewProductCategoryActivity extends AppCompatActivity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*startActivity(new Intent(AdminViewAdminActivity.this, AdminAddNewProductCategoryActivity.class));*/
+                Intent intent = new Intent(AdminViewProductCategoryActivity.this, AdminAddNewProductCategoryActivity.class);
+                int i_id =  recyclerView.getChildCount();
+                intent.putExtra("MaHangSP", i_id);
+                startActivity(intent);
+                finish();
             }
         });
     }
