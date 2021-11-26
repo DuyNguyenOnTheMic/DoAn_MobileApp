@@ -186,6 +186,8 @@ public class AdminMaintainProductsActivity extends AppCompatActivity {
 
 
     private void newChange() {
+        category= categoryname.getSelectedItem().toString();
+
         HashMap<String, Object> productMap = new HashMap<>();
         productMap.put("TenSP", pName);
         productMap.put("ThongTinChiTietSP", pDes);
@@ -216,6 +218,7 @@ public class AdminMaintainProductsActivity extends AppCompatActivity {
                 if(snapshot.exists()){
                     String pName = snapshot.child("TenSP").getValue().toString();
                     String pPrice = snapshot.child("GiaGoc").getValue().toString();
+                    category = snapshot.child("TenHangSP").getValue().toString();
                     String pDes = snapshot.child("ThongTinChiTietSP").getValue().toString();
                     dowloadImageUri = snapshot.child("HinhAnhSP").getValue().toString();
                     String pQuantity = snapshot.child("SoLuongTonKho").getValue().toString();
