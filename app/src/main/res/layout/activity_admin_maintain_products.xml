@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AdminAddNewProductActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/adminMaintainProduct_iv_Img"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="5dp"
+            android:scaleType="centerCrop" />
+
+
+
+        <RelativeLayout
+            android:id="@+id/adminMaintainProduct_relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <Spinner
+                android:id="@+id/adminMaintainProduct_spinner_categoryName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="45dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="45dp"
+                android:background="@drawable/input_design"
+                android:minHeight="48dp"
+                android:padding="20dp"
+                android:spinnerMode="dropdown"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/adminMaintainProduct_iv_dropDownIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:paddingTop="18dp"
+                android:layout_marginRight="55dp"
+                android:alpha=".5"
+                android:src="@drawable/ic_dropdown_svgrepo_com" />
+        </RelativeLayout>
+
+        <EditText
+            android:id="@+id/adminMaintainProduct_et_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/adminMaintainProduct_spinner_categoryName"
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginRight="45dp"
+            android:background="@drawable/input_design"
+            android:hint="Tên sản phẩm"
+            android:inputType="textMultiLine"
+            android:padding="20dp" />
+
+        <EditText
+            android:id="@+id/adminMaintainProduct_et_productDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/adminMaintainProduct_et_name"
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginRight="45dp"
+            android:background="@drawable/input_design"
+            android:hint="Thông tin sản phẩm"
+            android:inputType="textMultiLine"
+            android:padding="20dp" />
+
+        <EditText
+            android:id="@+id/adminMaintainProduct_et_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/adminMaintainProduct_et_productDescription"
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginRight="45dp"
+            android:background="@drawable/input_design"
+            android:hint="Giá sản phẩm"
+            android:inputType="number"
+            android:padding="20dp" />
+
+        <EditText
+            android:id="@+id/adminMaintainProduct_et_quantity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/adminMaintainProduct_et_price"
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginRight="45dp"
+            android:background="@drawable/input_design"
+            android:hint="Số lượng tồn"
+            android:inputType="number"
+            android:padding="20dp" />
+
+        <Button
+            android:id="@+id/adminMaintainProduct_btn_add"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/adminMaintainProduct_et_price"
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="45dp"
+            android:background="@drawable/buttons"
+            android:padding="17dp"
+            android:text="Cập nhật sản phẩm"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+
+</ScrollView>

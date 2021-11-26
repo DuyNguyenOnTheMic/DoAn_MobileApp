@@ -50,10 +50,12 @@ public class HomeActivity extends AppCompatActivity
     RecyclerView.LayoutManager layoutManager;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
 
         ProductsRef = FirebaseDatabase.getInstance().getReference().child("SanPham");
         Paper.init(this);
@@ -67,8 +69,10 @@ public class HomeActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomeActivity.this, CartActivity.class);
-                startActivity(intent);
+
+                    Intent intent = new Intent(HomeActivity.this, CartActivity.class);
+                    startActivity(intent);
+
             }
         });
 
@@ -87,10 +91,11 @@ public class HomeActivity extends AppCompatActivity
         TextView userNameTextView = headerView.findViewById(R.id.userprofile_tv_name);
         CircleImageView profileImageView = headerView.findViewById(R.id.userprofile_iv_image);
 
-/*
-        userNameTextView.setText(Prevalent.currentOnlineUser.getHoTen());
-        Picasso.get().load(Prevalent.currentOnlineUser.getAvatar()).placeholder(R.drawable.profile).into(profileImageView);
-*/
+
+   /* {
+         userNameTextView.setText(Prevalent.currentOnlineUser.getHoTen());
+         Picasso.get().load(Prevalent.currentOnlineUser.getAvatar()).placeholder(R.drawable.profile).into(profileImageView);
+    }*/
 
         userInfoDisplay(profileImageView, userNameTextView);
 
@@ -154,9 +159,11 @@ public class HomeActivity extends AppCompatActivity
                     productViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent intent = new Intent(HomeActivity.this, ProductDetailsActivity.class);
-                            intent.putExtra("MaSP", sanPham.getID());
-                            startActivity(intent);
+
+                                Intent intent = new Intent(HomeActivity.this, ProductDetailsActivity.class);
+                                intent.putExtra("MaSP", sanPham.getID());
+                                startActivity(intent);
+
                         }
                     });
                 }
@@ -217,13 +224,13 @@ public class HomeActivity extends AppCompatActivity
 
         if (id == R.id.nav_cart)
         {
-            Intent intent = new Intent(HomeActivity.this, CartActivity.class);
-            startActivity(intent);
+                Intent intent = new Intent(HomeActivity.this, CartActivity.class);
+                startActivity(intent);
         }
         else if (id == R.id.nav_search)
         {
-            Intent intent = new Intent(HomeActivity.this, SearchProductsActivity.class);
-            startActivity(intent);
+                Intent intent = new Intent(HomeActivity.this, SearchProductsActivity.class);
+                startActivity(intent);
         }
         else if (id == R.id.nav_updateUser)
         {
