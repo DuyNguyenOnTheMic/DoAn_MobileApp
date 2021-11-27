@@ -49,6 +49,7 @@ public class AdminEditProductCategoryActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startActivity(new Intent(AdminEditProductCategoryActivity.this, AdminViewProductCategoryActivity.class));
                 finish();
             }
         });
@@ -63,6 +64,14 @@ public class AdminEditProductCategoryActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        startActivity(new Intent(AdminEditProductCategoryActivity.this, AdminViewProductCategoryActivity.class));
+        finish();
     }
 
     private void updateProductCategoryInfo() {
