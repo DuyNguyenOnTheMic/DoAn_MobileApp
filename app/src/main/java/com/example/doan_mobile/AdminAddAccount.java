@@ -267,8 +267,8 @@ public class AdminAddAccount extends AppCompatActivity {
             inputImage.setImageURI(ImageUri);
         } else {
             Toast.makeText(this, "Có lỗi đã xảy ra, vui lòng thử lại!", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(AdminAddAccount.this, AdminAddAccount.class));
-            finish();
+            //startActivity(new Intent(AdminAddAccount.this, AdminAddAccount.class));
+            //finish();
         }
     }
 
