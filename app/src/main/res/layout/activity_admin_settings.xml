@@ -16,6 +16,7 @@
             android:id="@+id/tb_adminSettings"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -56,19 +57,19 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:src="@drawable/profile" />
+
     <TextView
         android:id="@+id/adminSettings_tv_profileImageChange"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/adminSettings_ap_profileImage"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="4dp"
+        android:layout_marginRight="10dp"
         android:text="Đổi ảnh đại diện"
         android:textColor="@android:color/black"
         android:textSize="17sp"
-        android:textStyle="bold"
-        android:layout_below="@+id/adminSettings_ap_profileImage"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="4dp"
-        android:layout_centerHorizontal="true"
-        />
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/adminSettings_et_fullName"
@@ -80,6 +81,8 @@
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="15dp"
         android:hint="Họ và tên"
+        android:imeOptions="actionNext"
+        android:inputType="text"
         android:minHeight="48dp"
         android:padding="10dp" />
 
@@ -99,6 +102,8 @@
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="15dp"
             android:hint="Mật khẩu"
+            android:imeOptions="actionDone"
+            android:inputType="text"
             android:minHeight="48dp"
             android:padding="10dp"
             android:password="true" />
@@ -115,7 +120,6 @@
             android:padding="5dp"
             android:src="@drawable/eye" />
     </RelativeLayout>
-
 
 
 </RelativeLayout>

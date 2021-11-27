@@ -62,6 +62,7 @@ public class AdminViewProductActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(AdminViewProductActivity.this, AdminAddNewProductActivity.class));
+                finish();
             }
         });
 

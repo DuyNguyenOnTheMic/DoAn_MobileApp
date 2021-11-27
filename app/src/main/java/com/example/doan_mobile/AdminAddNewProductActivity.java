@@ -40,12 +40,12 @@ import java.util.List;
 public class AdminAddNewProductActivity extends AppCompatActivity {
 
     String categoryName, dowloadImageUri, ID;
-    String sName, sDescription,sPrice, sQuantity;
-    ImageView inputImage;
+    String sName, sDescription, sPrice, sQuantity;
+    ImageView inputImage, back;
     Button addNewProduct;
     Spinner pCategoryName;
     EditText pName, pDescription, pPrice, pQuantity;
-    private  static  final int GalleryPick = 1;
+    private static final int GalleryPick = 1;
 
     List<String> pCategoryList;
 
@@ -69,7 +69,7 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
         ProductCategoryRef.child("HangSP").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot mySnapShot:snapshot.getChildren()) {
+                for (DataSnapshot mySnapShot : snapshot.getChildren()) {
                     String spinnerpCategory = mySnapShot.child("TenHangSP").getValue(String.class);
                     pCategoryList.add(spinnerpCategory);
                 }
@@ -104,28 +104,33 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
             }
         });
 
-
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
 
     }
 
     private void ValidateProduct() {
-         sName = pName.getText().toString().trim();
-         sDescription = pDescription.getText().toString().trim();
-         sPrice = pPrice.getText().toString().trim();
-         sQuantity = pQuantity.getText().toString().trim();
+        sName = pName.getText().toString().trim();
+        sDescription = pDescription.getText().toString().trim();
+        sPrice = pPrice.getText().toString().trim();
+        sQuantity = pQuantity.getText().toString().trim();
 
-        if (ImageUri == null){
-            Toast.makeText(getApplicationContext(),"Hình ảnh đâu ??-.-??",Toast.LENGTH_LONG).show();
-        }else if (TextUtils.isEmpty(sName)){
-            Toast.makeText(getApplicationContext(),"Bán cái gì mà hong có tên ??-.-??",Toast.LENGTH_LONG).show();
-        }else if (TextUtils.isEmpty(sDescription)){
-            Toast.makeText(getApplicationContext(),"Chưa có mô tả kìa -.-",Toast.LENGTH_LONG).show();
-        }else if (TextUtils.isEmpty(sPrice)){
-            Toast.makeText(getApplicationContext(),"Rồi bán mà hong có giá hả ??-.-??",Toast.LENGTH_LONG).show();
-        }else if (TextUtils.isEmpty(sQuantity)){
-            Toast.makeText(getApplicationContext(),"Bán nhiu cái ??-.-??",Toast.LENGTH_LONG).show();
-        }else{
+        if (ImageUri == null) {
+            Toast.makeText(getApplicationContext(), "Hình ảnh đâu ??-.-??", Toast.LENGTH_LONG).show();
+        } else if (TextUtils.isEmpty(sName)) {
+            Toast.makeText(getApplicationContext(), "Bán cái gì mà hong có tên ??-.-??", Toast.LENGTH_LONG).show();
+        } else if (TextUtils.isEmpty(sDescription)) {
+            Toast.makeText(getApplicationContext(), "Chưa có mô tả kìa -.-", Toast.LENGTH_LONG).show();
+        } else if (TextUtils.isEmpty(sPrice)) {
+            Toast.makeText(getApplicationContext(), "Rồi bán mà hong có giá hả ??-.-??", Toast.LENGTH_LONG).show();
+        } else if (TextUtils.isEmpty(sQuantity)) {
+            Toast.makeText(getApplicationContext(), "Bán nhiu cái ??-.-??", Toast.LENGTH_LONG).show();
+        } else {
             StoreProductInformation();
         }
     }
@@ -142,14 +147,14 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
         String saveCurrentTime = currentTime.format(calendar.getTime());
 
-        ID = saveCurrentDate+ " - " + saveCurrentTime;
+        ID = saveCurrentDate + " - " + saveCurrentTime;
 
-        StorageReference filePath = ProductImagesRef.child(ImageUri.getLastPathSegment() +".png");
+        StorageReference filePath = ProductImagesRef.child(ImageUri.getLastPathSegment() + ".png");
         final UploadTask uploadTask = filePath.putFile(ImageUri);
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(AdminAddNewProductActivity.this,"Error: "+e.toString(),Toast.LENGTH_LONG).show();
+                Toast.makeText(AdminAddNewProductActivity.this, "Error: " + e.toString(), Toast.LENGTH_LONG).show();
                 loadingBar.dismiss();
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -160,20 +165,20 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
                     @Override
                     public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
 
-                        if (!task.isSuccessful()){
+                        if (!task.isSuccessful()) {
                             throw task.getException();
 
                         }
-                         dowloadImageUri = filePath.getDownloadUrl().toString();
-                         return filePath.getDownloadUrl();
+                        dowloadImageUri = filePath.getDownloadUrl().toString();
+                        return filePath.getDownloadUrl();
                     }
                 }).addOnCompleteListener(new OnCompleteListener<Uri>() {
                     @Override
                     public void onComplete(@NonNull Task<Uri> task) {
-                        if (task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             dowloadImageUri = task.getResult().toString();
 
-                        SaveProductInfoToDatabase();
+                            SaveProductInfoToDatabase();
                         }
                     }
                 });
@@ -186,22 +191,23 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
         categoryName = pCategoryName.getSelectedItem().toString();
 
         HashMap<String, Object> productMap = new HashMap<>();
-        productMap.put("ID",ID);
-        productMap.put("TenHangSP",categoryName);
-        productMap.put("TenSP",sName);
-        productMap.put("ThongTinChiTietSP",sDescription);
-        productMap.put("GiaGoc",sPrice);
-        productMap.put("SoLuongTonKho",sQuantity);
-        productMap.put("HinhAnhSP",dowloadImageUri);
+        productMap.put("ID", ID);
+        productMap.put("TenHangSP", categoryName);
+        productMap.put("TenSP", sName);
+        productMap.put("ThongTinChiTietSP", sDescription);
+        productMap.put("GiaGoc", sPrice);
+        productMap.put("SoLuongTonKho", sQuantity);
+        productMap.put("HinhAnhSP", dowloadImageUri);
         ProductRef.child(ID).updateChildren(productMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()){
-                    startActivity(new Intent(AdminAddNewProductActivity.this, AdminCategoryActivity.class));
+                if (task.isSuccessful()) {
+                    startActivity(new Intent(AdminAddNewProductActivity.this, AdminViewProductActivity.class));
 
                     loadingBar.dismiss();
                     Toast.makeText(AdminAddNewProductActivity.this, "Thêm sản phẩm thành công ^^", Toast.LENGTH_SHORT).show();
-                }else{
+                    finish();
+                } else {
                     loadingBar.dismiss();
                     Toast.makeText(AdminAddNewProductActivity.this, "Error: " + task.getException().toString(), Toast.LENGTH_SHORT).show();
                 }
@@ -221,7 +227,7 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == GalleryPick && resultCode == RESULT_OK && data!=null){
+        if (requestCode == GalleryPick && resultCode == RESULT_OK && data != null) {
             ImageUri = data.getData();
             inputImage.setImageURI(ImageUri);
         }
@@ -235,6 +241,7 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
         pCategoryName = (Spinner) findViewById(R.id.adminAddNewProduct_spinner_categoryName);
         pQuantity = (EditText) findViewById(R.id.adminAddNewProduct_et_quantity);
         inputImage = (ImageView) findViewById(R.id.adminAddNewProduct_iv_selectImg);
+        back = (ImageView) findViewById(R.id.adminAddNewProduct_iv_back);
         loadingBar = new ProgressDialog(this);
     }
 }
