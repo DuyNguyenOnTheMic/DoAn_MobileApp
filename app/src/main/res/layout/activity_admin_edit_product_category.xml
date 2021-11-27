@@ -1,54 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AdminAddNewProductActivity">
-
-    <ImageView
-        android:id="@+id/adminEditProductCategory_iv_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_back_svgrepo_com"
-        android:layout_gravity="top|start"
-        android:layout_margin="12dp" />
+    tools:context=".AdminAddNewProductCategoryActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/adminEditProductCategory_tv_title"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Sửa danh mục"
-            android:textAlignment="center"
-            android:textSize="26sp"
-            android:textStyle="bold" />
+            android:layout_height="match_parent">
 
+            <ImageView
+                android:id="@+id/adminEditProductCategory_iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|start"
+                android:layout_margin="12dp"
+                android:src="@drawable/ic_back_svgrepo_com" />
+
+            <TextView
+                android:id="@+id/adminEditProductCategory_tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Sửa danh mục"
+                android:textAlignment="center"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/adminEditProductCategory_relativeLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
 
         <EditText
             android:id="@+id/adminEditProductCategory_et_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/adminEditProductCategory_spinner_categoryName"
             android:layout_marginLeft="45dp"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="30dp"
             android:layout_marginRight="45dp"
             android:background="@drawable/input_design"
             android:hint="Tên danh mục"
             android:inputType="text"
-            android:imeOptions="actionDone"
             android:padding="20dp" />
+
 
         <Button
             android:id="@+id/adminEditProductCategory_btn_update"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/adminEditProductCategory_et_price"
             android:layout_marginLeft="45dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="45dp"
@@ -61,5 +70,5 @@
 
     </LinearLayout>
 
+</ScrollView>
 
-</RelativeLayout>

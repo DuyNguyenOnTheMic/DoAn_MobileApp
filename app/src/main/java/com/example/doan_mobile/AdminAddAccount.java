@@ -93,15 +93,7 @@ public class AdminAddAccount extends AppCompatActivity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (TextUtils.isEmpty(fullname.getText().toString())) {
-                    Toast.makeText(AdminAddAccount.this, "Vui lòng nhập họ và tên", Toast.LENGTH_SHORT).show();
-                } else if (TextUtils.isEmpty(phone.getText().toString())) {
-                    Toast.makeText(AdminAddAccount.this, "Vui lòng nhập số điện thoại", Toast.LENGTH_SHORT).show();
-                } else if (TextUtils.isEmpty(pass.getText().toString())) {
-                    Toast.makeText(AdminAddAccount.this, "Vui lòng nhập mật khẩu", Toast.LENGTH_SHORT).show();
-                } else {
-                    AdminAddNewAccount();
-                }
+                AdminAddNewAccount();
             }
         });
     }
@@ -113,11 +105,11 @@ public class AdminAddAccount extends AppCompatActivity {
         spass = pass.getText().toString().trim();
 
         if (TextUtils.isEmpty(sname)) {
-            Toast.makeText(getApplicationContext(), "Chưa nhập họ tên", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Vui lòng nhập họ và tên", Toast.LENGTH_LONG).show();
         } else if (TextUtils.isEmpty(sphone)) {
-            Toast.makeText(getApplicationContext(), "Chưa nhập số điện thoại", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Vui lòng nhập Số điện thoại", Toast.LENGTH_LONG).show();
         } else if (TextUtils.isEmpty(spass)) {
-            Toast.makeText(getApplicationContext(), "Chưa nhập mật khẩu", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Vui lòng nhập mật khẩu", Toast.LENGTH_LONG).show();
         } else if (spass.length() <= 5) {
             Toast.makeText(AdminAddAccount.this, "Mật khẩu tối thiểu là 6 kí tự", Toast.LENGTH_SHORT).show();
         } else if (sphone.length() != 10) {
@@ -167,6 +159,8 @@ public class AdminAddAccount extends AppCompatActivity {
                             dowloadImageUri = task.getResult().toString();
 
                             SaveAccountInfoToDatabase();
+                        } else {
+                            Toast.makeText(AdminAddAccount.this, "quao", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -247,8 +241,7 @@ public class AdminAddAccount extends AppCompatActivity {
                             }
                         }
                     });
-                }
-                else {
+                } else {
                     Toast.makeText(AdminAddAccount.this, "Số điện thoại này đã được đăng ký", Toast.LENGTH_SHORT).show();
                     loadingBar.dismiss();
                 }

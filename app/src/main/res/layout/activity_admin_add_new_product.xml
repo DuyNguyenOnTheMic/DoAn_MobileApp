@@ -62,7 +62,10 @@
                 android:layout_marginRight="45dp"
                 android:background="@drawable/input_design"
                 android:minHeight="48dp"
-                android:padding="10dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="20dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="20dp"
                 android:spinnerMode="dropdown" />
 
             <ImageView
