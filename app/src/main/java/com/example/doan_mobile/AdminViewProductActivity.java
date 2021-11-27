@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.doan_mobile.Model.SanPham;
-import com.example.doan_mobile.Prevalent.Prevalent;
 import com.example.doan_mobile.ViewHolder.ProductViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -112,6 +111,7 @@ public class AdminViewProductActivity extends AppCompatActivity {
                                         if( i == 0){
                                             Intent intent = new Intent(AdminViewProductActivity.this, AdminMaintainProductsActivity.class);
                                             intent.putExtra("MaSP", sanPham.getID());
+                                            intent.putExtra("TenHangSP", sanPham.getTenHangSP());
                                             startActivity(intent);
                                         }
                                         if(i==1){

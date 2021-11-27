@@ -1,12 +1,7 @@
 package com.example.doan_mobile;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +11,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -32,9 +31,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -52,7 +49,7 @@ public class AdminMaintainProductsActivity extends AppCompatActivity {
     DatabaseReference ProductCategoryRef;
     ProgressDialog loadingBar;
 
-    private String productID = "";
+    private String productID, productCategoryName;
     private DatabaseReference productRef;
     String pName,pDes,pQuantity,pPrice;
 
@@ -64,6 +61,7 @@ public class AdminMaintainProductsActivity extends AppCompatActivity {
 
         ProductImagesRef = FirebaseStorage.getInstance().getReference().child("HinhAnhSP");
         productID = getIntent().getStringExtra("MaSP");
+        productCategoryName = getIntent().getStringExtra("TenHangSP");
         productRef = FirebaseDatabase.getInstance().getReference().child("SanPham").child(productID);
 
         CategoryList = new ArrayList<>();
@@ -80,6 +78,12 @@ public class AdminMaintainProductsActivity extends AppCompatActivity {
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(AdminMaintainProductsActivity.this, android.R.layout.simple_spinner_item, CategoryList);
                 arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
                 categoryname.setAdapter(arrayAdapter);
+
+                for (int i = 0; i < categoryname.getAdapter().getCount(); i++) {
+                    if (categoryname.getAdapter().getItem(i).toString().contains(productCategoryName)) {
+                        categoryname.setSelection(i);
+                    }
+                }
             }
 
             @Override
@@ -218,7 +222,6 @@ public class AdminMaintainProductsActivity extends AppCompatActivity {
                 if(snapshot.exists()){
                     String pName = snapshot.child("TenSP").getValue().toString();
                     String pPrice = snapshot.child("GiaGoc").getValue().toString();
-                    category = snapshot.child("TenHangSP").getValue().toString();
                     String pDes = snapshot.child("ThongTinChiTietSP").getValue().toString();
                     dowloadImageUri = snapshot.child("HinhAnhSP").getValue().toString();
                     String pQuantity = snapshot.child("SoLuongTonKho").getValue().toString();

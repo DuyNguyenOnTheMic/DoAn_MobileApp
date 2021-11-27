@@ -1,19 +1,20 @@
 package com.example.doan_mobile.Model;
 
 public class SanPham {
-    String ID, ThongTinChiTietSP, GiaGoc, SoLuongTon, HinhAnhSP, TenSP;
+    String ID, ThongTinChiTietSP, GiaGoc, SoLuongTon, HinhAnhSP, TenSP, TenHangSP;
 
     public  SanPham() {
 
     }
 
-    public SanPham(String ID, String thongTinChiTietSP, String giaGoc, String soLuongTon, String hinhAnhSP, String tenSP) {
+    public SanPham(String ID, String thongTinChiTietSP, String giaGoc, String soLuongTon, String hinhAnhSP, String tenSP, String tenHangSP) {
         this.ID = ID;
         ThongTinChiTietSP = thongTinChiTietSP;
         GiaGoc = giaGoc;
         SoLuongTon = soLuongTon;
         HinhAnhSP = hinhAnhSP;
         TenSP = tenSP;
+        TenHangSP = tenHangSP;
     }
 
     public String getID() {
@@ -62,5 +63,13 @@ public class SanPham {
 
     public void setTenSP(String tenSP) {
         TenSP = tenSP;
+    }
+
+    public String getTenHangSP() {
+        return TenHangSP;
+    }
+
+    public void setTenHangSP(String tenHangSP) {
+        TenHangSP = tenHangSP;
     }
 }
