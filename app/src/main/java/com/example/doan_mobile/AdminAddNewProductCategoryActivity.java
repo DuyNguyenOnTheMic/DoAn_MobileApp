@@ -44,6 +44,7 @@ public class AdminAddNewProductCategoryActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startActivity(new Intent(AdminAddNewProductCategoryActivity.this, AdminViewProductCategoryActivity.class));
                 finish();
             }
         });

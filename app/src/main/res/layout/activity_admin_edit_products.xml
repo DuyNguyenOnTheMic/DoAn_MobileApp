@@ -3,15 +3,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AdminAddNewProductActivity">
+    tools:context=".AdminEditProductsActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/adminEditProduct_iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|start"
+                android:layout_margin="12dp"
+                android:src="@drawable/ic_back_svgrepo_com" />
+
+            <TextView
+                android:id="@+id/adminEditProduct_tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Sửa sản phẩm"
+                android:textAlignment="center"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
         <ImageView
-            android:id="@+id/adminMaintainProduct_iv_Img"
+            android:id="@+id/adminEditProduct_iv_Img"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_marginTop="5dp"
@@ -20,13 +44,13 @@
 
 
         <RelativeLayout
-            android:id="@+id/adminMaintainProduct_relativeLayout"
+            android:id="@+id/adminEditProduct_relativeLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
 
             <Spinner
-                android:id="@+id/adminMaintainProduct_spinner_categoryName"
+                android:id="@+id/adminEditProduct_spinner_categoryName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="45dp"
@@ -39,7 +63,7 @@
                 android:textStyle="bold" />
 
             <ImageView
-                android:id="@+id/adminMaintainProduct_iv_dropDownIcon"
+                android:id="@+id/adminEditProduct_iv_dropDownIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -51,10 +75,10 @@
         </RelativeLayout>
 
         <EditText
-            android:id="@+id/adminMaintainProduct_et_name"
+            android:id="@+id/adminEditProduct_et_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/adminMaintainProduct_spinner_categoryName"
+            android:layout_below="@+id/adminEditProduct_spinner_categoryName"
             android:layout_marginLeft="45dp"
             android:layout_marginTop="6dp"
             android:layout_marginRight="45dp"
@@ -64,10 +88,10 @@
             android:padding="20dp" />
 
         <EditText
-            android:id="@+id/adminMaintainProduct_et_productDescription"
+            android:id="@+id/adminEditProduct_et_productDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/adminMaintainProduct_et_name"
+            android:layout_below="@+id/adminEditProduct_et_name"
             android:layout_marginLeft="45dp"
             android:layout_marginTop="6dp"
             android:layout_marginRight="45dp"
@@ -77,10 +101,10 @@
             android:padding="20dp" />
 
         <EditText
-            android:id="@+id/adminMaintainProduct_et_price"
+            android:id="@+id/adminEditProduct_et_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/adminMaintainProduct_et_productDescription"
+            android:layout_below="@+id/adminEditProduct_et_productDescription"
             android:layout_marginLeft="45dp"
             android:layout_marginTop="6dp"
             android:layout_marginRight="45dp"
@@ -90,10 +114,10 @@
             android:padding="20dp" />
 
         <EditText
-            android:id="@+id/adminMaintainProduct_et_quantity"
+            android:id="@+id/adminEditProduct_et_quantity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/adminMaintainProduct_et_price"
+            android:layout_below="@+id/adminEditProduct_et_price"
             android:layout_marginLeft="45dp"
             android:layout_marginTop="6dp"
             android:layout_marginRight="45dp"
@@ -103,16 +127,16 @@
             android:padding="20dp" />
 
         <Button
-            android:id="@+id/adminMaintainProduct_btn_add"
+            android:id="@+id/adminEditProduct_btn_add"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/adminMaintainProduct_et_price"
+            android:layout_below="@+id/adminEditProduct_et_price"
             android:layout_marginLeft="45dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="45dp"
             android:background="@drawable/buttons"
             android:padding="17dp"
-            android:text="Cập nhật sản phẩm"
+            android:text="Sửa"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="18sp" />

@@ -110,10 +110,11 @@ public class AdminViewProductActivity extends AppCompatActivity {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
                                         if( i == 0){
-                                            Intent intent = new Intent(AdminViewProductActivity.this, AdminMaintainProductsActivity.class);
+                                            Intent intent = new Intent(AdminViewProductActivity.this, AdminEditProductsActivity.class);
                                             intent.putExtra("MaSP", sanPham.getID());
                                             intent.putExtra("TenHangSP", sanPham.getTenHangSP());
                                             startActivity(intent);
+                                            finish();
                                         }
                                         if(i==1){
                                             AlertDialog.Builder confirm_dialog = new AlertDialog.Builder(AdminViewProductActivity.this);

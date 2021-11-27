@@ -15,10 +15,9 @@
         android:theme="@style/Theme.DoAn_Mobile"
         tools:replace="android:theme">
         <activity
-
-            android:name=".AdminMaintainProductsActivity"
+            android:name=".AdminEditProductsActivity"
             android:exported="true" />
-
+        <activity
             android:name=".AdminEditProductCategoryActivity"
             android:exported="false" />
         <activity
@@ -27,7 +26,6 @@
         <activity
             android:name=".AdminUserProductActivity"
             android:exported="false" />
-
         <activity
             android:name=".SearchProductsActivity"
             android:exported="true" />

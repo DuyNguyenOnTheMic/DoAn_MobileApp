@@ -140,7 +140,7 @@
             android:layout_marginRight="45dp"
             android:background="@drawable/buttons"
             android:padding="17dp"
-            android:text="Thêm sản phẩm"
+            android:text="Thêm"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="18sp" />

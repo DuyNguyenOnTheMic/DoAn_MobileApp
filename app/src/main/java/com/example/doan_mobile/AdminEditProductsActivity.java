@@ -35,12 +35,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class AdminMaintainProductsActivity extends AppCompatActivity {
+public class AdminEditProductsActivity extends AppCompatActivity {
     private Button applyChange;
     private EditText name, price, des, quantity;
     private ImageView imageView;
     Uri ImageUri;
     StorageReference ProductImagesRef;
+    ImageView back;
     private  static  final int GalleryPick = 1;
 
     String category, dowloadImageUri;
@@ -56,7 +57,7 @@ public class AdminMaintainProductsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_maintain_products);
+        setContentView(R.layout.activity_admin_edit_products);
         matching();
 
         ProductImagesRef = FirebaseStorage.getInstance().getReference().child("HinhAnhSP");
@@ -75,7 +76,7 @@ public class AdminMaintainProductsActivity extends AppCompatActivity {
                     CategoryList.add(spinnerpCategory);
                 }
 
-                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(AdminMaintainProductsActivity.this, android.R.layout.simple_spinner_item, CategoryList);
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(AdminEditProductsActivity.this, android.R.layout.simple_spinner_item, CategoryList);
                 arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
                 categoryname.setAdapter(arrayAdapter);
 
@@ -94,6 +95,14 @@ public class AdminMaintainProductsActivity extends AppCompatActivity {
 
         displaySpecificProductInfo();
 
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AdminEditProductsActivity.this, AdminViewProductActivity.class));
+                finish();
+            }
+        });
+
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -110,13 +119,14 @@ public class AdminMaintainProductsActivity extends AppCompatActivity {
     }
 
     private void matching() {
-        applyChange = (Button) findViewById(R.id.adminMaintainProduct_btn_add);
-        quantity = (EditText) findViewById(R.id.adminMaintainProduct_et_quantity);
-        name = (EditText) findViewById(R.id.adminMaintainProduct_et_name);
-        des = (EditText) findViewById(R.id.adminMaintainProduct_et_productDescription);
-        price = (EditText) findViewById(R.id.adminMaintainProduct_et_price);
-        categoryname = (Spinner) findViewById(R.id.adminMaintainProduct_spinner_categoryName);
-        imageView = (ImageView) findViewById(R.id.adminMaintainProduct_iv_Img);
+        applyChange = (Button) findViewById(R.id.adminEditProduct_btn_add);
+        quantity = (EditText) findViewById(R.id.adminEditProduct_et_quantity);
+        name = (EditText) findViewById(R.id.adminEditProduct_et_name);
+        des = (EditText) findViewById(R.id.adminEditProduct_et_productDescription);
+        price = (EditText) findViewById(R.id.adminEditProduct_et_price);
+        categoryname = (Spinner) findViewById(R.id.adminEditProduct_spinner_categoryName);
+        imageView = (ImageView) findViewById(R.id.adminEditProduct_iv_Img);
+        back = (ImageView) findViewById(R.id.adminEditProduct_iv_back);
         loadingBar = new ProgressDialog(this);
     }
 
@@ -127,13 +137,13 @@ public class AdminMaintainProductsActivity extends AppCompatActivity {
         pDes = des.getText().toString();
         pQuantity = quantity.getText().toString();
         if (pName.equals("")) {
-            Toast.makeText(AdminMaintainProductsActivity.this, "Chưa có tên sản phẩm nè :(", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AdminEditProductsActivity.this, "Chưa có tên sản phẩm nè :(", Toast.LENGTH_SHORT).show();
         } else if (pPrice.equals("")) {
-            Toast.makeText(AdminMaintainProductsActivity.this, "Chưa có giá sản phẩm nè :(", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AdminEditProductsActivity.this, "Chưa có giá sản phẩm nè :(", Toast.LENGTH_SHORT).show();
         } else if (pDes.equals("")) {
-            Toast.makeText(AdminMaintainProductsActivity.this, "Chưa có mô tả sản phẩm nè :(", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AdminEditProductsActivity.this, "Chưa có mô tả sản phẩm nè :(", Toast.LENGTH_SHORT).show();
         } else if (pQuantity.equals("")) {
-            Toast.makeText(AdminMaintainProductsActivity.this, "Chưa có số lượng tồn kho sản phẩm nè :(", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AdminEditProductsActivity.this, "Chưa có số lượng tồn kho sản phẩm nè :(", Toast.LENGTH_SHORT).show();
         }else {
 
             StoreProductInformation();
@@ -155,7 +165,7 @@ public class AdminMaintainProductsActivity extends AppCompatActivity {
             uploadTask.addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(AdminMaintainProductsActivity.this,"Error: "+e.toString(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(AdminEditProductsActivity.this,"Error: "+e.toString(),Toast.LENGTH_LONG).show();
                     loadingBar.dismiss();
                 }
             }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -204,11 +214,15 @@ public class AdminMaintainProductsActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
-                    Toast.makeText(AdminMaintainProductsActivity.this, "Cập nhật sản phẩm thành công rồi nè :)", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AdminEditProductsActivity.this, "Cập nhật sản phẩm thành công rồi nè :)", Toast.LENGTH_SHORT).show();
 
-                    Intent intent = new Intent(AdminMaintainProductsActivity.this, AdminViewProductActivity.class);
+                    Intent intent = new Intent(AdminEditProductsActivity.this, AdminViewProductActivity.class);
                     startActivity(intent);
                     finish();
+                }
+                else {
+                    loadingBar.dismiss();
+                    Toast.makeText(AdminEditProductsActivity.this, "Error: " + task.getException().toString(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
