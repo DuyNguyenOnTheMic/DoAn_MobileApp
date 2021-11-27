@@ -60,8 +60,14 @@ public class AdminAddNewProductCategoryActivity extends AppCompatActivity {
             }
         });
 
+    }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
 
+        startActivity(new Intent(AdminAddNewProductCategoryActivity.this, AdminViewProductCategoryActivity.class));
+        finish();
     }
 
     private void addNewProductCategory() {

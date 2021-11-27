@@ -115,6 +115,14 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        startActivity(new Intent(AdminAddNewProductActivity.this, AdminViewProductActivity.class));
+        finish();
+    }
+
     private void ValidateProduct() {
         sName = pName.getText().toString().trim();
         sDescription = pDescription.getText().toString().trim();

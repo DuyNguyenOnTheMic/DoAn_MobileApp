@@ -118,6 +118,14 @@ public class AdminEditProductsActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        startActivity(new Intent(AdminEditProductsActivity.this, AdminViewProductActivity.class));
+        finish();
+    }
+
     private void matching() {
         applyChange = (Button) findViewById(R.id.adminEditProduct_btn_add);
         quantity = (EditText) findViewById(R.id.adminEditProduct_et_quantity);

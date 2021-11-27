@@ -66,6 +66,14 @@ public class AdminEditProductCategoryActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        startActivity(new Intent(AdminEditProductCategoryActivity.this, AdminViewProductCategoryActivity.class));
+        finish();
+    }
+
     private void updateProductCategoryInfo() {
         String sProductCategoryName = productCategoryName.getText().toString().trim();
 
