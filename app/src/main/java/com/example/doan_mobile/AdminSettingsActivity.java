@@ -103,7 +103,7 @@ public class AdminSettingsActivity extends AppCompatActivity {
             profileImage.setImageURI(imageUri);
         } else {
             Toast.makeText(this, "Có lỗi đã xảy ra, vui lòng thử lại!", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(AdminSettingsActivity.this, SettingsActivity.class));
+            startActivity(new Intent(AdminSettingsActivity.this, AdminSettingsActivity.class));
             finish();
         }
     }

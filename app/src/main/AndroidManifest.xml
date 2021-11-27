@@ -15,8 +15,13 @@
         android:theme="@style/Theme.DoAn_Mobile"
         tools:replace="android:theme">
         <activity
+
+            android:name=".AdminAddAccount"
+            android:exported="false" />
+
             android:name=".AdminEditProductsActivity"
             android:exported="true" />
+
         <activity
             android:name=".AdminEditProductCategoryActivity"
             android:exported="false" />

@@ -1,12 +1,16 @@
 package com.example.doan_mobile;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +19,8 @@ import com.example.doan_mobile.Model.QuanTri;
 import com.example.doan_mobile.ViewHolder.AdminViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -52,7 +58,8 @@ public class AdminViewAdminActivity extends AppCompatActivity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*startActivity(new Intent(AdminViewAdminActivity.this, AdminAddNewAdminActivity.class));*/
+                startActivity(new Intent(AdminViewAdminActivity.this, AdminAddAccount.class));
+                finish();
             }
         });
 
@@ -92,6 +99,7 @@ public class AdminViewAdminActivity extends AppCompatActivity {
                             adminViewHolder.adminRole.setText(quanTri.getVaiTro());
                             Picasso.get().load(quanTri.getAvatar()).into(adminViewHolder.adminImage);
                         }
+
                     }
                 };
 
