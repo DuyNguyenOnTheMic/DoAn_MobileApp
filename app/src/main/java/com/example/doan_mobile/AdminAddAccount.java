@@ -1,14 +1,12 @@
 package com.example.doan_mobile;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -18,16 +16,24 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,6 +45,8 @@ public class AdminAddAccount extends AppCompatActivity {
     EditText fullname, phone, pass;
     ImageView inputImage, back;
     Uri ImageUri;
+
+
     Button add;
     Spinner spRole;
     TextView change;
@@ -55,7 +63,6 @@ public class AdminAddAccount extends AppCompatActivity {
         matching();
 
         ArrayList<String> arrayList = new ArrayList<String>();
-        arrayList.add("Vai trò của bạn");
         arrayList.add("Admin");
         arrayList.add("Sale");
 
@@ -69,14 +76,17 @@ public class AdminAddAccount extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startActivity(new Intent(AdminAddAccount.this, AdminViewAdminActivity.class));
                 finish();
             }
         });
 
-        inputImage.setOnClickListener(new View.OnClickListener() {
+        change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                OpenGallery();
+                CropImage.activity(ImageUri)
+                        .setAspectRatio(1, 1)
+                        .start(AdminAddAccount.this);
             }
         });
 
@@ -85,41 +95,36 @@ public class AdminAddAccount extends AppCompatActivity {
             public void onClick(View v) {
                 if (TextUtils.isEmpty(fullname.getText().toString())) {
                     Toast.makeText(AdminAddAccount.this, "Vui lòng nhập họ và tên", Toast.LENGTH_SHORT).show();
-                }
-                else if (TextUtils.isEmpty(phone.getText().toString())) {
+                } else if (TextUtils.isEmpty(phone.getText().toString())) {
                     Toast.makeText(AdminAddAccount.this, "Vui lòng nhập số điện thoại", Toast.LENGTH_SHORT).show();
-                }
-                else if (TextUtils.isEmpty(pass.getText().toString())) {
+                } else if (TextUtils.isEmpty(pass.getText().toString())) {
                     Toast.makeText(AdminAddAccount.this, "Vui lòng nhập mật khẩu", Toast.LENGTH_SHORT).show();
                 } else {
-                    AdminAddAccount();
+                    AdminAddNewAccount();
                 }
             }
         });
     }
 
-    private void OpenGallery() {
-        Intent intent = new Intent();
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        intent.setType("image/*");
-        startActivityForResult(intent, GalleryPick);
-    }
 
-
-    private void AdminAddAccount() {
+    private void AdminAddNewAccount() {
         sname = fullname.getText().toString().trim();
         sphone = phone.getText().toString().trim();
         spass = pass.getText().toString().trim();
 
-        if (ImageUri == null) {
-            Toast.makeText(getApplicationContext(), "Chưa có hình ảnh", Toast.LENGTH_LONG).show();
-        } else if (TextUtils.isEmpty(sname)) {
+        if (TextUtils.isEmpty(sname)) {
             Toast.makeText(getApplicationContext(), "Chưa nhập họ tên", Toast.LENGTH_LONG).show();
         } else if (TextUtils.isEmpty(sphone)) {
             Toast.makeText(getApplicationContext(), "Chưa nhập số điện thoại", Toast.LENGTH_LONG).show();
         } else if (TextUtils.isEmpty(spass)) {
             Toast.makeText(getApplicationContext(), "Chưa nhập mật khẩu", Toast.LENGTH_LONG).show();
-        }  else {
+        } else if (spass.length() <= 5) {
+            Toast.makeText(AdminAddAccount.this, "Mật khẩu tối thiểu là 6 kí tự", Toast.LENGTH_SHORT).show();
+        } else if (sphone.length() != 10) {
+            Toast.makeText(AdminAddAccount.this, "Số điện thoại phải có 10 số", Toast.LENGTH_SHORT).show();
+        } else if (ImageUri == null) {
+            SaveAccountInfoToDatabaseWithoutImage();
+        } else {
             AdminAccountInformation();
         }
 
@@ -127,7 +132,7 @@ public class AdminAddAccount extends AppCompatActivity {
     }
 
     private void AdminAccountInformation() {
-        loadingBar.setTitle("Thêm tài khoản quản trị thành công");
+        loadingBar.setTitle("Thông báo");
         loadingBar.setMessage("Vui lòng đợi, chúng tôi đang thêm mới tài khoản");
         loadingBar.setCanceledOnTouchOutside(false);
         loadingBar.show();
@@ -169,40 +174,108 @@ public class AdminAddAccount extends AppCompatActivity {
         });
     }
 
-    private void SaveAccountInfoToDatabase() {
+    private void SaveAccountInfoToDatabaseWithoutImage() {
 
-        sRole = spRole.getSelectedItem().toString();
-
-        HashMap<String, Object> accountMap = new HashMap<>();
-        accountMap.put("HoTen", sname);
-        accountMap.put("DienThoai", sphone);
-        accountMap.put("MatKhau", spass);
-        accountMap.put("VaiTro", sRole);
-        accountMap.put("Avatar", dowloadImageUri);
-        AdminAccountRef.child(sphone).updateChildren(accountMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+        AdminAccountRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    startActivity(new Intent(AdminAddAccount.this, AdminViewAdminActivity.class));
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (!(snapshot.child(sphone).exists())) {
+                    sRole = spRole.getSelectedItem().toString();
 
-                    loadingBar.dismiss();
-                    Toast.makeText(AdminAddAccount.this, "Thêm tài khoản thành công ^^", Toast.LENGTH_SHORT).show();
-                    finish();
+                    HashMap<String, Object> accountMap = new HashMap<>();
+                    accountMap.put("HoTen", sname);
+                    accountMap.put("DienThoai", sphone);
+                    accountMap.put("MatKhau", spass);
+                    accountMap.put("VaiTro", sRole);
+
+                    AdminAccountRef.child(sphone).updateChildren(accountMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                startActivity(new Intent(AdminAddAccount.this, AdminViewAdminActivity.class));
+
+                                loadingBar.dismiss();
+                                Toast.makeText(AdminAddAccount.this, "Thêm tài khoản thành công ^^", Toast.LENGTH_SHORT).show();
+                                finish();
+                            } else {
+                                loadingBar.dismiss();
+                                Toast.makeText(AdminAddAccount.this, "Error: " + task.getException().toString(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
                 } else {
+                    Toast.makeText(AdminAddAccount.this, "Số điện thoại này đã được đăng ký", Toast.LENGTH_SHORT).show();
                     loadingBar.dismiss();
-                    Toast.makeText(AdminAddAccount.this, "Error: " + task.getException().toString(), Toast.LENGTH_SHORT).show();
                 }
             }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
         });
+
+    }
+
+    private void SaveAccountInfoToDatabase() {
+
+        AdminAccountRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (!(snapshot.child(sphone).exists())) {
+                    sRole = spRole.getSelectedItem().toString();
+
+                    HashMap<String, Object> accountMap = new HashMap<>();
+                    accountMap.put("HoTen", sname);
+                    accountMap.put("DienThoai", sphone);
+                    accountMap.put("MatKhau", spass);
+                    accountMap.put("VaiTro", sRole);
+                    accountMap.put("Avatar", dowloadImageUri);
+
+                    AdminAccountRef.child(sphone).updateChildren(accountMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                startActivity(new Intent(AdminAddAccount.this, AdminViewAdminActivity.class));
+
+                                loadingBar.dismiss();
+                                Toast.makeText(AdminAddAccount.this, "Thêm tài khoản thành công ^^", Toast.LENGTH_SHORT).show();
+                                finish();
+                            } else {
+                                loadingBar.dismiss();
+                                Toast.makeText(AdminAddAccount.this, "Error: " + task.getException().toString(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
+                else {
+                    Toast.makeText(AdminAddAccount.this, "Số điện thoại này đã được đăng ký", Toast.LENGTH_SHORT).show();
+                    loadingBar.dismiss();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == GalleryPick && resultCode == RESULT_OK && data != null) {
-            ImageUri = data.getData();
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE
+                && resultCode == RESULT_OK && data != null) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            ImageUri = result.getUri();
+
             inputImage.setImageURI(ImageUri);
+        } else {
+            Toast.makeText(this, "Có lỗi đã xảy ra, vui lòng thử lại!", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(AdminAddAccount.this, AdminAddAccount.class));
+            finish();
         }
     }
 
@@ -218,5 +291,23 @@ public class AdminAddAccount extends AppCompatActivity {
         spRole = (Spinner) findViewById(R.id.adminAddAccount_spinner_Role);
         loadingBar = new ProgressDialog(this);
 
+    }
+
+    public void ShowHidePass(View view) {
+        if (view.getId() == R.id.show_pass_btn) {
+
+            if (pass.getTransformationMethod().equals(PasswordTransformationMethod.getInstance())) {
+                ((ImageView) (view)).setImageResource(R.drawable.hidden);
+
+                //Show Password
+                pass.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            } else {
+                ((ImageView) (view)).setImageResource(R.drawable.eye);
+
+                //Hide Password
+                pass.setTransformationMethod(PasswordTransformationMethod.getInstance());
+
+            }
+        }
     }
 }

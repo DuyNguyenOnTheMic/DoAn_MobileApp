@@ -35,38 +35,42 @@
 
         </RelativeLayout>
 
+        <RelativeLayout
+            android:id="@+id/adminAddAccount_relativeLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/adminAddAccount_iv_selectImg"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="15dp"
-            android:cropToPadding="false"
-            android:scaleType="centerCrop"
-            android:src="@drawable/profile"
-            tools:ignore="ContentDescription" />
+            <ImageView
+                android:id="@+id/adminAddAccount_iv_selectImg"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:cropToPadding="false"
+                android:scaleType="centerCrop"
+                android:src="@drawable/profile"
+                tools:ignore="ContentDescription" />
 
-        <TextView
-            android:id="@+id/adminAddAccount_tv_profileImageChange"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/adminSettings_ap_profileImage"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="127dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:text="Thêm ảnh đại diện"
-            android:textColor="@android:color/black"
-            android:textSize="19sp"
-            android:textStyle="bold" />
+            <TextView
+                android:id="@+id/adminAddAccount_tv_profileImageChange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/adminAddAccount_iv_selectImg"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:text="Thêm ảnh đại diện"
+                android:textColor="@android:color/black"
+                android:textSize="19sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
 
 
         <RelativeLayout
             android:id="@+id/adminAddAccount_relativeLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/adminAddNewProduct_iv_selectImg">
+            android:layout_height="wrap_content">
 
             <Spinner
                 android:id="@+id/adminAddAccount_spinner_Role"
@@ -77,7 +81,7 @@
                 android:layout_marginRight="45dp"
                 android:background="@drawable/input_design"
                 android:minHeight="48dp"
-                android:padding="20dp"
+                android:padding="10dp"
                 android:spinnerMode="dropdown"
                 android:textStyle="bold" />
 
@@ -103,7 +107,7 @@
             android:layout_marginRight="45dp"
             android:background="@drawable/input_design"
             android:hint="Họ và Tên"
-            android:inputType="textMultiLine"
+            android:inputType="text"
             android:padding="20dp" />
 
         <EditText
@@ -119,18 +123,37 @@
             android:inputType="number"
             android:padding="20dp" />
 
-        <EditText
-            android:id="@+id/adminAddAccount_et_pass"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/adminAddAccount_et_phone"
-            android:layout_marginLeft="45dp"
-            android:layout_marginTop="6dp"
-            android:layout_marginRight="45dp"
-            android:background="@drawable/input_design"
-            android:hint="Mật khẩu"
-            android:inputType="textMultiLine"
-            android:padding="20dp" />
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/adminAddAccount_et_pass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="45dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginRight="45dp"
+                android:background="@drawable/input_design"
+                android:hint="Mật khẩu"
+                android:inputType="textPassword"
+                android:padding="20dp" />
+
+            <ImageView
+                android:id="@+id/show_pass_btn"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="58dp"
+                android:paddingTop="5dp"
+                android:alpha=".5"
+                android:onClick="ShowHidePass"
+                android:src="@drawable/eye" />
+
+        </RelativeLayout>
+
+
 
         <Button
             android:id="@+id/adminAddAccount_btn_add"
@@ -142,7 +165,7 @@
             android:layout_marginRight="45dp"
             android:background="@drawable/buttons"
             android:padding="17dp"
-            android:text="Thêm tài khoản"
+            android:text="Thêm"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="18sp" />

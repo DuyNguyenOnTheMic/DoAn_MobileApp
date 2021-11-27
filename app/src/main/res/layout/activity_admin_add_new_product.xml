@@ -62,9 +62,8 @@
                 android:layout_marginRight="45dp"
                 android:background="@drawable/input_design"
                 android:minHeight="48dp"
-                android:padding="20dp"
-                android:spinnerMode="dropdown"
-                android:textStyle="bold" />
+                android:padding="10dp"
+                android:spinnerMode="dropdown" />
 
             <ImageView
                 android:id="@+id/adminAddNewProduct_iv_dropDownIcon"
