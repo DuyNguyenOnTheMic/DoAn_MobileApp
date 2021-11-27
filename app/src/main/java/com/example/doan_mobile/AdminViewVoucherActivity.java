@@ -22,8 +22,12 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class AdminViewVoucherActivity extends AppCompatActivity {
 
@@ -33,12 +37,29 @@ public class AdminViewVoucherActivity extends AppCompatActivity {
     FloatingActionButton add;
     ImageView back;
 
+    Integer lastesKey;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_view_voucher);
 
         VouchersRef = FirebaseDatabase.getInstance().getReference().child("Voucher");
+
+        Query last = VouchersRef.orderByKey().limitToLast(1);
+        last.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot childSnap: dataSnapshot.getChildren()){
+                    lastesKey = Integer.valueOf(childSnap.getKey());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         matching();
 
@@ -57,7 +78,10 @@ public class AdminViewVoucherActivity extends AppCompatActivity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(AdminViewVoucherActivity.this, AdminAddNewVoucherActivity.class));
+                Intent intent = new Intent(AdminViewVoucherActivity.this, AdminAddNewVoucherActivity.class);
+                intent.putExtra("ID", lastesKey);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -107,7 +131,7 @@ public class AdminViewVoucherActivity extends AppCompatActivity {
 
                                             Intent intent = new Intent(AdminViewVoucherActivity.this, AdminEditVoucherActivity.class);
                                             String i_id = getRef(voucherViewHolder.getAdapterPosition()).getKey();
-                                            intent.putExtra("MaVoucher", i_id);
+                                            intent.putExtra("ID", i_id);
                                             startActivity(intent);
                                             finish();
 
