@@ -1,5 +1,6 @@
 package com.example.doan_mobile;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,7 +27,7 @@ import java.util.Locale;
 public class AdminViewOrderActivity extends AppCompatActivity {
 
     RecyclerView ordersList;
-    DatabaseReference ordersRef;
+    DatabaseReference ordersRef, cartRef;
     ImageView back;
 
     @Override
@@ -34,6 +36,7 @@ public class AdminViewOrderActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin_view_order);
 
         ordersRef = FirebaseDatabase.getInstance().getReference().child("DonHang");
+        cartRef = FirebaseDatabase.getInstance().getReference().child("GioHang");
 
         matching();
 
@@ -82,6 +85,40 @@ public class AdminViewOrderActivity extends AppCompatActivity {
                                 startActivity(intent);
                             }
                         });
+
+                        orderViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                CharSequence options[] = new CharSequence[] {
+                                        "Đúng",
+                                        "Huỷ"
+                                };
+
+                                AlertDialog.Builder builder = new AlertDialog.Builder(AdminViewOrderActivity.this);
+                                builder.setTitle("Bạn đã hoàn thành đơn hàng này?");
+
+                                AlertDialog.Builder confirm_dialog = new AlertDialog.Builder(AdminViewOrderActivity.this);
+                                AlertDialog alert = confirm_dialog.create();
+
+                                builder.setItems(options, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        if (which == 0) {
+                                            String MaKH = getRef(orderViewHolder.getAdapterPosition()).getKey();
+
+                                            removeOrder(MaKH);
+                                            removeAdminCart(MaKH);
+
+                                        }
+                                        if (which == 1) {
+                                            alert.dismiss();
+                                        }
+                                    }
+                                });
+                                builder.show();
+
+                            }
+                        });
                     }
 
                     @NonNull
@@ -94,6 +131,14 @@ public class AdminViewOrderActivity extends AppCompatActivity {
                 };
         ordersList.setAdapter(adapter);
         adapter.startListening();
+    }
+
+    private void removeAdminCart(String maKH) {
+        cartRef.child("ViewQuanTri").child(maKH).removeValue();
+    }
+
+    private void removeOrder(String maKH) {
+        ordersRef.child(maKH).removeValue();
     }
 
     private void matching() {
