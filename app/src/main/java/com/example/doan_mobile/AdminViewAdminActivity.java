@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.doan_mobile.Model.QuanTri;
+import com.example.doan_mobile.Prevalent.AdminPrevalent;
 import com.example.doan_mobile.ViewHolder.AdminViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -99,6 +100,62 @@ public class AdminViewAdminActivity extends AppCompatActivity {
                             adminViewHolder.adminRole.setText(quanTri.getVaiTro());
                             Picasso.get().load(quanTri.getAvatar()).into(adminViewHolder.adminImage);
                         }
+
+                        adminViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                CharSequence options[] = new CharSequence[]
+                                        {
+                                                "Xoá",
+                                                "Huỷ"
+                                        };
+                                AlertDialog.Builder builder = new AlertDialog.Builder(AdminViewAdminActivity.this);
+                                builder.setTitle("Lựa chọn: ");
+                                builder.setItems(options, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        if (which == 0) {
+                                            AlertDialog.Builder confirm_dialog = new AlertDialog.Builder(AdminViewAdminActivity.this);
+                                            AlertDialog alert = confirm_dialog.create();
+
+                                            confirm_dialog.setTitle("Thông báo");
+                                            confirm_dialog.setMessage("Bạn có chắc muốn xoá tài khoản của " + quanTri.getHoTen() + "?");
+                                            confirm_dialog.setPositiveButton("Xoá", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+
+                                                    String key = getRef(adminViewHolder.getAdapterPosition()).getKey();
+
+                                                    if (AdminPrevalent.currentOnlineAdmin.getDienThoai().equals(key)) {
+                                                        Toast.makeText(AdminViewAdminActivity.this, "Bạn không thể tự xoá tài khoản của mình!", Toast.LENGTH_SHORT).show();
+                                                    } else
+
+                                                    AdminsRef.child(key)
+                                                            .removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                            if (task.isSuccessful()){
+                                                                Toast.makeText(AdminViewAdminActivity.this, "Xóa tài khoản thành công :)", Toast.LENGTH_SHORT).show();
+                                                            }
+                                                        }
+                                                    });
+
+                                                }
+                                            });
+                                            confirm_dialog.setNegativeButton("Huỷ", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                    alert.dismiss();
+                                                }
+                                            });
+                                            confirm_dialog.show();
+                                        }
+                                    }
+                                });
+                                builder.show();
+                            }
+                        });
+
 
                     }
                 };
