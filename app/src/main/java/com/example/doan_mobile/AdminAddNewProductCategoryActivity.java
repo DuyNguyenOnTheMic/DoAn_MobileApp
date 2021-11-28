@@ -44,6 +44,7 @@ public class AdminAddNewProductCategoryActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startActivity(new Intent(AdminAddNewProductCategoryActivity.this, AdminViewProductCategoryActivity.class));
                 finish();
             }
         });
@@ -59,8 +60,14 @@ public class AdminAddNewProductCategoryActivity extends AppCompatActivity {
             }
         });
 
+    }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
 
+        startActivity(new Intent(AdminAddNewProductCategoryActivity.this, AdminViewProductCategoryActivity.class));
+        finish();
     }
 
     private void addNewProductCategory() {
@@ -70,7 +77,7 @@ public class AdminAddNewProductCategoryActivity extends AppCompatActivity {
         HashMap<String, Object> producCategorytMap = new HashMap<>();
         producCategorytMap.put("TenHangSP", sProductCategoryName);
 
-        ProductCategoryRef.child(String.valueOf(MaHangSP)).
+        ProductCategoryRef.child(String.valueOf(MaHangSP + 1)).
                 updateChildren(producCategorytMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {

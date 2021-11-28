@@ -22,8 +22,12 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class AdminViewProductCategoryActivity extends AppCompatActivity {
 
@@ -33,12 +37,29 @@ public class AdminViewProductCategoryActivity extends AppCompatActivity {
     FloatingActionButton add;
     ImageView back;
 
+    Integer latestKey;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_view_product_category);
 
         ProductCategoryRef = FirebaseDatabase.getInstance().getReference().child("HangSP");
+
+        Query latest = ProductCategoryRef.orderByKey().limitToLast(1);
+        latest.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot childSnapshot: snapshot.getChildren()) {
+                    latestKey = Integer.valueOf(childSnapshot.getKey());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         matching();
 
@@ -58,8 +79,7 @@ public class AdminViewProductCategoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AdminViewProductCategoryActivity.this, AdminAddNewProductCategoryActivity.class);
-                int i_id = recyclerView.getChildCount();
-                intent.putExtra("MaHangSP", i_id);
+                intent.putExtra("MaHangSP", latestKey);
                 startActivity(intent);
                 finish();
             }

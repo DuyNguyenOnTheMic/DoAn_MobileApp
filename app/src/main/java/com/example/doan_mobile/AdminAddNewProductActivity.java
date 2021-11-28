@@ -107,11 +107,20 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startActivity(new Intent(AdminAddNewProductActivity.this, AdminViewProductActivity.class));
                 finish();
             }
         });
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        startActivity(new Intent(AdminAddNewProductActivity.this, AdminViewProductActivity.class));
+        finish();
     }
 
     private void ValidateProduct() {
