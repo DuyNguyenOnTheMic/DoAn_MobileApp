@@ -1,118 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context=".AdminAddNewVoucherActivity">
-
-<ImageView
-    android:id="@+id/adminAddNewVoucher_iv_voucherIcon"
-    android:layout_width="150dp"
-    android:layout_height="150dp"
-    android:src="@drawable/voucher_icon"
-    android:layout_margin="15dp"
-    android:layout_centerHorizontal="true"
-    app:civ_border_color="@color/white"/>
-
-<EditText
-    android:id="@+id/adminAddNewVoucher_et_voucherCode"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_below="@+id/adminAddNewVoucher_iv_voucherIcon"
-    android:layout_marginLeft="45dp"
-    android:layout_marginTop="6dp"
-    android:layout_marginRight="45dp"
-    android:background="@drawable/input_design"
-    android:enabled="false"
-    android:hint="Mã Voucher"
-    android:inputType="textMultiLine"
-    android:padding="20dp" />
+    android:layout_height="match_parent"
+    tools:context=".AdminAddNewVoucherActivity">
 
-<EditText
-    android:id="@+id/adminAddNewVoucher_et_discount"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_below="@+id/adminAddNewVoucher_et_voucherCode"
-    android:layout_marginLeft="45dp"
-    android:layout_marginTop="6dp"
-    android:layout_marginRight="45dp"
-    android:background="@drawable/input_design"
-    android:hint="Mức giảm"
-    android:inputType="textMultiLine"
-    android:padding="20dp" />
-
-<EditText
-    android:id="@+id/adminAddNewVoucher_et_note"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_below="@+id/adminAddNewVoucher_et_discount"
-    android:layout_marginLeft="45dp"
-    android:layout_marginTop="6dp"
-    android:layout_marginRight="45dp"
-    android:background="@drawable/input_design"
-    android:hint="Ghi chú"
-    android:inputType="textMultiLine"
-    android:padding="20dp" />
-
-    <EditText
-        android:id="@+id/adminAddNewVoucher_et_startDay"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/adminAddNewVoucher_et_note"
-        android:layout_marginLeft="45dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginRight="45dp"
-        android:background="@drawable/input_design"
-        android:hint="Thời gian bắt đầu"
-        android:focusable="false"
-        android:inputType="textMultiLine"
-        android:padding="20dp" />
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/adminAddNewVoucher_et_endDay"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/adminAddNewVoucher_et_startDay"
-        android:layout_marginLeft="45dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginRight="45dp"
-        android:background="@drawable/input_design"
-        android:hint="Thời gian kết thúc"
-        android:focusable="false"
-        android:inputType="textMultiLine"
-        android:padding="20dp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-<Button
-    android:id="@+id/adminAddNewVoucher_btn_addVoucher"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_below="@+id/adminAddNewVoucher_et_endDay"
-    android:layout_marginLeft="45dp"
-    android:layout_marginTop="20dp"
-    android:layout_marginRight="45dp"
-    android:background="@drawable/buttons"
-    android:padding="17dp"
-    android:text="Thêm Voucher"
-    android:textAllCaps="false"
-    android:textColor="@color/white"
-    android:textSize="18sp" />
+            <ImageView
+                android:id="@+id/adminAddNewVoucher_iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|start"
+                android:layout_margin="12dp"
+                android:src="@drawable/ic_back_svgrepo_com" />
 
-<Button
-    android:id="@+id/adminAddNewVoucher_btn_cancle"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_below="@+id/adminAddNewVoucher_btn_addVoucher"
-    android:layout_marginLeft="45dp"
-    android:layout_marginTop="20dp"
-    android:layout_marginRight="45dp"
-    android:background="@drawable/buttons"
-    android:padding="17dp"
-    android:text="Hủy"
-    android:textAllCaps="false"
-    android:textColor="@color/black"
-    android:textSize="18sp" />
+            <TextView
+                android:id="@+id/adminAddNewVoucher_tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Thêm voucher"
+                android:textAlignment="center"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/adminAddNewVoucher_iv_voucherIcon"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_margin="15dp"
+            android:layout_gravity="center"
+            android:src="@drawable/voucher_icon"
+            app:civ_border_color="@color/white" />
+
+        <EditText
+            android:id="@+id/adminAddNewVoucher_et_voucherCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginRight="45dp"
+            android:textAlignment="center"
+            android:background="@drawable/input_disabled_design"
+            android:enabled="false"
+            android:textColor="@color/black"
+            android:hint="Mã Voucher"
+            android:inputType="text"
+            android:padding="20dp" />
+
+        <EditText
+            android:id="@+id/adminAddNewVoucher_et_discount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginRight="45dp"
+            android:background="@drawable/input_design"
+            android:hint="Mức giảm"
+            android:inputType="textMultiLine"
+            android:padding="20dp" />
+
+        <EditText
+            android:id="@+id/adminAddNewVoucher_et_note"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginRight="45dp"
+            android:background="@drawable/input_design"
+            android:hint="Ghi chú"
+            android:inputType="textMultiLine"
+            android:padding="20dp" />
+
+        <EditText
+            android:id="@+id/adminAddNewVoucher_et_startDay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginRight="45dp"
+            android:background="@drawable/input_design"
+            android:focusable="false"
+            android:hint="Thời gian bắt đầu"
+            android:inputType="textMultiLine"
+            android:padding="20dp" />
+
+        <EditText
+            android:id="@+id/adminAddNewVoucher_et_endDay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginRight="45dp"
+            android:background="@drawable/input_design"
+            android:focusable="false"
+            android:hint="Thời gian kết thúc"
+            android:inputType="textMultiLine"
+            android:padding="20dp" />
+
+        <Button
+            android:id="@+id/adminAddNewVoucher_btn_addVoucher"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="45dp"
+            android:background="@drawable/buttons"
+            android:padding="17dp"
+            android:text="Thêm"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
 
 
-</RelativeLayout>
+    </LinearLayout>
+
+</ScrollView>

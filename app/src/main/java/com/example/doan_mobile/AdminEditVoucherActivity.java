@@ -1,8 +1,5 @@
 package com.example.doan_mobile;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -10,11 +7,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,8 +24,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 
 public class AdminEditVoucherActivity extends AppCompatActivity {
-    Button editVoucher, cancle;
+    Button editVoucher;
     EditText voucherCode, discount, note, startDay, endDay;
+    ImageView back;
     String sdiscount, snote, sstartDay, sendDay, ID;
     DatabaseReference VoucherRef;
 
@@ -73,9 +73,10 @@ public class AdminEditVoucherActivity extends AppCompatActivity {
             }
         });
 
-        cancle.setOnClickListener(new View.OnClickListener() {
+        back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startActivity(new Intent(AdminEditVoucherActivity.this, AdminViewVoucherActivity.class));
                 finish();
             }
         });
@@ -137,7 +138,7 @@ public class AdminEditVoucherActivity extends AppCompatActivity {
 
     private void matching() {
         editVoucher = (Button) findViewById(R.id.adminEditVoucher_btn_editVoucher);
-        cancle = (Button) findViewById(R.id.adminEditVoucher_btn_cancle);
+        back = (ImageView) findViewById(R.id.adminEditVoucher_iv_back);
         voucherCode = (EditText) findViewById(R.id.adminEditVoucher_et_voucherCode);
         discount = (EditText) findViewById(R.id.adminEditVoucher_et_discount);
         note = (EditText) findViewById(R.id.adminEditVoucher_et_note);

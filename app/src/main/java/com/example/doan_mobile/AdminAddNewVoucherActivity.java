@@ -1,8 +1,6 @@
 package com.example.doan_mobile;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -10,28 +8,28 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import android.app.DatePickerDialog;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Random;
 
 public class AdminAddNewVoucherActivity extends AppCompatActivity {
     Integer ID = 0;
-    Button addNewVoucher, cancle;
+    Button addNewVoucher;
     EditText voucherCode, discount, note, startDay, endDay;
+    ImageView back;
     String rdvoucherCode, sdiscount, snote, sstartDay, sendDay;
     DatabaseReference VoucherRef;
     DatePickerDialog.OnDateSetListener setListener;
@@ -104,12 +102,14 @@ public class AdminAddNewVoucherActivity extends AppCompatActivity {
             }
         });
 
-        cancle.setOnClickListener(new View.OnClickListener() {
+        back.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                  finish();
+            public void onClick(View v) {
+                startActivity(new Intent(AdminAddNewVoucherActivity.this, AdminViewVoucherActivity.class));
+                finish();
             }
         });
+
     }
 
     //Hiển thị ngày bắt đầu
@@ -191,11 +191,11 @@ public class AdminAddNewVoucherActivity extends AppCompatActivity {
 
     private void matching() {
         addNewVoucher = (Button) findViewById(R.id.adminAddNewVoucher_btn_addVoucher);
-        cancle = (Button) findViewById(R.id.adminAddNewVoucher_btn_cancle);
         voucherCode = (EditText) findViewById(R.id.adminAddNewVoucher_et_voucherCode);
         discount = (EditText) findViewById(R.id.adminAddNewVoucher_et_discount);
         note = (EditText) findViewById(R.id.adminAddNewVoucher_et_note);
         startDay = (EditText) findViewById(R.id.adminAddNewVoucher_et_startDay);
         endDay = (EditText) findViewById(R.id.adminAddNewVoucher_et_endDay);
+        back = (ImageView) findViewById(R.id.adminAddNewVoucher_iv_back);
     }
 }
