@@ -124,7 +124,7 @@ public class AdminAddAccount extends AppCompatActivity {
     }
 
     private void AdminAccountInformation() {
-        loadingBar.setTitle("Thông báo");
+        loadingBar.setTitle("Thêm tài khoản");
         loadingBar.setMessage("Vui lòng đợi, chúng tôi đang thêm mới tài khoản");
         loadingBar.setCanceledOnTouchOutside(false);
         loadingBar.show();

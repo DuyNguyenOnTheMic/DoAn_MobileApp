@@ -152,7 +152,7 @@ public class AdminSettingsActivity extends AppCompatActivity {
 
     private void uploadImage() {
         final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Cập nhật hồ sơ");
+        progressDialog.setTitle("Cập nhật tài khoản");
         progressDialog.setMessage("Vui lòng đợi trong khi chúng tôi đang cập nhật tài khoản của bạn");
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();

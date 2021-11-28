@@ -1,6 +1,5 @@
 package com.example.doan_mobile;
 
-import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -130,15 +129,15 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
         sQuantity = pQuantity.getText().toString().trim();
 
         if (ImageUri == null) {
-            Toast.makeText(getApplicationContext(), "Hình ảnh đâu ??-.-??", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Chưa có hình ảnh sản phẩm nè :(", Toast.LENGTH_LONG).show();
         } else if (TextUtils.isEmpty(sName)) {
-            Toast.makeText(getApplicationContext(), "Bán cái gì mà hong có tên ??-.-??", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Chưa có tên sản phẩm nè :(", Toast.LENGTH_LONG).show();
         } else if (TextUtils.isEmpty(sDescription)) {
-            Toast.makeText(getApplicationContext(), "Chưa có mô tả kìa -.-", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Chưa có mô tả sản phẩm nè :(", Toast.LENGTH_LONG).show();
         } else if (TextUtils.isEmpty(sPrice)) {
-            Toast.makeText(getApplicationContext(), "Rồi bán mà hong có giá hả ??-.-??", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Chưa có giá sản phẩm nè :(", Toast.LENGTH_LONG).show();
         } else if (TextUtils.isEmpty(sQuantity)) {
-            Toast.makeText(getApplicationContext(), "Bán nhiu cái ??-.-??", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Chưa có số lượng tồn kho sản phẩm nè :(", Toast.LENGTH_LONG).show();
         } else {
             StoreProductInformation();
         }
