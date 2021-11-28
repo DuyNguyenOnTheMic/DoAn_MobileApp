@@ -1,6 +1,7 @@
 package com.example.doan_mobile;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -32,7 +33,7 @@ public class AdminAddNewVoucherActivity extends AppCompatActivity {
     ImageView back;
     String rdvoucherCode, sdiscount, snote, sstartDay, sendDay;
     DatabaseReference VoucherRef;
-    DatePickerDialog.OnDateSetListener setListener;
+    ProgressDialog loadingBar;
     Calendar myCalendarS = Calendar.getInstance();
     Calendar myCalendarE = Calendar.getInstance();
 
@@ -162,6 +163,12 @@ public class AdminAddNewVoucherActivity extends AppCompatActivity {
 
     //Lưu dữ liệu thêm mới vào Firebase
     private void SaveVoucherInfoToDatabase() {
+
+        loadingBar.setTitle("Thêm mới voucher");
+        loadingBar.setMessage("Vui lòng đợi, chúng tôi đang thêm mới voucher");
+        loadingBar.setCanceledOnTouchOutside(false);
+        loadingBar.show();
+
         HashMap<String, Object> voucherMap = new HashMap<>();
         voucherMap.put("MaVoucher", rdvoucherCode);
         voucherMap.put("MucGiam", sdiscount);
@@ -176,12 +183,12 @@ public class AdminAddNewVoucherActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     startActivity(new Intent(AdminAddNewVoucherActivity.this, AdminViewVoucherActivity.class));
 
-                    //loadingBar.dismiss();
+                    loadingBar.dismiss();
                     Toast.makeText(AdminAddNewVoucherActivity.this, "Thêm Voucher thành công ^^", Toast.LENGTH_SHORT).show();
                     finish();
 
                 } else {
-                    //loadingBar.dismiss();
+                    loadingBar.dismiss();
                     Toast.makeText(AdminAddNewVoucherActivity.this, "Error: " + task.getException().toString(), Toast.LENGTH_SHORT).show();
                 }
             }
@@ -197,5 +204,6 @@ public class AdminAddNewVoucherActivity extends AppCompatActivity {
         startDay = (EditText) findViewById(R.id.adminAddNewVoucher_et_startDay);
         endDay = (EditText) findViewById(R.id.adminAddNewVoucher_et_endDay);
         back = (ImageView) findViewById(R.id.adminAddNewVoucher_iv_back);
+        loadingBar = new ProgressDialog(this);
     }
 }

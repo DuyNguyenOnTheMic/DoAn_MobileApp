@@ -1,11 +1,14 @@
 package com.example.doan_mobile;
 
+import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -21,7 +24,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Locale;
 
 public class AdminEditVoucherActivity extends AppCompatActivity {
     Button editVoucher;
@@ -29,6 +35,9 @@ public class AdminEditVoucherActivity extends AppCompatActivity {
     ImageView back;
     String sdiscount, snote, sstartDay, sendDay, ID;
     DatabaseReference VoucherRef;
+    ProgressDialog loadingBar;
+    Calendar myCalendarS = Calendar.getInstance();
+    Calendar myCalendarE = Calendar.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +52,55 @@ public class AdminEditVoucherActivity extends AppCompatActivity {
         VoucherRef = FirebaseDatabase.getInstance().getReference().child("Voucher");
 
         getVoucherDetail();
+
+        //Chọn ngày bắt đầu
+        DatePickerDialog.OnDateSetListener dateS = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
+                myCalendarS.set(Calendar.YEAR, year);
+                myCalendarS.set(Calendar.MONTH, month);
+                myCalendarS.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+                String myFormat = "dd/MM/yyyy";
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+                startDay.setText(sdf.format(myCalendarS.getTime()));
+            }
+        };
+
+        startDay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                new DatePickerDialog(AdminEditVoucherActivity.this, dateS,myCalendarS
+                        .get(Calendar.YEAR), myCalendarS.get(Calendar.MONTH),
+                        myCalendarS.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
+        //Chọn ngày kết thúc
+        DatePickerDialog.OnDateSetListener dateE = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
+                myCalendarE.set(Calendar.YEAR, year);
+                myCalendarE.set(Calendar.MONTH, month);
+                myCalendarE.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+                String myFormat = "dd/MM/yyyy";
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+                endDay.setText(sdf.format(myCalendarE.getTime()));
+            }
+        };
+
+        endDay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                new DatePickerDialog(AdminEditVoucherActivity.this, dateE,myCalendarE
+                        .get(Calendar.YEAR), myCalendarE.get(Calendar.MONTH),
+                        myCalendarE.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
     }
 
     //Lấy dữ liệu hiển thị lên giao diện
@@ -116,6 +174,12 @@ public class AdminEditVoucherActivity extends AppCompatActivity {
     }
 
     private void UpdateDataVoucher() {
+
+        loadingBar.setTitle("Sửa voucher");
+        loadingBar.setMessage("Vui lòng đợi, chúng tôi đang sửa voucher");
+        loadingBar.setCanceledOnTouchOutside(false);
+        loadingBar.show();
+
         HashMap<String, Object> voucherMap = new HashMap<>();
         voucherMap.put("MaVoucher",voucherCode.getText().toString());
         voucherMap.put("MucGiam", sdiscount);
@@ -130,12 +194,12 @@ public class AdminEditVoucherActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     startActivity(new Intent(AdminEditVoucherActivity.this, AdminViewVoucherActivity.class));
 
-                    //loadingBar.dismiss();
+                    loadingBar.dismiss();
                     Toast.makeText(AdminEditVoucherActivity.this, "Sửa Voucher thành công ^^", Toast.LENGTH_SHORT).show();
                     finish();
 
                 } else {
-                    //loadingBar.dismiss();
+                    loadingBar.dismiss();
                     Toast.makeText(AdminEditVoucherActivity.this, "Error: " + task.getException().toString(), Toast.LENGTH_SHORT).show();
                 }
             }
@@ -150,6 +214,7 @@ public class AdminEditVoucherActivity extends AppCompatActivity {
         note = (EditText) findViewById(R.id.adminEditVoucher_et_note);
         startDay = (EditText) findViewById(R.id.adminEditVoucher_et_startDay);
         endDay = (EditText) findViewById(R.id.adminEditVoucher_et_endDay);
+        loadingBar = new ProgressDialog(this);
     }
 
 }
