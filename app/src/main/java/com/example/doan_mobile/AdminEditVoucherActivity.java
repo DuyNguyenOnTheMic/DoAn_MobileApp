@@ -1,7 +1,6 @@
 package com.example.doan_mobile;
 
 import android.app.DatePickerDialog;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -38,7 +37,6 @@ public class AdminEditVoucherActivity extends AppCompatActivity {
     String sdiscount, snote, sstartDay, sendDay, ID;
     String ThoiGianBD, ThoiGianKT;
     DatabaseReference VoucherRef;
-    ProgressDialog loadingBar;
     Calendar myCalendarS = Calendar.getInstance();
     Calendar myCalendarE = Calendar.getInstance();
 
@@ -201,11 +199,6 @@ public class AdminEditVoucherActivity extends AppCompatActivity {
 
     private void UpdateDataVoucher() {
 
-        loadingBar.setTitle("Sửa voucher");
-        loadingBar.setMessage("Vui lòng đợi, chúng tôi đang sửa voucher");
-        loadingBar.setCanceledOnTouchOutside(false);
-        loadingBar.show();
-
         HashMap<String, Object> voucherMap = new HashMap<>();
         voucherMap.put("MaVoucher",voucherCode.getText().toString());
         voucherMap.put("MucGiam", sdiscount);
@@ -220,12 +213,10 @@ public class AdminEditVoucherActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     startActivity(new Intent(AdminEditVoucherActivity.this, AdminViewVoucherActivity.class));
 
-                    loadingBar.dismiss();
                     Toast.makeText(AdminEditVoucherActivity.this, "Sửa Voucher thành công ^^", Toast.LENGTH_SHORT).show();
                     finish();
 
                 } else {
-                    loadingBar.dismiss();
                     Toast.makeText(AdminEditVoucherActivity.this, "Error: " + task.getException().toString(), Toast.LENGTH_SHORT).show();
                 }
             }
@@ -240,7 +231,6 @@ public class AdminEditVoucherActivity extends AppCompatActivity {
         note = (EditText) findViewById(R.id.adminEditVoucher_et_note);
         startDay = (EditText) findViewById(R.id.adminEditVoucher_et_startDay);
         endDay = (EditText) findViewById(R.id.adminEditVoucher_et_endDay);
-        loadingBar = new ProgressDialog(this);
     }
 
 }
