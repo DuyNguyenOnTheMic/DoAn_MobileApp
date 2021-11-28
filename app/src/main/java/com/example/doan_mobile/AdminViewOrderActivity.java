@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -18,16 +19,19 @@ import com.example.doan_mobile.Model.DonHang;
 import com.example.doan_mobile.ViewHolder.OrderViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.NumberFormat;
+import java.util.HashMap;
 import java.util.Locale;
 
 public class AdminViewOrderActivity extends AppCompatActivity {
 
     RecyclerView ordersList;
-    DatabaseReference ordersRef, cartRef;
+    DatabaseReference ordersRef, cartRef, productRef;
     ImageView back;
 
     @Override
@@ -37,6 +41,7 @@ public class AdminViewOrderActivity extends AppCompatActivity {
 
         ordersRef = FirebaseDatabase.getInstance().getReference().child("DonHang");
         cartRef = FirebaseDatabase.getInstance().getReference().child("GioHang");
+        productRef = FirebaseDatabase.getInstance().getReference().child("SanPham");
 
         matching();
 
@@ -56,8 +61,8 @@ public class AdminViewOrderActivity extends AppCompatActivity {
 
         FirebaseRecyclerOptions<DonHang> options =
                 new FirebaseRecyclerOptions.Builder<DonHang>()
-                .setQuery(ordersRef, DonHang.class)
-                .build();
+                        .setQuery(ordersRef, DonHang.class)
+                        .build();
 
         FirebaseRecyclerAdapter<DonHang, OrderViewHolder> adapter =
                 new FirebaseRecyclerAdapter<DonHang, OrderViewHolder>(options) {
@@ -71,8 +76,9 @@ public class AdminViewOrderActivity extends AppCompatActivity {
                         orderViewHolder.userName.setText("Tên: " + donHang.getTenKH());
                         orderViewHolder.userPhone.setText("SĐT: " + donHang.getSDT());
                         orderViewHolder.userTotalPrice.setText("Tổng tiền: " + sPrice);
-                        orderViewHolder.userDateTime.setText("Ngày đặt hàng:\n" + donHang.getNgay() + " " +  donHang.getThoiGian());
+                        orderViewHolder.userDateTime.setText("Ngày đặt hàng:\n" + donHang.getNgay() + " " + donHang.getThoiGian());
                         orderViewHolder.userAddress.setText("Địa chỉ: " + donHang.getDiaChi() + ", " + donHang.getThanhPho());
+                        orderViewHolder.orderStatus.setText("Tình trạng: " + donHang.getTinhTrang());
 
                         orderViewHolder.showProducts.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -89,25 +95,72 @@ public class AdminViewOrderActivity extends AppCompatActivity {
                         orderViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                CharSequence options[] = new CharSequence[] {
-                                        "Đúng",
+                                CharSequence options[] = new CharSequence[]{
+                                        "Cập nhật tình trạng đơn hàng",
                                         "Huỷ"
                                 };
 
                                 AlertDialog.Builder builder = new AlertDialog.Builder(AdminViewOrderActivity.this);
-                                builder.setTitle("Bạn đã hoàn thành đơn hàng này?");
+                                builder.setTitle("Lựa chọn:");
 
-                                AlertDialog.Builder confirm_dialog = new AlertDialog.Builder(AdminViewOrderActivity.this);
-                                AlertDialog alert = confirm_dialog.create();
+                                AlertDialog alert = builder.create();
 
                                 builder.setItems(options, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         if (which == 0) {
-                                            String MaKH = getRef(orderViewHolder.getAdapterPosition()).getKey();
 
-                                            removeOrder(MaKH);
-                                            removeAdminCart(MaKH);
+                                            CharSequence order_status[] = new CharSequence[]{
+                                                    "Chờ xác nhận",
+                                                    "Đang giao",
+                                                    "Hoàn thành"
+                                            };
+
+                                            AlertDialog.Builder orderStatusBuilder = new AlertDialog.Builder(AdminViewOrderActivity.this);
+                                            orderStatusBuilder.setTitle("Cập nhật tình trạng đơn hàng:");
+
+                                            orderStatusBuilder.setItems(order_status, new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    String MaKH = getRef(orderViewHolder.getAdapterPosition()).getKey();
+
+                                                    if (which == 0) {
+
+                                                        updateOrderStatus_ChoXacNhan(MaKH);
+
+                                                    }
+                                                    if (which == 1) {
+
+                                                        updateOrderStatus_DangGiao(MaKH);
+
+                                                    }
+                                                    if (which == 2) {
+
+                                                        AlertDialog.Builder confirm_dialog = new AlertDialog.Builder(AdminViewOrderActivity.this);
+                                                        AlertDialog alert = confirm_dialog.create();
+
+                                                        confirm_dialog.setTitle("Thông báo");
+                                                        confirm_dialog.setMessage("Bạn có chắc muốn hoàn thành đơn hàng của " + donHang.getTenKH() + " ?" + "\nĐiều này sẽ dẫn đến đơn hàng sẽ bị xoá đi?");
+                                                        confirm_dialog.setPositiveButton("Hoàn thành", new DialogInterface.OnClickListener() {
+                                                            @Override
+                                                            public void onClick(DialogInterface dialog, int which) {
+                                                                removeOrder(MaKH);
+                                                                removeAdminCart(MaKH);
+                                                                Toast.makeText(AdminViewOrderActivity.this, "Đơn hàng đã xoá thành công!", Toast.LENGTH_SHORT).show();
+                                                            }
+                                                        });
+                                                        confirm_dialog.setNegativeButton("Huỷ", new DialogInterface.OnClickListener() {
+                                                            @Override
+                                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                                alert.dismiss();
+                                                            }
+                                                        });
+                                                        confirm_dialog.show();
+                                                    }
+                                                }
+                                            });
+                                            orderStatusBuilder.show();
+
 
                                         }
                                         if (which == 1) {
@@ -131,6 +184,39 @@ public class AdminViewOrderActivity extends AppCompatActivity {
                 };
         ordersList.setAdapter(adapter);
         adapter.startListening();
+    }
+
+    private void updateOrderStatus_DangGiao(String maKH) {
+        HashMap<String, Object> OrderMap = new HashMap<>();
+        OrderMap.put("TinhTrang", "Đang giao");
+
+        ordersRef.child(maKH).updateChildren(OrderMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    Toast.makeText(AdminViewOrderActivity.this, "Cập nhật tình trạng đơn hàng thành công ^^", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(AdminViewOrderActivity.this, "Error: " + task.getException().toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    private void updateOrderStatus_ChoXacNhan(String maKH) {
+
+        HashMap<String, Object> OrderMap = new HashMap<>();
+        OrderMap.put("TinhTrang", "Chờ xác nhận");
+
+        ordersRef.child(maKH).updateChildren(OrderMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    Toast.makeText(AdminViewOrderActivity.this, "Cập nhật tình trạng đơn hàng thành công ^^", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(AdminViewOrderActivity.this, "Error: " + task.getException().toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     private void removeAdminCart(String maKH) {

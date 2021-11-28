@@ -74,11 +74,23 @@
             android:textSize="18dp"
             android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/adminOrders_tv_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/adminOrders_tv_date"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="Order Date"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
         <Button
             android:id="@+id/adminOrders_btn_showProducts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/adminOrders_tv_date"
+            android:layout_below="@+id/adminOrders_tv_status"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"

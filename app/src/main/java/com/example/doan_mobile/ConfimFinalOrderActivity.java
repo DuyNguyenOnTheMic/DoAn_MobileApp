@@ -54,9 +54,9 @@ public class ConfimFinalOrderActivity extends AppCompatActivity {
 
                     String sName = snapshot.child("HoTen").getValue().toString();
                     String sPhone = snapshot.child("DienThoai").getValue().toString();
-                    String sAddress = snapshot.child("DiaChi").getValue().toString();
 
                     if (snapshot.child("DiaChi").exists()) {
+                        String sAddress = snapshot.child("DiaChi").getValue().toString();
 
                         name.setText(sName);
                         phone.setText(sPhone);

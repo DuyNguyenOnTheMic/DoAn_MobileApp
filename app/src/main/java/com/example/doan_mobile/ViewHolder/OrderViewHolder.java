@@ -11,7 +11,7 @@ import com.example.doan_mobile.R;
 
 public class OrderViewHolder extends RecyclerView.ViewHolder {
 
-    public TextView userName, userPhone, userTotalPrice, userDateTime, userAddress;
+    public TextView userName, userPhone, userTotalPrice, userDateTime, userAddress, orderStatus;
     public Button showProducts;
 
     public OrderViewHolder(@NonNull View itemView) {
@@ -23,5 +23,6 @@ public class OrderViewHolder extends RecyclerView.ViewHolder {
         userDateTime = itemView.findViewById(R.id.adminOrders_tv_date);
         userAddress = itemView.findViewById(R.id.adminOrders_tv_address);
         showProducts = itemView.findViewById(R.id.adminOrders_btn_showProducts);
+        orderStatus = itemView.findViewById(R.id.adminOrders_tv_status);
     }
 }

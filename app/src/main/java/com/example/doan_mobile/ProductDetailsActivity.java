@@ -53,8 +53,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (state.equals("Hoàn thành") || state.equals("Đang giao")){
-                    Toast.makeText(ProductDetailsActivity.this, "Bạn có thể mua thêm sản phẩm khi đơn hàng của bạn đang giao hoặc đã hoàn thành", Toast.LENGTH_SHORT).show();
+                if (state.equals("Chờ xác nhận") || state.equals("Đang giao")){
+                    Toast.makeText(ProductDetailsActivity.this, "Bạn có thể mua thêm sản phẩm khi đơn hàng của bạn đã hoàn thành", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     addingToCartList();
