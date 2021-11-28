@@ -55,13 +55,19 @@ public class AdminEditVoucherActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 try {
-                    HashMap<String, Object> voucherMap = (HashMap<String, Object>) dataSnapshot.getValue();
 
-                    voucherCode.setText(voucherMap.get("MaVoucher").toString());
-                    discount.setText(voucherMap.get("MucGiam").toString());
-                    note.setText(voucherMap.get("GhiChu").toString());
-                    startDay.setText(voucherMap.get("ThoiGianBatDau").toString());
-                    endDay.setText(voucherMap.get("ThoiGianKetThuc").toString());
+                    String sMaVoucher = dataSnapshot.child("MaVoucher").getValue().toString();
+                    String sMucGiam = dataSnapshot.child("MucGiam").getValue().toString();
+                    String sGhiChu = dataSnapshot.child("GhiChu").getValue().toString();
+                    String sThoiGianBD = dataSnapshot.child("ThoiGianBatDau").getValue().toString();
+                    String sThoiGianKT = dataSnapshot.child("ThoiGianKetThuc").getValue().toString();
+
+                    voucherCode.setText(sMaVoucher);
+                    discount.setText(sMucGiam);
+                    note.setText(sGhiChu);
+                    startDay.setText(sThoiGianBD);
+                    endDay.setText(sThoiGianKT);
+
                 }catch (Exception e){
                     Log.d("Error", e.toString());
                 }
