@@ -24,8 +24,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 
@@ -34,6 +36,7 @@ public class AdminEditVoucherActivity extends AppCompatActivity {
     EditText voucherCode, discount, note, startDay, endDay;
     ImageView back;
     String sdiscount, snote, sstartDay, sendDay, ID;
+    String ThoiGianBD, ThoiGianKT;
     DatabaseReference VoucherRef;
     ProgressDialog loadingBar;
     Calendar myCalendarS = Calendar.getInstance();
@@ -46,8 +49,10 @@ public class AdminEditVoucherActivity extends AppCompatActivity {
 
         matching();
 
-        //ID tăng tự động
+        //Lấy Intent từ View
         ID = getIntent().getStringExtra("ID");
+        ThoiGianBD = getIntent().getStringExtra("ThoiGianBD");
+        ThoiGianKT = getIntent().getStringExtra("ThoiGianKT");
         //Kết nối với firebase Voucher
         VoucherRef = FirebaseDatabase.getInstance().getReference().child("Voucher");
 
@@ -63,6 +68,7 @@ public class AdminEditVoucherActivity extends AppCompatActivity {
 
                 String myFormat = "dd/MM/yyyy";
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+                
                 startDay.setText(sdf.format(myCalendarS.getTime()));
             }
         };
@@ -71,6 +77,16 @@ public class AdminEditVoucherActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
+                String myFormat = "dd/MM/yyyy";
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+                try {
+                    Date date = sdf.parse(ThoiGianBD);
+                    myCalendarS.setTime(date);
+                } catch (ParseException e) {
+                    Toast.makeText(AdminEditVoucherActivity.this, "Có lỗi đã xảy ra! Vui lòng thử lại", Toast.LENGTH_SHORT).show();
+                }
+                
                 new DatePickerDialog(AdminEditVoucherActivity.this, dateS,myCalendarS
                         .get(Calendar.YEAR), myCalendarS.get(Calendar.MONTH),
                         myCalendarS.get(Calendar.DAY_OF_MONTH)).show();
@@ -96,6 +112,16 @@ public class AdminEditVoucherActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
+                String myFormat = "dd/MM/yyyy";
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+                try {
+                    Date date = sdf.parse(ThoiGianKT);
+                    myCalendarE.setTime(date);
+                } catch (ParseException e) {
+                    Toast.makeText(AdminEditVoucherActivity.this, "Có lỗi đã xảy ra! Vui lòng thử lại", Toast.LENGTH_SHORT).show();
+                }
+
                 new DatePickerDialog(AdminEditVoucherActivity.this, dateE,myCalendarE
                         .get(Calendar.YEAR), myCalendarE.get(Calendar.MONTH),
                         myCalendarE.get(Calendar.DAY_OF_MONTH)).show();

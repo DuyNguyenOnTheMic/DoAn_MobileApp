@@ -132,6 +132,8 @@ public class AdminViewVoucherActivity extends AppCompatActivity {
                                             Intent intent = new Intent(AdminViewVoucherActivity.this, AdminEditVoucherActivity.class);
                                             String i_id = getRef(voucherViewHolder.getAdapterPosition()).getKey();
                                             intent.putExtra("ID", i_id);
+                                            intent.putExtra("ThoiGianBD", voucher.getThoiGianBatDau());
+                                            intent.putExtra("ThoiGianKT", voucher.getThoiGianKetThuc());
                                             startActivity(intent);
                                             finish();
 
