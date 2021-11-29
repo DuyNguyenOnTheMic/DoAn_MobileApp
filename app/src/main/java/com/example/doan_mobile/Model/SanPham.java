@@ -1,17 +1,17 @@
 package com.example.doan_mobile.Model;
 
 public class SanPham {
-    String ID, ThongTinChiTietSP, GiaGoc, SoLuongTon, HinhAnhSP, TenSP, TenHangSP;
+    String ID, ThongTinChiTietSP, GiaGoc, SoLuongTonKho, HinhAnhSP, TenSP, TenHangSP;
 
     public  SanPham() {
 
     }
 
-    public SanPham(String ID, String thongTinChiTietSP, String giaGoc, String soLuongTon, String hinhAnhSP, String tenSP, String tenHangSP) {
+    public SanPham(String ID, String thongTinChiTietSP, String giaGoc, String soLuongTonKho, String hinhAnhSP, String tenSP, String tenHangSP) {
         this.ID = ID;
         ThongTinChiTietSP = thongTinChiTietSP;
         GiaGoc = giaGoc;
-        SoLuongTon = soLuongTon;
+        SoLuongTonKho = soLuongTonKho;
         HinhAnhSP = hinhAnhSP;
         TenSP = tenSP;
         TenHangSP = tenHangSP;
@@ -41,12 +41,12 @@ public class SanPham {
         GiaGoc = giaGoc;
     }
 
-    public String getSoLuongTon() {
-        return SoLuongTon;
+    public String getSoLuongTonKho() {
+        return SoLuongTonKho;
     }
 
-    public void setSoLuongTon(String soLuongTon) {
-        SoLuongTon = soLuongTon;
+    public void setSoLuongTonKho(String soLuongTonKho) {
+        SoLuongTonKho = soLuongTonKho;
     }
 
     public String getHinhAnhSP() {
