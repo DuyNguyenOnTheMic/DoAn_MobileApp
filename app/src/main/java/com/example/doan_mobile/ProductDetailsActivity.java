@@ -53,13 +53,12 @@ public class ProductDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (state.equals("Chờ xác nhận") || state.equals("Đang giao")){
+                if (state.equals("Chờ xác nhận") || state.equals("Đang giao")) {
                     Toast.makeText(ProductDetailsActivity.this, "Bạn có thể mua thêm sản phẩm khi đơn hàng của bạn đã hoàn thành", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else {
                     addingToCartList();
                 }
-                
+
             }
         });
     }
@@ -151,7 +150,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         });
     }
 
-    private void checkOrderState(){
+    private void checkOrderState() {
         DatabaseReference orderRef;
 
         orderRef = FirebaseDatabase.getInstance().getReference()
@@ -161,14 +160,14 @@ public class ProductDetailsActivity extends AppCompatActivity {
         orderRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()){
+                if (snapshot.exists()) {
                     String shippingState = snapshot.child("TinhTrang").getValue().toString();
 
-                    if (shippingState.equals("Đang giao")){
-                        state ="Hoàn thành";
-                         }
-                    else if (shippingState.equals("Chờ xác nhận")){
-                        state ="Đang giao";
+                    if (shippingState.equals("Chờ xác nhận")) {
+                        state = "Chờ xác nhận";
+                    }
+                    if (shippingState.equals("Đang giao")) {
+                        state = "Đang giao";
                     }
                 }
             }
