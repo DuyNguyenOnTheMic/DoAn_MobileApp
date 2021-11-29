@@ -96,8 +96,7 @@ public class AdminViewOrderActivity extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
                                 CharSequence options[] = new CharSequence[]{
-                                        "Cập nhật tình trạng đơn hàng",
-                                        "Huỷ"
+                                        "Cập nhật tình trạng đơn hàng"
                                 };
 
                                 AlertDialog.Builder builder = new AlertDialog.Builder(AdminViewOrderActivity.this);
@@ -161,10 +160,6 @@ public class AdminViewOrderActivity extends AppCompatActivity {
                                             });
                                             orderStatusBuilder.show();
 
-
-                                        }
-                                        if (which == 1) {
-                                            alert.dismiss();
                                         }
                                     }
                                 });

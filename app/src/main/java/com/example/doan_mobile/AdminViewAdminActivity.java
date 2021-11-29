@@ -106,8 +106,7 @@ public class AdminViewAdminActivity extends AppCompatActivity {
                             public void onClick(View v) {
                                 CharSequence options[] = new CharSequence[]
                                         {
-                                                "Xoá",
-                                                "Huỷ"
+                                                "Xoá"
                                         };
                                 AlertDialog.Builder builder = new AlertDialog.Builder(AdminViewAdminActivity.this);
                                 builder.setTitle("Lựa chọn: ");
