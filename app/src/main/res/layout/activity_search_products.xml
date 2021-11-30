@@ -20,18 +20,18 @@
             android:layout_width="290dp"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="10dp"
             android:background="@drawable/input_search_design"
             android:hint="Nhập sản phẩm bạn muốn tìm"
-            android:paddingLeft="15dp"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:paddingStart="15dp"
             android:paddingTop="9dp"
-            android:paddingRight="9dp"
+            android:paddingEnd="9dp"
             android:paddingBottom="9dp"
             android:textColorHint="@android:color/darker_gray"
             android:textSize="15dp"
-            tools:ignore="TouchTargetSizeCheck"
-            android:inputType="text"
-            android:imeOptions="actionDone"/>
+            tools:ignore="TouchTargetSizeCheck" />
 
         <Button
             android:id="@+id/searchproducts_btn_search"
