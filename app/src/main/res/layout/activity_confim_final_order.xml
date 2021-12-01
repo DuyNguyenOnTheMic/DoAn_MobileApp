@@ -27,7 +27,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="30dp"
         android:layout_marginRight="20dp"
-        android:hint="Tên bạn"
+        android:hint="Tên của bạn"
         android:imeOptions="actionNext"
         android:inputType="text"
         android:minHeight="48dp"
@@ -54,7 +54,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
-        android:hint="Địa chỉ của bạn của bạn"
+        android:hint="Địa chỉ của bạn"
         android:imeOptions="actionNext"
         android:inputType="text"
         android:minHeight="48dp" />
@@ -67,7 +67,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
-        android:hint="Thành phố của bạn của bạn"
+        android:hint="Thành phố của bạn"
         android:imeOptions="actionDone"
         android:inputType="text"
         android:minHeight="48dp" />
