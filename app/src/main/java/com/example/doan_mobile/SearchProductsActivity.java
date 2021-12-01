@@ -48,6 +48,7 @@ public class SearchProductsActivity extends AppCompatActivity {
             }
         });
 
+        // Search bằng bàn phím
         input.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
