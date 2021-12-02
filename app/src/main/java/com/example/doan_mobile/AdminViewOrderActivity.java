@@ -112,7 +112,8 @@ public class AdminViewOrderActivity extends AppCompatActivity {
                                             CharSequence order_status[] = new CharSequence[]{
                                                     "Chờ xác nhận",
                                                     "Đang giao",
-                                                    "Hoàn thành"
+                                                    "Hoàn thành",
+                                                    "Huỷ"
                                             };
 
                                             AlertDialog.Builder orderStatusBuilder = new AlertDialog.Builder(AdminViewOrderActivity.this);
@@ -145,7 +146,29 @@ public class AdminViewOrderActivity extends AppCompatActivity {
                                                             public void onClick(DialogInterface dialog, int which) {
                                                                 removeOrder(MaKH);
                                                                 removeAdminCart(MaKH);
-                                                                Toast.makeText(AdminViewOrderActivity.this, "Đơn hàng đã xoá thành công!", Toast.LENGTH_SHORT).show();
+                                                                Toast.makeText(AdminViewOrderActivity.this, "Hoàn thành đơn hàng thành công!", Toast.LENGTH_SHORT).show();
+                                                            }
+                                                        });
+                                                        confirm_dialog.setNegativeButton("Huỷ", new DialogInterface.OnClickListener() {
+                                                            @Override
+                                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                                alert.dismiss();
+                                                            }
+                                                        });
+                                                        confirm_dialog.show();
+                                                    }
+                                                    if (which == 3) {
+                                                        AlertDialog.Builder confirm_dialog = new AlertDialog.Builder(AdminViewOrderActivity.this);
+                                                        AlertDialog alert = confirm_dialog.create();
+
+                                                        confirm_dialog.setTitle("Thông báo");
+                                                        confirm_dialog.setMessage("Bạn có chắc muốn huỷ đơn hàng của " + donHang.getTenKH() + " ?" + "\nĐiều này sẽ dẫn đến đơn hàng sẽ bị xoá đi?");
+                                                        confirm_dialog.setPositiveButton("Xác nhận", new DialogInterface.OnClickListener() {
+                                                            @Override
+                                                            public void onClick(DialogInterface dialog, int which) {
+                                                                removeOrder(MaKH);
+                                                                removeAdminCart(MaKH);
+                                                                Toast.makeText(AdminViewOrderActivity.this, "Huỷ đơn hàng thành công!", Toast.LENGTH_SHORT).show();
                                                             }
                                                         });
                                                         confirm_dialog.setNegativeButton("Huỷ", new DialogInterface.OnClickListener() {
