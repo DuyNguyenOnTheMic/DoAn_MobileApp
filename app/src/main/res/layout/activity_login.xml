@@ -30,27 +30,48 @@
         android:textSize="17sp"
         android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/login_et_password"
+    <RelativeLayout
+        android:id="@+id/login_RelativeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/login_et_phone"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginRight="15dp"
-        android:background="@drawable/input_design"
-        android:hint="Mật khẩu"
-        android:inputType="textPassword"
-        android:padding="20dp"
-        android:textColor="@color/black"
-        android:textSize="17sp"
-        android:textStyle="bold" />
+        android:layout_below="@+id/login_et_phone">
+
+        <EditText
+            android:id="@+id/login_et_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/input_design"
+            android:hint="Mật khẩu"
+            android:inputType="textPassword"
+            android:padding="20dp"
+            android:textColor="@color/black"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/show_pass_btn"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="25dp"
+            android:alpha=".5"
+            android:onClick="ShowHidePass"
+            android:paddingTop="10dp"
+            android:src="@drawable/eye" />
+
+    </RelativeLayout>
+
+
 
     <LinearLayout
         android:id="@+id/login_linearlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/login_et_password"
+        android:layout_below="@+id/login_RelativeLayout"
         android:layout_marginTop="5dp"
         android:orientation="horizontal">
 
