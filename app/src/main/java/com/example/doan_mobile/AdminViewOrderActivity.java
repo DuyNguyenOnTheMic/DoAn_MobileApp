@@ -140,7 +140,7 @@ public class AdminViewOrderActivity extends AppCompatActivity {
                                                         AlertDialog alert = confirm_dialog.create();
 
                                                         confirm_dialog.setTitle("Thông báo");
-                                                        confirm_dialog.setMessage("Bạn có chắc muốn hoàn thành đơn hàng của " + donHang.getTenKH() + " ?" + "\nĐiều này sẽ dẫn đến đơn hàng sẽ bị xoá đi?");
+                                                        confirm_dialog.setMessage("Bạn có chắc đã hoàn thành thành đơn hàng của " + donHang.getTenKH() + " ?" + "\nĐiều này sẽ dẫn đến đơn hàng sẽ bị xoá đi?");
                                                         confirm_dialog.setPositiveButton("Hoàn thành", new DialogInterface.OnClickListener() {
                                                             @Override
                                                             public void onClick(DialogInterface dialog, int which) {
