@@ -127,19 +127,8 @@ public class CartActivity extends AppCompatActivity {
                                             .child(Prevalent.currentOnlineUser.getDienThoai())
                                             .child("SanPham")
                                             .child(gioHang.getMaSP())
-                                            .removeValue()
-                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<Void> task) {
-                                                    if (task.isSuccessful()){
-                                                        Toast.makeText(CartActivity.this, "Xóa thành công!", Toast.LENGTH_SHORT).show();
-                                                        finish();
-                                                        overridePendingTransition(0, 0);
-                                                        startActivity(getIntent());
-                                                        overridePendingTransition(0, 0);
-                                                    }
-                                                }
-                                            });
+                                            .removeValue();
+
 
                                     cartListRef.child("ViewQuanTri")
                                             .child(Prevalent.currentOnlineUser.getDienThoai())
